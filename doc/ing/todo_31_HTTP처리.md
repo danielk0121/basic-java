@@ -3,7 +3,8 @@
 > HTTP 클라이언트/서버 코드 구현 — 라이브러리 비교 문서 작성 후 코드 구현 진행
 
 ## 사전 작업
-- [ ] HTTP 클라이언트 라이브러리 비교 문서 작성 (RestTemplate vs WebClient vs OkHttp vs HttpClient)
+- [x] HTTP 클라이언트 라이브러리 비교 문서 작성 → [ref/http_클라이언트_라이브러리_비교.md](../../ref/http_클라이언트_라이브러리_비교.md)
+  - 결론: RestClient (동기) + WebClient (비동기) 우선 구현. RestTemplate 제외(deprecated 예정)
 
 ## HTTP 클라이언트
 - [ ] RestTemplate GET/POST 요청
