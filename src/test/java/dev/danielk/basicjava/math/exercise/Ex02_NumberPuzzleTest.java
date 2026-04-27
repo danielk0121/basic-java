@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.math.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,6 +28,7 @@ class Ex02_NumberPuzzleTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 소수 판별")
     void test_isPrime() {
@@ -48,6 +50,7 @@ class Ex02_NumberPuzzleTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 자릿수 합")
     void test_digitSum() {
@@ -66,6 +69,7 @@ class Ex02_NumberPuzzleTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 2진수 회문 판별")
     void test_isBinaryPalindrome() {
@@ -83,6 +87,7 @@ class Ex02_NumberPuzzleTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 소수이면서 자릿수 합이 홀수")
     void test_isPrimeAndOddDigitSum() {

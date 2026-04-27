@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.collection.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -30,6 +31,7 @@ class Ex06_GroupClassifierTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 카테고리별 상품 분류")
     void test_groupByCategory() {
@@ -51,6 +53,7 @@ class Ex06_GroupClassifierTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 카테고리별 상품 수 집계")
     void test_countByCategory() {
@@ -72,6 +75,7 @@ class Ex06_GroupClassifierTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 카테고리명 기준 정렬")
     void test_sortByCategory() {

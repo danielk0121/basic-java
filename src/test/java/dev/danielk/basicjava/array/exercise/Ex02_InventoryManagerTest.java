@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.array.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -33,6 +34,7 @@ class Ex02_InventoryManagerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 상품ID로 재고 검색")
     void test_findStock() {
@@ -52,6 +54,7 @@ class Ex02_InventoryManagerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 전체 재고 합계")
     void test_totalStock() {
@@ -69,6 +72,7 @@ class Ex02_InventoryManagerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 품절 상품 ID 목록")
     void test_outOfStockIds() {
@@ -86,6 +90,7 @@ class Ex02_InventoryManagerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 재고 배열 문자열 변환")
     void test_inventoryAsString() {

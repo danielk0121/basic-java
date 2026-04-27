@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.array.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -30,6 +31,7 @@ class Ex03_SurveyAnalyzerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 점수별 빈도수 집계")
     void test_countFrequency() {
@@ -52,6 +54,7 @@ class Ex03_SurveyAnalyzerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 범위 복사 후 내림차순 정렬")
     void test_sliceAndSortDesc() {
@@ -70,6 +73,7 @@ class Ex03_SurveyAnalyzerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 두 응답 배열 비교")
     void test_isSameResponse() {
@@ -88,6 +92,7 @@ class Ex03_SurveyAnalyzerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: int[] → Integer[] 변환")
     void test_toBoxedArray() {

@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.string.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ class Ex01_LogParserTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 날짜 추출")
     void test_extractDate() {
@@ -55,6 +57,7 @@ class Ex01_LogParserTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 로그 레벨 추출")
     void test_extractLevel() {
@@ -76,6 +79,7 @@ class Ex01_LogParserTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 에러 로그 판별")
     void test_isErrorLog() {
@@ -94,6 +98,7 @@ class Ex01_LogParserTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 레벨별 로그 필터링")
     void test_filterByLevel() {
@@ -123,6 +128,7 @@ class Ex01_LogParserTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 5: 타임스탬프 형식 검증")
     void test_isValidTimestamp() {
@@ -142,6 +148,7 @@ class Ex01_LogParserTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 6: key=value 파라미터 추출")
     void test_extractParams() {

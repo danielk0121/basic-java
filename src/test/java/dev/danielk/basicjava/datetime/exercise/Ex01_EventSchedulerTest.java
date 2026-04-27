@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.datetime.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -30,6 +31,7 @@ class Ex01_EventSchedulerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 날짜 문자열 파싱")
     void test_parseDate() {
@@ -48,6 +50,7 @@ class Ex01_EventSchedulerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: D-day 계산")
     void test_dday() {
@@ -67,6 +70,7 @@ class Ex01_EventSchedulerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 기간 문자열 반환")
     void test_periodString() {
@@ -86,6 +90,7 @@ class Ex01_EventSchedulerTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 이벤트 종료일 계산")
     void test_endDate() {

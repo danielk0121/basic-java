@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.string.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -32,6 +33,7 @@ class Ex03_NameFormatterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 성/이름 순서 바꾸기")
     void test_swapName() {
@@ -50,6 +52,7 @@ class Ex03_NameFormatterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 이름 목록 인사말 생성")
     void test_greetAll() {
@@ -71,6 +74,7 @@ class Ex03_NameFormatterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 이름 사전순 정렬")
     void test_sortNames() {
@@ -89,6 +93,7 @@ class Ex03_NameFormatterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 이니셜 변환")
     void test_toInitials() {
@@ -110,6 +115,7 @@ class Ex03_NameFormatterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 5: 이름 목록 자연어 결합")
     void test_joinWithAnd() {
@@ -130,6 +136,7 @@ class Ex03_NameFormatterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 6: 이름 말줄임 처리")
     void test_truncate() {

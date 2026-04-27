@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.string.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ class Ex04_PasswordValidatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: null 또는 빈 문자열 확인")
     void test_isNullOrEmpty() {
@@ -56,6 +58,7 @@ class Ex04_PasswordValidatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 비밀번호 규칙 위반 항목 반환")
     void test_validatePassword() {
@@ -84,6 +87,7 @@ class Ex04_PasswordValidatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 비밀번호 마스킹")
     void test_mask() {
@@ -104,6 +108,7 @@ class Ex04_PasswordValidatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 연속 3회 반복 문자 감지")
     void test_hasTripleRepeat() {
@@ -124,6 +129,7 @@ class Ex04_PasswordValidatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 5: 비밀번호에 사용자명 포함 여부 확인")
     void test_containsUsername() {
@@ -144,6 +150,7 @@ class Ex04_PasswordValidatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 6: 앞 절반이 숫자로만 구성되어 있는지 확인")
     void test_isFirstHalfAllDigits() {

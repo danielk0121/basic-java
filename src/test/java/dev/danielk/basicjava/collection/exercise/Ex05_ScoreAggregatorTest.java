@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.collection.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -29,6 +30,7 @@ class Ex05_ScoreAggregatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 총점 계산")
     void test_totalScore() {
@@ -45,6 +47,7 @@ class Ex05_ScoreAggregatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 없는 과목 기본값 반환")
     void test_getScore() {
@@ -63,6 +66,7 @@ class Ex05_ScoreAggregatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 보너스 점수 추가")
     void test_addBonus() {
@@ -83,6 +87,7 @@ class Ex05_ScoreAggregatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 과목명 정렬")
     void test_sortedSubjects() {

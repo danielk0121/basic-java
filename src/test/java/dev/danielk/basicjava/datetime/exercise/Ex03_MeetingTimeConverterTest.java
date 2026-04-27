@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.datetime.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -31,6 +32,7 @@ class Ex03_MeetingTimeConverterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 서울 ZonedDateTime 생성")
     void test_toSeoulZoned() {
@@ -50,6 +52,7 @@ class Ex03_MeetingTimeConverterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 서울 → UTC 변환")
     void test_toUtc() {
@@ -70,6 +73,7 @@ class Ex03_MeetingTimeConverterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 서울 → 뉴욕 변환")
     void test_toNewYork() {
@@ -91,6 +95,7 @@ class Ex03_MeetingTimeConverterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: ZonedDateTime 포맷")
     void test_formatZoned() {

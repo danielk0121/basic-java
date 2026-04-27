@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.datetime.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -28,6 +29,7 @@ class Ex02_WorkHoursCalculatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 날짜시간 파싱")
     void test_parseDateTime() {
@@ -47,6 +49,7 @@ class Ex02_WorkHoursCalculatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 근무 시간(시) 계산")
     void test_workHours() {
@@ -68,6 +71,7 @@ class Ex02_WorkHoursCalculatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 근무 시간(분) 계산")
     void test_workMinutes() {
@@ -86,6 +90,7 @@ class Ex02_WorkHoursCalculatorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 초과근무 분 계산")
     void test_overtimeMinutes() {

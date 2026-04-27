@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.collection.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -28,6 +29,7 @@ class Ex02_StudentGradeTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 상위 N명 점수")
     void test_topN() {
@@ -45,6 +47,7 @@ class Ex02_StudentGradeTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 하위 N명 점수")
     void test_bottomN() {
@@ -62,6 +65,7 @@ class Ex02_StudentGradeTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 중복 제거 후 정렬")
     void test_uniqueSorted() {
@@ -79,6 +83,7 @@ class Ex02_StudentGradeTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 특정 점수 등장 횟수")
     void test_countScore() {

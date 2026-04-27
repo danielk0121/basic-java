@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.math.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -29,6 +30,7 @@ class Ex01_CryptoHelperTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 최대공약수(GCD)")
     void test_gcd() {
@@ -47,6 +49,7 @@ class Ex01_CryptoHelperTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 최소공배수(LCM)")
     void test_lcm() {
@@ -65,6 +68,7 @@ class Ex01_CryptoHelperTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 에라토스테네스의 체")
     void test_sieve() {
@@ -82,6 +86,7 @@ class Ex01_CryptoHelperTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 진법 변환 인코딩")
     void test_encodeRadix() {
@@ -98,6 +103,7 @@ class Ex01_CryptoHelperTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 5: GCD × LCM = a × b 검증")
     void test_verifyGcdLcm() {

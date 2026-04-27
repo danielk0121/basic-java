@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.collection.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -28,6 +29,7 @@ class Ex03_TeamRosterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 양 팀 공통 선수")
     void test_commonPlayers() {
@@ -46,6 +48,7 @@ class Ex03_TeamRosterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: A팀 단독 선수")
     void test_exclusivePlayers() {
@@ -64,6 +67,7 @@ class Ex03_TeamRosterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 선수 명단 뒤집기")
     void test_reversedRoster() {
@@ -82,6 +86,7 @@ class Ex03_TeamRosterTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 이름 길이 기준 정렬")
     void test_sortByNameLength() {

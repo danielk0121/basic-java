@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.string.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -34,6 +35,7 @@ class Ex02_WordStatTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 문장 토큰화")
     void test_tokenize() {
@@ -54,6 +56,7 @@ class Ex02_WordStatTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 단어 빈도수 집계")
     void test_wordCount() {
@@ -73,6 +76,7 @@ class Ex02_WordStatTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 모음 개수 세기")
     void test_countVowels() {
@@ -92,6 +96,7 @@ class Ex02_WordStatTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 각 단어 뒤집기")
     void test_reverseWords() {
@@ -110,6 +115,7 @@ class Ex02_WordStatTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 5: 가장 긴 단어 찾기")
     void test_longestWord() {
@@ -128,6 +134,7 @@ class Ex02_WordStatTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 6: Title Case 변환")
     void test_toTitleCase() {

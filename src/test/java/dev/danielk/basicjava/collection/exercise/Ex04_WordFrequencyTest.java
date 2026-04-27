@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.collection.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -29,6 +30,7 @@ class Ex04_WordFrequencyTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 단어 빈도 집계")
     void test_countWords() {
@@ -48,6 +50,7 @@ class Ex04_WordFrequencyTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 상위 N개 빈도 단어")
     void test_topNWords() {
@@ -67,6 +70,7 @@ class Ex04_WordFrequencyTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 두 빈도 맵 병합")
     void test_mergeCounts() {
@@ -88,6 +92,7 @@ class Ex04_WordFrequencyTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 없는 단어 기본값 처리")
     void test_getCount() {

@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.array.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ class Ex01_GradeProcessorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 점수 오름차순 정렬 (원본 불변)")
     void test_sortedScores() {
@@ -48,6 +50,7 @@ class Ex01_GradeProcessorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 최고점 / 최저점 / 평균 계산")
     void test_statistics() {
@@ -68,6 +71,7 @@ class Ex01_GradeProcessorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 점수별 등급 부여")
     void test_grade() {
@@ -90,6 +94,7 @@ class Ex01_GradeProcessorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 점수 초기화")
     void test_resetScores() {
@@ -107,6 +112,7 @@ class Ex01_GradeProcessorTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 5: 점수 배열 문자열 변환")
     void test_scoresAsString() {

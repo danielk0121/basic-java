@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.random.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -30,6 +31,7 @@ class Ex01_CardDeckTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 52장 카드 덱 생성")
     void test_createDeck() {
@@ -49,6 +51,7 @@ class Ex01_CardDeckTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 셔플 후 패 5장 뽑기")
     void test_drawHand() {
@@ -69,6 +72,7 @@ class Ex01_CardDeckTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 중복 없이 N장 랜덤 추출")
     void test_drawRandom() {

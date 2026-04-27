@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.collection.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -29,6 +30,7 @@ class Ex01_CartSystemTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 위시리스트 합집합")
     void test_union() {
@@ -47,6 +49,7 @@ class Ex01_CartSystemTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 위시리스트 교집합")
     void test_intersection() {
@@ -65,6 +68,7 @@ class Ex01_CartSystemTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 위시리스트 차집합")
     void test_difference() {
@@ -83,6 +87,7 @@ class Ex01_CartSystemTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 가격 상위 N개 슬라이싱")
     void test_topNPrices() {
@@ -100,6 +105,7 @@ class Ex01_CartSystemTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 5: 최고가 / 최저가")
     void test_maxMinPrice() {

@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.random.exercise;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -28,6 +29,7 @@ class Ex02_RandomQuizTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 1: 중복 없이 N개 문제 추출")
     void test_selectQuestions() {
@@ -48,6 +50,7 @@ class Ex02_RandomQuizTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 2: 보기 순서 셔플")
     void test_shuffleChoices() {
@@ -68,6 +71,7 @@ class Ex02_RandomQuizTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 3: 셔플 후 정답 인덱스 탐색")
     void test_findAnswerIndex() {
@@ -86,6 +90,7 @@ class Ex02_RandomQuizTest {
         throw new UnsupportedOperationException("구현 필요");
     }
 
+    @Disabled("구현 필요")
     @Test
     @DisplayName("문제 4: 난수 기반 판정")
     void test_randomJudge() {
