@@ -1,4 +1,4 @@
-package com.example.basicjava;
+package dev.danielk.basicjava;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

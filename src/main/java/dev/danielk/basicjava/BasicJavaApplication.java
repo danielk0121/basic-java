@@ -1,4 +1,4 @@
-package com.example.basicjava;
+package dev.danielk.basicjava;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
