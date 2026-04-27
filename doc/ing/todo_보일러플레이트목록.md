@@ -57,12 +57,6 @@
 - 맵 기본값 처리: getOrDefault, putIfAbsent
 - 맵 병합: merge, compute
 
-### 스택/큐/덱
-- 스택 기본 사용: Deque as Stack
-- 큐 기본 사용: LinkedList, ArrayDeque
-- 덱 기본 사용: ArrayDeque
-- 우선순위 큐(힙) 기본 사용: PriorityQueue
-
 ### 숫자/수학 처리
 - 최대공약수(GCD), 최소공배수(LCM)
 - 소수 판별 및 소수 목록 생성
@@ -86,6 +80,12 @@
 ---
 
 ## 2. 알고리즘
+
+### 자료구조 활용 (JDK 라이브러리 사용, 직접 구현 안함)
+- 스택: Deque as Stack
+- 큐: LinkedList, ArrayDeque
+- 덱: ArrayDeque
+- 우선순위 큐(힙): PriorityQueue
 
 ### 재귀/완전탐색
 - 팩토리얼
