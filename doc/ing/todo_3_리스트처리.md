@@ -1,4 +1,4 @@
-# todo 1-3: 리스트 처리
+# todo 3: 리스트 처리
 
 > 보일러플레이트 — List, Collections 활용
 
