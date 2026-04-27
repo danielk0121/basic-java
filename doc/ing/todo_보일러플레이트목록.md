@@ -1,5 +1,9 @@
 # 보일러플레이트 목록
 
+## 범위 정의
+- 포함: HTTP IO 처리
+- 제외: 파일 IO, JDBC IO 등 그 외 IO 처리
+
 ## 문자열 처리
 - 문자열 자르기: substring, split
 - 문자열 검색: indexOf, contains, startsWith, endsWith
@@ -39,8 +43,6 @@
 ## 입출력 처리
 - 표준 입력 읽기: Scanner, BufferedReader
 - 빠른 출력: BufferedWriter, StringBuilder 누적 출력
-- 파일 읽기/쓰기
-- CSV/줄 단위 파싱
 
 ## HTTP 처리
 - RestTemplate GET/POST 요청
