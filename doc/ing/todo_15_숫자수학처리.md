@@ -1,4 +1,4 @@
-# todo 5: 숫자/수학 처리
+# todo 15: 숫자/수학 처리
 
 > 보일러플레이트 — Math, BigInteger 등 활용
 

@@ -1,4 +1,4 @@
-# todo 7: 랜덤 처리
+# todo 17: 랜덤 처리
 
 > 보일러플레이트 — Random, ThreadLocalRandom, Collections 활용
 

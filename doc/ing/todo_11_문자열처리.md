@@ -1,4 +1,4 @@
-# todo 1: 문자열 처리
+# todo 11: 문자열 처리
 
 > 보일러플레이트 — String, CharSequence, StringBuilder 활용
 
