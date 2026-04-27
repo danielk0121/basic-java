@@ -1,31 +1,30 @@
 # 계획: 10번대 연습 예제 작업
 
-> 각 보일러플레이트 todo(12~17)에 대응하는 연습 예제를 todo 18(문자열) 방식과 동일하게 작성한다.
-> 작업 단위는 todo별 1개씩, 총 6개.
+> 각 보일러플레이트 todo(12~17)에 대응하는 연습 예제를 todo 11_1(문자열) 방식과 동일하게 작성한다.
+> 번호 체계: 보일러플레이트 번호 뒤에 `_1`을 붙임 (예: todo 12 → todo 12_1)
 
 ---
 
 ## 작업 단위 목록
 
-- [ ] todo 19: 배열 처리 연습 예제
-- [ ] todo 20: 리스트/맵/수학 연습 예제
-- [ ] todo 23: 날짜/시간 연습 예제
-- [ ] todo 24: 랜덤 처리 연습 예제
-
-> 번호 부여 원칙: 20번대는 알고리즘(21, 22) 예약 → 리스트/맵/수학은 20번으로 묶어 처리.
-> 날짜/시간(23), 랜덤(24)은 21~22 뒤에 배치.
+- [ ] todo 12_1: 배열 처리 연습 예제
+- [ ] todo 13_1: 리스트 처리 연습 예제
+- [ ] todo 14_1: 맵 처리 연습 예제
+- [ ] todo 15_1: 숫자/수학 처리 연습 예제
+- [ ] todo 16_1: 날짜/시간 처리 연습 예제
+- [ ] todo 17_1: 랜덤 처리 연습 예제
 
 ---
 
-## todo 19: 배열 처리 연습 예제
+## todo 12_1: 배열 처리 연습 예제
 
 **대응 보일러플레이트:** todo 12 (`ArrayTest.java`)
 
-**예제 주제 (3~4개)**
+**예제 주제 (3개)**
 
 - Ex01 성적 처리기
   - 시나리오: 학생 점수 배열을 받아 정렬, 최고/최저/평균 계산, 등급 부여
-  - 커버 메서드: `Arrays.sort`, `Arrays.stream.max/min/average`, `Arrays.copyOf`, `Arrays.fill`, `Arrays.toString`
+  - 커버 메서드: `Arrays.sort`, `stream max/min/average`, `Arrays.copyOf`, `Arrays.fill`, `Arrays.toString`
 
 - Ex02 재고 관리 시스템
   - 시나리오: 상품 재고 2차원 배열에서 특정 상품 검색, 재고 합산, 품절 항목 필터링
@@ -35,39 +34,77 @@
   - 시나리오: 1~5점 응답 배열에서 빈도수 집계, 배열 복사 후 내림차순 정렬, 배열 비교
   - 커버 메서드: `Arrays.copyOfRange`, `Arrays.equals`, `Arrays.fill`, `Comparator.reverseOrder`, `Arrays.asList → toArray`
 
-**구현 파일 위치**
-- `src/test/java/dev/danielk/basicjava/array/exercise/`
+**구현 파일 위치:** `src/test/java/dev/danielk/basicjava/array/exercise/`
 
 ---
 
-## todo 20: 리스트/맵/수학 연습 예제
+## todo 13_1: 리스트 처리 연습 예제
 
-**대응 보일러플레이트:** todo 13 (`ListTest.java`), todo 14 (`MapTest.java`), todo 15 (`MathTest.java`)
+**대응 보일러플레이트:** todo 13 (`ListTest.java`)
 
-**예제 주제 (4개)**
+**예제 주제 (3개)**
 
-- Ex01 장바구니 시스템 (List)
+- Ex01 장바구니 시스템
   - 시나리오: 상품 목록 합집합/교집합/차집합으로 위시리스트 비교, 가격순 정렬, 중복 제거, 상위 N개 슬라이싱
-  - 커버 메서드: `addAll/retainAll/removeAll`, `sort`, `distinct`, `subList`, `Collections.reverse`, `Collections.max/min`
+  - 커버 메서드: `addAll`, `retainAll`, `removeAll`, `sort`, `distinct`, `subList`, `Collections.reverse`, `Collections.max/min`
 
-- Ex02 단어 빈도 분석기 (Map)
+- Ex02 학생 성적 관리
+  - 시나리오: 성적 리스트에서 상위/하위 N명 슬라이싱, 중복 점수 제거, 빈도수 집계
+  - 커버 메서드: `sort`, `subList`, `Collections.frequency`, `distinct`, `Collections.max/min`
+
+- Ex03 팀 로스터 관리
+  - 시나리오: 두 팀 명단 비교(공통/차이), 명단 뒤집기, 커스텀 정렬
+  - 커버 메서드: `retainAll`, `removeAll`, `Collections.reverse`, `sort(Comparator)`
+
+**구현 파일 위치:** `src/test/java/dev/danielk/basicjava/collection/exercise/`
+
+---
+
+## todo 14_1: 맵 처리 연습 예제
+
+**대응 보일러플레이트:** todo 14 (`MapTest.java`)
+
+**예제 주제 (3개)**
+
+- Ex01 단어 빈도 분석기
   - 시나리오: 텍스트에서 단어 등장 횟수 집계, 상위 빈도 단어 추출, 두 텍스트의 단어 맵 병합
-  - 커버 메서드: `merge`, `compute`, `computeIfAbsent`, `getOrDefault`, `putIfAbsent`, `entrySet 정렬`
+  - 커버 메서드: `merge`, `getOrDefault`, `putIfAbsent`, `entrySet 정렬(값 기준)`
 
-- Ex03 암호화 도우미 (수학)
+- Ex02 학생 점수 집계기
+  - 시나리오: 과목별 점수 맵 순회, 과목 추가/갱신, 기본값 처리
+  - 커버 메서드: `keySet`, `entrySet`, `values`, `getOrDefault`, `compute`, `putIfAbsent`
+
+- Ex03 그룹별 데이터 분류기
+  - 시나리오: 상품을 카테고리별로 분류, 카테고리 내 상품 추가, 키 기준 정렬 출력
+  - 커버 메서드: `computeIfAbsent`, `merge`, `entrySet 정렬(키 기준)`
+
+**구현 파일 위치:** `src/test/java/dev/danielk/basicjava/collection/exercise/`
+
+---
+
+## todo 15_1: 숫자/수학 처리 연습 예제
+
+**대응 보일러플레이트:** todo 15 (`MathTest.java`)
+
+**예제 주제 (3개)**
+
+- Ex01 암호화 도우미
   - 시나리오: 두 수의 GCD/LCM으로 암호 키 생성, 소수 목록으로 인덱스 테이블 구성, 진법 변환으로 인코딩
-  - 커버 메서드: `gcd`, `lcm`, `sieve`, `Integer.toBinaryString/toHexString/parseInt`
+  - 커버 메서드: `gcd`, `lcm`, `sieve(에라토스테네스의 체)`, `Integer.toBinaryString/toHexString/parseInt`
 
-- Ex04 복권 번호 생성기 (수학 + 순열/조합)
+- Ex02 복권 번호 생성기
   - 시나리오: 1~45 중 6개 조합 수 계산, 특정 번호 집합의 순열 생성, 자릿수 합 기반 당첨 판별
   - 커버 메서드: `combination`, `permutation`, 자릿수 추출, `String.valueOf.chars`
 
-**구현 파일 위치**
-- `src/test/java/dev/danielk/basicjava/collection/exercise/`
+- Ex03 숫자 퍼즐 검증기
+  - 시나리오: 주어진 수가 소수인지, 자릿수 합이 특정 조건 만족인지, 진법 변환 후 회문인지 판별
+  - 커버 메서드: `isPrime`, 자릿수 합, `Integer.toBinaryString`, `StringBuilder.reverse`
+
+**구현 파일 위치:** `src/test/java/dev/danielk/basicjava/collection/exercise/`
 
 ---
 
-## todo 23: 날짜/시간 연습 예제
+## todo 16_1: 날짜/시간 처리 연습 예제
 
 **대응 보일러플레이트:** todo 16 (`DateTimeTest.java`)
 
@@ -85,16 +122,15 @@
   - 시나리오: 서울 기준 회의 시각을 여러 타임존으로 변환하여 출력
   - 커버 메서드: `ZonedDateTime`, `ZoneId.of`, `withZoneSameInstant`, `Instant`, `format`
 
-**구현 파일 위치**
-- `src/test/java/dev/danielk/basicjava/collection/exercise/` (날짜/시간 포함)
+**구현 파일 위치:** `src/test/java/dev/danielk/basicjava/collection/exercise/`
 
 ---
 
-## todo 24: 랜덤 처리 연습 예제
+## todo 17_1: 랜덤 처리 연습 예제
 
 **대응 보일러플레이트:** todo 17 (`RandomTest.java`)
 
-**예제 주제 (2~3개)**
+**예제 주제 (2개)**
 
 - Ex01 카드 게임 덱
   - 시나리오: 52장 카드 배열 생성, 셔플, 패(hand) 5장 뽑기, 패에 중복 없음 검증
@@ -104,12 +140,11 @@
   - 시나리오: 문제 풀에서 중복 없이 N개 랜덤 추출, 보기 순서 셔플, 정답 인덱스 계산
   - 커버 메서드: `Collections.shuffle`, `subList`, `nextInt(bound)`, `nextDouble`
 
-**구현 파일 위치**
-- `src/test/java/dev/danielk/basicjava/collection/exercise/` (랜덤 포함)
+**구현 파일 위치:** `src/test/java/dev/danielk/basicjava/collection/exercise/`
 
 ---
 
-## 작업 방식 (todo 18과 동일)
+## 작업 방식 (todo 11_1과 동일)
 
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)
 - 문제 파일: 메서드 시그니처 + Javadoc 힌트 + 테스트 케이스만 작성, 구현부는 `throw new UnsupportedOperationException("구현 필요")`
