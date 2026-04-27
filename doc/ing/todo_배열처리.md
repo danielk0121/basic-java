@@ -1,4 +1,4 @@
-# todo: 배열 처리
+# todo 1-2: 배열 처리
 
 > 보일러플레이트 — Arrays 클래스 및 Stream 활용
 
