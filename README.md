@@ -35,16 +35,3 @@ src/test/java/dev/danielk/basicjava/
 ├── array/      # 배열/컬렉션 처리
 └── algorithm/  # 알고리즘 구현
 ```
-
-## 실행 방법
-
-```bash
-./gradlew bootRun
-```
-
-## 빌드 및 테스트
-
-```bash
-./gradlew build
-./gradlew test
-```
