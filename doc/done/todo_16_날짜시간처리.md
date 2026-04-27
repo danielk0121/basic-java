@@ -9,4 +9,4 @@
 - [x] 타임존 처리
 
 ## 구현 파일
-- `src/test/java/dev/danielk/basicjava/collection/DateTimeTest.java`
+- `src/test/java/dev/danielk/basicjava/datetime/DateTimeTest.java`

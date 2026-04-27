@@ -1,4 +1,4 @@
-package dev.danielk.basicjava.collection;
+package dev.danielk.basicjava.random;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

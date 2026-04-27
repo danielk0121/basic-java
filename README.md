@@ -36,6 +36,10 @@ src/main/java/dev/danielk/basicjava/
 
 src/test/java/dev/danielk/basicjava/
 ├── string/     # 문자열 처리
-├── array/      # 배열/컬렉션 처리
+├── array/      # 배열 처리
+├── collection/ # 리스트/맵 처리
+├── math/       # 숫자/수학 처리
+├── datetime/   # 날짜/시간 처리
+├── random/     # 랜덤 처리
 └── algorithm/  # 알고리즘 구현
 ```
