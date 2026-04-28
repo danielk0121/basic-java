@@ -71,11 +71,15 @@
   - 양방향 논블로킹 → `ConcurrentLinkedDeque`
   - 양방향 블로킹 (앞뒤 모두 생산·소비) → `LinkedBlockingDeque`
 
-## 구현 파일 (작성 예정)
+## 구현 파일
 - `src/test/java/dev/danielk/basicjava/datastructure/`
-  - `StackTest.java`
-  - `QueueTest.java`
-  - `DequeTest.java`
-  - `PriorityQueueTest.java`
-  - `ThreadSafeQueueTest.java`
-  - `exercise/` — 연습예제 (문제/답안 쌍)
+  - `StackTest.java` — ArrayDeque as Stack, 괄호 유효성 검사
+  - `QueueTest.java` — ArrayDeque / LinkedList as Queue, BFS
+  - `DequeTest.java` — ArrayDeque 양방향, 팰린드롬, 슬라이딩 윈도우 최댓값
+  - `PriorityQueueTest.java` — min/max-heap, 커스텀 정렬, K번째 최솟값
+  - `ConcurrentLinkedQueueTest.java` — lock-free 큐, 멀티스레드 offer/poll
+  - `LinkedBlockingQueueTest.java` — 블로킹 큐, 생산자-소비자 패턴
+  - `ArrayBlockingQueueTest.java` — 고정 크기 블로킹 큐, 스로틀링
+  - `ConcurrentLinkedDequeTest.java` — lock-free 덱, 작업 훔치기 패턴
+  - `LinkedBlockingDequeTest.java` — 블로킹 덱, 양방향 생산자-소비자
+  - `exercise/` — 연습예제 (문제/답안 쌍, 미작성)
