@@ -30,11 +30,13 @@
 - StringBuilder를 이용한 가변 문자열 처리
 
 **파일 링크**
-- [StringBasicTest.java](../src/test/java/dev/danielk/basicjava/string/StringBasicTest.java) / [StringTransformTest.java](../src/test/java/dev/danielk/basicjava/string/StringTransformTest.java) / [StringBuilderTest.java](../src/test/java/dev/danielk/basicjava/string/StringBuilderTest.java)
-- [Ex01_LogParserTest.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex01_LogParserTest.java) / [Ex01_LogParserAnswer.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex01_LogParserAnswer.java)
-- [Ex02_WordStatTest.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex02_WordStatTest.java) / [Ex02_WordStatAnswer.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex02_WordStatAnswer.java)
-- [Ex03_NameFormatterTest.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex03_NameFormatterTest.java) / [Ex03_NameFormatterAnswer.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex03_NameFormatterAnswer.java)
-- [Ex04_PasswordValidatorTest.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex04_PasswordValidatorTest.java) / [Ex04_PasswordValidatorAnswer.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex04_PasswordValidatorAnswer.java)
+- [StringBasicTest.java](../src/test/java/dev/danielk/basicjava/string/StringBasicTest.java): 자르기, 검색, 비교, 문자 접근, 길이/공백, 공백 제거
+- [StringTransformTest.java](../src/test/java/dev/danielk/basicjava/string/StringTransformTest.java): 대소문자, 치환, 뒤집기, 반복/합치기, 숫자 변환, 포맷, 정규식
+- [StringBuilderTest.java](../src/test/java/dev/danielk/basicjava/string/StringBuilderTest.java): StringBuilder 조작, CharSequence subSequence
+- [Ex01_LogParserTest.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex01_LogParserTest.java) / [Ex01_LogParserAnswer.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex01_LogParserAnswer.java): 연습 01 로그 파서
+- [Ex02_WordStatTest.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex02_WordStatTest.java) / [Ex02_WordStatAnswer.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex02_WordStatAnswer.java): 연습 02 단어 통계 분석기
+- [Ex03_NameFormatterTest.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex03_NameFormatterTest.java) / [Ex03_NameFormatterAnswer.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex03_NameFormatterAnswer.java): 연습 03 이름 포매터
+- [Ex04_PasswordValidatorTest.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex04_PasswordValidatorTest.java) / [Ex04_PasswordValidatorAnswer.java](../src/test/java/dev/danielk/basicjava/string/exercise/Ex04_PasswordValidatorAnswer.java): 연습 04 비밀번호 검증기
 
 ### 12. 배열 처리
 - 배열 정렬: 오름차순, 내림차순, 커스텀 비교자
@@ -49,10 +51,10 @@
 - 배열 문자열 변환: Arrays.toString, Arrays.deepToString
 
 **파일 링크**
-- [ArrayTest.java](../src/test/java/dev/danielk/basicjava/array/ArrayTest.java)
-- [Ex01_GradeProcessorTest.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex01_GradeProcessorTest.java) / [Ex01_GradeProcessorAnswer.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex01_GradeProcessorAnswer.java)
-- [Ex02_InventoryManagerTest.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex02_InventoryManagerTest.java) / [Ex02_InventoryManagerAnswer.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex02_InventoryManagerAnswer.java)
-- [Ex03_SurveyAnalyzerTest.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex03_SurveyAnalyzerTest.java) / [Ex03_SurveyAnalyzerAnswer.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex03_SurveyAnalyzerAnswer.java)
+- [ArrayTest.java](../src/test/java/dev/danielk/basicjava/array/ArrayTest.java): 배열 처리 보일러플레이트
+- [Ex01_GradeProcessorTest.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex01_GradeProcessorTest.java) / [Ex01_GradeProcessorAnswer.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex01_GradeProcessorAnswer.java): 연습 01 성적 처리기
+- [Ex02_InventoryManagerTest.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex02_InventoryManagerTest.java) / [Ex02_InventoryManagerAnswer.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex02_InventoryManagerAnswer.java): 연습 02 재고 관리 시스템
+- [Ex03_SurveyAnalyzerTest.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex03_SurveyAnalyzerTest.java) / [Ex03_SurveyAnalyzerAnswer.java](../src/test/java/dev/danielk/basicjava/array/exercise/Ex03_SurveyAnalyzerAnswer.java): 연습 03 설문 결과 분석기
 
 ### 13. 리스트 처리
 - 리스트 집합 연산: 합집합, 교집합, 차집합
@@ -64,10 +66,10 @@
 - 리스트 빈도수 집계: Collections.frequency
 
 **파일 링크**
-- [ListTest.java](../src/test/java/dev/danielk/basicjava/collection/ListTest.java)
-- [Ex01_CartSystemTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex01_CartSystemTest.java) / [Ex01_CartSystemAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex01_CartSystemAnswer.java)
-- [Ex02_StudentGradeTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex02_StudentGradeTest.java) / [Ex02_StudentGradeAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex02_StudentGradeAnswer.java)
-- [Ex03_TeamRosterTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex03_TeamRosterTest.java) / [Ex03_TeamRosterAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex03_TeamRosterAnswer.java)
+- [ListTest.java](../src/test/java/dev/danielk/basicjava/collection/ListTest.java): 리스트 처리 보일러플레이트
+- [Ex01_CartSystemTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex01_CartSystemTest.java) / [Ex01_CartSystemAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex01_CartSystemAnswer.java): 연습 01 장바구니 시스템
+- [Ex02_StudentGradeTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex02_StudentGradeTest.java) / [Ex02_StudentGradeAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex02_StudentGradeAnswer.java): 연습 02 학생 성적 관리
+- [Ex03_TeamRosterTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex03_TeamRosterTest.java) / [Ex03_TeamRosterAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex03_TeamRosterAnswer.java): 연습 03 팀 로스터 관리
 
 ### 14. 맵 처리
 - 맵 순회: keySet, entrySet, values
@@ -77,10 +79,10 @@
 - 맵 병합: merge, compute
 
 **파일 링크**
-- [MapTest.java](../src/test/java/dev/danielk/basicjava/collection/MapTest.java)
-- [Ex04_WordFrequencyTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex04_WordFrequencyTest.java) / [Ex04_WordFrequencyAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex04_WordFrequencyAnswer.java)
-- [Ex05_ScoreAggregatorTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex05_ScoreAggregatorTest.java) / [Ex05_ScoreAggregatorAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex05_ScoreAggregatorAnswer.java)
-- [Ex06_GroupClassifierTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex06_GroupClassifierTest.java) / [Ex06_GroupClassifierAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex06_GroupClassifierAnswer.java)
+- [MapTest.java](../src/test/java/dev/danielk/basicjava/collection/MapTest.java): 맵 처리 보일러플레이트
+- [Ex04_WordFrequencyTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex04_WordFrequencyTest.java) / [Ex04_WordFrequencyAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex04_WordFrequencyAnswer.java): 연습 04 단어 빈도 분석기
+- [Ex05_ScoreAggregatorTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex05_ScoreAggregatorTest.java) / [Ex05_ScoreAggregatorAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex05_ScoreAggregatorAnswer.java): 연습 05 학생 점수 집계기
+- [Ex06_GroupClassifierTest.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex06_GroupClassifierTest.java) / [Ex06_GroupClassifierAnswer.java](../src/test/java/dev/danielk/basicjava/collection/exercise/Ex06_GroupClassifierAnswer.java): 연습 06 그룹별 데이터 분류기
 
 ### 15. 숫자/수학 처리
 - 최대공약수(GCD), 최소공배수(LCM)
@@ -90,9 +92,9 @@
 - 순열, 조합 생성
 
 **파일 링크**
-- [MathTest.java](../src/test/java/dev/danielk/basicjava/math/MathTest.java)
-- [Ex01_CryptoHelperTest.java](../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperTest.java) / [Ex01_CryptoHelperAnswer.java](../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperAnswer.java)
-- [Ex02_NumberPuzzleTest.java](../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleTest.java) / [Ex02_NumberPuzzleAnswer.java](../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleAnswer.java)
+- [MathTest.java](../src/test/java/dev/danielk/basicjava/math/MathTest.java): 숫자/수학 처리 보일러플레이트
+- [Ex01_CryptoHelperTest.java](../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperTest.java) / [Ex01_CryptoHelperAnswer.java](../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperAnswer.java): 연습 01 암호화 도우미
+- [Ex02_NumberPuzzleTest.java](../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleTest.java) / [Ex02_NumberPuzzleAnswer.java](../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleAnswer.java): 연습 02 숫자 퍼즐 검증기
 
 ### 16. 날짜/시간 처리
 - 현재 날짜/시간 가져오기
@@ -101,10 +103,10 @@
 - 타임존 처리
 
 **파일 링크**
-- [DateTimeTest.java](../src/test/java/dev/danielk/basicjava/datetime/DateTimeTest.java)
-- [Ex01_EventSchedulerTest.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex01_EventSchedulerTest.java) / [Ex01_EventSchedulerAnswer.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex01_EventSchedulerAnswer.java)
-- [Ex02_WorkHoursCalculatorTest.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex02_WorkHoursCalculatorTest.java) / [Ex02_WorkHoursCalculatorAnswer.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex02_WorkHoursCalculatorAnswer.java)
-- [Ex03_MeetingTimeConverterTest.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex03_MeetingTimeConverterTest.java) / [Ex03_MeetingTimeConverterAnswer.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex03_MeetingTimeConverterAnswer.java)
+- [DateTimeTest.java](../src/test/java/dev/danielk/basicjava/datetime/DateTimeTest.java): 날짜/시간 처리 보일러플레이트
+- [Ex01_EventSchedulerTest.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex01_EventSchedulerTest.java) / [Ex01_EventSchedulerAnswer.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex01_EventSchedulerAnswer.java): 연습 01 이벤트 일정 관리기
+- [Ex02_WorkHoursCalculatorTest.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex02_WorkHoursCalculatorTest.java) / [Ex02_WorkHoursCalculatorAnswer.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex02_WorkHoursCalculatorAnswer.java): 연습 02 근무 시간 계산기
+- [Ex03_MeetingTimeConverterTest.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex03_MeetingTimeConverterTest.java) / [Ex03_MeetingTimeConverterAnswer.java](../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex03_MeetingTimeConverterAnswer.java): 연습 03 글로벌 회의 시간 변환기
 
 ### 17. 랜덤 처리
 - 정수 난수 생성: Random, ThreadLocalRandom
@@ -114,9 +116,9 @@
 - 랜덤 요소 추출
 
 **파일 링크**
-- [RandomTest.java](../src/test/java/dev/danielk/basicjava/random/RandomTest.java)
-- [Ex01_CardDeckTest.java](../src/test/java/dev/danielk/basicjava/random/exercise/Ex01_CardDeckTest.java) / [Ex01_CardDeckAnswer.java](../src/test/java/dev/danielk/basicjava/random/exercise/Ex01_CardDeckAnswer.java)
-- [Ex02_RandomQuizTest.java](../src/test/java/dev/danielk/basicjava/random/exercise/Ex02_RandomQuizTest.java) / [Ex02_RandomQuizAnswer.java](../src/test/java/dev/danielk/basicjava/random/exercise/Ex02_RandomQuizAnswer.java)
+- [RandomTest.java](../src/test/java/dev/danielk/basicjava/random/RandomTest.java): 랜덤 처리 보일러플레이트
+- [Ex01_CardDeckTest.java](../src/test/java/dev/danielk/basicjava/random/exercise/Ex01_CardDeckTest.java) / [Ex01_CardDeckAnswer.java](../src/test/java/dev/danielk/basicjava/random/exercise/Ex01_CardDeckAnswer.java): 연습 01 카드 게임 덱
+- [Ex02_RandomQuizTest.java](../src/test/java/dev/danielk/basicjava/random/exercise/Ex02_RandomQuizTest.java) / [Ex02_RandomQuizAnswer.java](../src/test/java/dev/danielk/basicjava/random/exercise/Ex02_RandomQuizAnswer.java): 연습 02 랜덤 퀴즈 출제기
 
 ### 18. JSON 처리
 - Gson 직렬화: toJson()
@@ -127,9 +129,9 @@
 - Jackson ObjectMapper 리스트 처리: TypeReference<List<T>>
 
 **파일 링크**
-- [JsonTest.java](../src/test/java/dev/danielk/basicjava/json/JsonTest.java)
-- [Ex01_GsonBasicTest.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicTest.java) / [Ex01_GsonBasicAnswer.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicAnswer.java)
-- [Ex02_JacksonBasicTest.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicTest.java) / [Ex02_JacksonBasicAnswer.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicAnswer.java)
+- [JsonTest.java](../src/test/java/dev/danielk/basicjava/json/JsonTest.java): JSON 처리 보일러플레이트
+- [Ex01_GsonBasicTest.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicTest.java) / [Ex01_GsonBasicAnswer.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicAnswer.java): 연습 01 Gson 기본
+- [Ex02_JacksonBasicTest.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicTest.java) / [Ex02_JacksonBasicAnswer.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicAnswer.java): 연습 02 Jackson 기본
 
 ---
 
