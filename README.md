@@ -26,6 +26,10 @@
 
 - [폴더 구조 고찰: doc 분리 vs src/test 통합](doc/ref_폴더구조_고찰.md)
 
+## 참고 문서
+
+- [ref_큐_덱_차이점.md](doc/ref_큐_덱_차이점.md)
+
 ## 연습 예제 구조
 
 각 주제별로 `exercise/` 패키지에 문제(`*Test.java`)와 답안(`*Answer.java`)이 쌍으로 존재합니다.
