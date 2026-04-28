@@ -34,12 +34,15 @@ Gson과 Jackson ObjectMapper에 대한 연습문제 및 답안 작성
 ```
 
 ## 작업 내용
-- [ ] `src/test/java/dev/danielk/basicjava/json/JsonPracticeTest.java` 생성
-- [ ] 문제 1~3: Gson 연습문제 작성
-- [ ] 문제 4~5: Jackson ObjectMapper 연습문제 작성
-- [ ] 각 문제에 `[문제]` / `[풀이]` 섹션 구분 적용
-- [ ] 테스트 실행 확인
+- [x] `src/test/java/dev/danielk/basicjava/json/JsonPracticeTest.java` 생성
+- [x] 문제 1~3: Gson 연습문제 작성
+- [x] 문제 4~5: Jackson ObjectMapper 연습문제 작성
+- [x] 각 문제에 `[문제]` / `[풀이]` 섹션 구분 적용
+- [x] 테스트 실행 확인
 
 ## 완료 기준
 - 5개 테스트 모두 통과
 - `[문제]` 주석 블록과 `[풀이]` 주석 블록이 명확히 분리됨
+
+## 완료일
+2026-04-29
