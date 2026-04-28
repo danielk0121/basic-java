@@ -38,50 +38,23 @@
 ```
 src/main/java/dev/danielk/basicjava/
 └── http/
-    ├── server/ # HTTP 서버 처리 (컨트롤러)
-    └── client/ # HTTP 클라이언트 처리
+    ├── server/            # HTTP 서버 처리 (컨트롤러)
+    └── client/            # HTTP 클라이언트 처리
 
 src/test/java/dev/danielk/basicjava/
-├── string/
-│   ├── StringBasicTest.java
-│   ├── StringBuilderTest.java
-│   ├── StringTransformTest.java
-│   └── exercise/          # 문자열 연습 예제
-│       ├── Ex01_LogParserTest.java / Answer.java
-│       ├── Ex02_WordStatTest.java / Answer.java
-│       ├── Ex03_NameFormatterTest.java / Answer.java
-│       └── Ex04_PasswordValidatorTest.java / Answer.java
-├── array/
-│   ├── ArrayTest.java
-│   └── exercise/          # 배열 연습 예제
-│       ├── Ex01_GradeProcessorTest.java / Answer.java
-│       ├── Ex02_InventoryManagerTest.java / Answer.java
-│       └── Ex03_SurveyAnalyzerTest.java / Answer.java
-├── collection/
-│   ├── ListTest.java
-│   ├── MapTest.java
-│   └── exercise/          # 리스트/맵 연습 예제
-│       ├── Ex01_CartSystemTest.java / Answer.java
-│       ├── Ex02_StudentGradeTest.java / Answer.java
-│       ├── Ex03_TeamRosterTest.java / Answer.java
-│       ├── Ex04_WordFrequencyTest.java / Answer.java
-│       ├── Ex05_ScoreAggregatorTest.java / Answer.java
-│       └── Ex06_GroupClassifierTest.java / Answer.java
-├── math/
-│   ├── MathTest.java
-│   └── exercise/          # 수학 연습 예제
-│       ├── Ex01_CryptoHelperTest.java / Answer.java
-│       └── Ex02_NumberPuzzleTest.java / Answer.java
-├── datetime/
-│   ├── DateTimeTest.java
-│   └── exercise/          # 날짜/시간 연습 예제
-│       ├── Ex01_EventSchedulerTest.java / Answer.java
-│       ├── Ex02_WorkHoursCalculatorTest.java / Answer.java
-│       └── Ex03_MeetingTimeConverterTest.java / Answer.java
-├── random/
-│   ├── RandomTest.java
-│   └── exercise/          # 랜덤 연습 예제
-│       ├── Ex01_CardDeckTest.java / Answer.java
-│       └── Ex02_RandomQuizTest.java / Answer.java
+├── string/                # 문자열 처리 보일러플레이트
+│   └── exercise/          # 문자열 연습 예제 (로그 파서, 단어 통계, 이름 포매터, 비밀번호 검증)
+├── array/                 # 배열 처리 보일러플레이트
+│   └── exercise/          # 배열 연습 예제 (성적 처리, 재고 관리, 설문 분석)
+├── collection/            # 리스트/맵 처리 보일러플레이트
+│   └── exercise/          # 리스트/맵 연습 예제 (장바구니, 성적 관리, 팀 로스터, 단어 빈도, 점수 집계, 그룹 분류)
+├── math/                  # 숫자/수학 처리 보일러플레이트
+│   └── exercise/          # 수학 연습 예제 (암호화 도우미, 숫자 퍼즐)
+├── datetime/              # 날짜/시간 처리 보일러플레이트
+│   └── exercise/          # 날짜/시간 연습 예제 (이벤트 일정, 근무 시간, 회의 시간 변환)
+├── random/                # 랜덤 처리 보일러플레이트
+│   └── exercise/          # 랜덤 연습 예제 (카드 덱, 랜덤 퀴즈)
+├── json/                  # JSON 처리 보일러플레이트 (Gson, Jackson)
+│   └── exercise/          # JSON 연습 예제 (Gson 기본, Jackson 기본)
 └── algorithm/             # 알고리즘 구현
 ```
