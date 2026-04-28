@@ -12,10 +12,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 연습 01 답안: 이벤트 일정 관리기
+ *
+ * 이벤트 시작/종료 날짜 파싱, D-day 계산, 기간(Period) 출력을 수행하세요.
+ *
+ * 사용해야 할 메서드:
+ *   LocalDate.parse, DateTimeFormatter, ChronoUnit.DAYS.between,
+ *   Period.between, plusDays/minusDays
  */
 @DisplayName("연습 01 답안: 이벤트 일정 관리기")
 class Ex01_EventSchedulerAnswer {
 
+    // ── 문제 1 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] "yyyy-MM-dd" 형식 문자열을 LocalDate로 파싱하여 반환하세요.
+     * 힌트: LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+     *
+     * [풀이] ofPattern("yyyy-MM-dd")으로 포매터 생성 후 parse에 전달
+     */
     LocalDate parseDate(String dateStr) {
         return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
@@ -27,7 +40,14 @@ class Ex01_EventSchedulerAnswer {
         assertThat(parseDate("2026-01-01")).isEqualTo(LocalDate.of(2026, 1, 1));
     }
 
-    /** ChronoUnit.DAYS.between(from, to): to가 from보다 과거이면 음수 반환 */
+    // ── 문제 2 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 오늘(today)부터 이벤트 날짜(eventDate)까지 남은 일수(D-day)를 반환하세요.
+     * 이벤트가 지났으면 음수, 오늘이면 0, 미래면 양수
+     * 힌트: ChronoUnit.DAYS.between(today, eventDate)
+     *
+     * [풀이] ChronoUnit.DAYS.between(from, to): to가 from보다 과거이면 음수 반환
+     */
     long dday(LocalDate today, LocalDate eventDate) {
         return ChronoUnit.DAYS.between(today, eventDate);
     }
@@ -41,7 +61,13 @@ class Ex01_EventSchedulerAnswer {
         assertThat(dday(today, LocalDate.of(2026, 4, 20))).isEqualTo(-7);
     }
 
-    /** Period.between: 두 날짜의 연/월/일 단위 차이를 각각 구분하여 반환 */
+    // ── 문제 3 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 두 날짜 사이의 기간을 Period로 계산하여 "X년 Y개월 Z일" 형태로 반환하세요.
+     * 힌트: Period.between(start, end), getYears(), getMonths(), getDays()
+     *
+     * [풀이] Period.between: 두 날짜의 연/월/일 단위 차이를 각각 구분하여 반환
+     */
     String periodString(LocalDate start, LocalDate end) {
         Period p = Period.between(start, end);
         return p.getYears() + "년 " + p.getMonths() + "개월 " + p.getDays() + "일";
@@ -56,7 +82,13 @@ class Ex01_EventSchedulerAnswer {
                 .isEqualTo("0년 0개월 26일");
     }
 
-    /** LocalDate는 불변 — plusDays는 새 객체를 반환 */
+    // ── 문제 4 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 이벤트 시작일에서 n일 후의 종료일을 반환하세요.
+     * 힌트: startDate.plusDays(n)
+     *
+     * [풀이] LocalDate는 불변 — plusDays는 새 객체를 반환
+     */
     LocalDate endDate(LocalDate startDate, int days) {
         return startDate.plusDays(days);
     }

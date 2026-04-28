@@ -7,11 +7,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 연습 02 답안: 숫자 퍼즐 검증기
+ *
+ * 소수 판별, 자릿수 합 조건, 진법 변환 후 회문 여부를 검증하세요.
+ *
+ * 사용해야 할 메서드:
+ *   isPrime 직접 구현, String.valueOf.chars,
+ *   Integer.toBinaryString, StringBuilder.reverse
  */
 @DisplayName("연습 02 답안: 숫자 퍼즐 검증기")
 class Ex02_NumberPuzzleAnswer {
 
-    /** 2 미만은 소수 아님, i*i <= n 조건으로 sqrt 계산 없이 처리 */
+    // ── 문제 1 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 주어진 수가 소수인지 판별하세요.
+     * 힌트: 2부터 sqrt(n)까지 나눠지는지 확인 (i*i <= n 조건 사용)
+     *
+     * [풀이] 2 미만은 소수 아님, i*i <= n 조건으로 sqrt 계산 없이 처리
+     */
     boolean isPrime(int n) {
         if (n < 2) return false;
         for (int i = 2; i * i <= n; i++) {
@@ -31,7 +43,13 @@ class Ex02_NumberPuzzleAnswer {
         assertThat(isPrime(100)).isFalse();
     }
 
-    /** String.valueOf(n).chars()는 각 문자의 ASCII 코드 반환, '0'(48)을 빼면 실제 숫자 값 */
+    // ── 문제 2 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 자릿수 합을 반환하세요.
+     * 힌트: String.valueOf(n).chars().map(c -> c - '0').sum()
+     *
+     * [풀이] String.valueOf(n).chars()는 각 문자의 ASCII 코드 반환, '0'(48)을 빼면 실제 숫자 값
+     */
     int digitSum(int n) {
         return String.valueOf(n).chars().map(c -> c - '0').sum();
     }
@@ -44,7 +62,13 @@ class Ex02_NumberPuzzleAnswer {
         assertThat(digitSum(100)).isEqualTo(1);
     }
 
-    /** 2진수 문자열 → StringBuilder로 뒤집기 → 원본과 equals 비교 */
+    // ── 문제 3 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 수를 2진수 문자열로 변환했을 때 회문인지 판별하세요.
+     * 힌트: Integer.toBinaryString(n), new StringBuilder(bin).reverse().toString()
+     *
+     * [풀이] 2진수 문자열 → StringBuilder로 뒤집기 → 원본과 equals 비교
+     */
     boolean isBinaryPalindrome(int n) {
         String bin = Integer.toBinaryString(n);
         return bin.equals(new StringBuilder(bin).reverse().toString());
@@ -53,12 +77,17 @@ class Ex02_NumberPuzzleAnswer {
     @Test
     @DisplayName("문제 3: 2진수 회문 판별")
     void test_isBinaryPalindrome() {
-        assertThat(isBinaryPalindrome(9)).isTrue();
-        assertThat(isBinaryPalindrome(21)).isTrue();
-        assertThat(isBinaryPalindrome(10)).isFalse();
+        assertThat(isBinaryPalindrome(9)).isTrue();   // 1001
+        assertThat(isBinaryPalindrome(21)).isTrue();  // 10101
+        assertThat(isBinaryPalindrome(10)).isFalse(); // 1010
     }
 
-    /** isPrime과 digitSum을 조합 */
+    // ── 문제 4 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 수가 소수이고 자릿수 합이 홀수인 경우 true를 반환하세요.
+     *
+     * [풀이] isPrime과 digitSum을 조합
+     */
     boolean isPrimeAndOddDigitSum(int n) {
         return isPrime(n) && digitSum(n) % 2 != 0;
     }
@@ -66,9 +95,9 @@ class Ex02_NumberPuzzleAnswer {
     @Test
     @DisplayName("문제 4: 소수이면서 자릿수 합이 홀수")
     void test_isPrimeAndOddDigitSum() {
-        assertThat(isPrimeAndOddDigitSum(23)).isTrue();
-        assertThat(isPrimeAndOddDigitSum(29)).isTrue();
-        assertThat(isPrimeAndOddDigitSum(4)).isFalse();
-        assertThat(isPrimeAndOddDigitSum(11)).isFalse();
+        assertThat(isPrimeAndOddDigitSum(23)).isTrue();  // 소수, 2+3=5 홀수
+        assertThat(isPrimeAndOddDigitSum(29)).isTrue();  // 소수, 2+9=11 홀수
+        assertThat(isPrimeAndOddDigitSum(4)).isFalse();  // 소수 아님
+        assertThat(isPrimeAndOddDigitSum(11)).isFalse(); // 소수, 1+1=2 짝수
     }
 }

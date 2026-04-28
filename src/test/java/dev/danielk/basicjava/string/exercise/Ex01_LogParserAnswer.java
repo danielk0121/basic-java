@@ -12,13 +12,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 연습 01 답안: 로그 파서
+ *
+ * 서버 로그 문자열에서 필요한 정보를 추출하는 유틸 메서드를 완성하세요.
+ *
+ * 사용해야 할 메서드:
+ *   split, substring, indexOf, contains, startsWith, endsWith,
+ *   strip, matches, Pattern/Matcher (그룹 추출)
+ *
+ * 로그 형식 예시:
+ *   "[2026-04-27 15:30:00] ERROR  UserService - 사용자를 찾을 수 없습니다 (userId=42)"
+ *   "[2026-04-27 09:00:01] INFO   AppServer  - 서버가 시작되었습니다"
+ *   "[2026-04-27 23:59:59] WARN   PayService - 결제 응답 지연 (elapsed=3200ms)"
  */
 @DisplayName("연습 01 답안: 로그 파서")
 class Ex01_LogParserAnswer {
 
     // ── 문제 1 답안 ───────────────────────────────────────────────────────────
     /**
-     * '[' 다음부터 첫 번째 공백 전까지 = 날짜 부분
+     * [문제] 로그 한 줄에서 날짜(yyyy-MM-dd) 부분만 추출하세요.
+     * 힌트: indexOf('['), indexOf(' '), substring
+     *
+     * [풀이] '[' 다음부터 첫 번째 공백 전까지 = 날짜 부분
      * "[2026-04-27 15:30:00] ..." → indexOf('[')=0, indexOf(' ')=11
      * substring(1, 11) → "2026-04-27"
      */
@@ -39,7 +53,11 @@ class Ex01_LogParserAnswer {
 
     // ── 문제 2 답안 ───────────────────────────────────────────────────────────
     /**
-     * ']' 이후 문자열을 split("\\s+")으로 나누면:
+     * [문제] 로그 한 줄에서 로그 레벨(ERROR / INFO / WARN)을 추출하세요.
+     * 로그 레벨은 ']' 이후 공백으로 구분된 첫 번째 토큰입니다.
+     * 힌트: indexOf(']'), substring, split, strip
+     *
+     * [풀이] ']' 이후 문자열을 split("\\s+")으로 나누면:
      * " ERROR  UserService - ..." → ["", "ERROR", "UserService", ...]
      * strip() 후 split하면 인덱스 1이 레벨
      */
@@ -62,7 +80,10 @@ class Ex01_LogParserAnswer {
 
     // ── 문제 3 답안 ───────────────────────────────────────────────────────────
     /**
-     * extractLevel로 레벨을 꺼낸 뒤 "ERROR"와 equals 비교
+     * [문제] 로그 한 줄이 에러 로그인지 판별하세요.
+     * 힌트: contains 또는 startsWith 활용
+     *
+     * [풀이] extractLevel로 레벨을 꺼낸 뒤 "ERROR"와 equals 비교
      * 또는 contains("ERROR")로 단순하게 처리 가능 (레벨이 고정 위치일 때)
      */
     boolean isErrorLog(String logLine) {
@@ -79,7 +100,10 @@ class Ex01_LogParserAnswer {
 
     // ── 문제 4 답안 ───────────────────────────────────────────────────────────
     /**
-     * 각 로그 줄에서 레벨을 추출해 level과 equals 비교 후 필터링
+     * [문제] 로그 목록에서 특정 레벨의 로그만 필터링하여 반환하세요.
+     * 힌트: extractLevel 재사용, equals
+     *
+     * [풀이] 각 로그 줄에서 레벨을 추출해 level과 equals 비교 후 필터링
      */
     List<String> filterByLevel(List<String> logs, String level) {
         List<String> result = new ArrayList<>();
@@ -111,7 +135,11 @@ class Ex01_LogParserAnswer {
 
     // ── 문제 5 답안 ───────────────────────────────────────────────────────────
     /**
-     * 로그 줄 전체가 "[yyyy-MM-dd HH:mm:ss]"로 시작하는지 matches로 검증
+     * [문제] 로그 한 줄의 타임스탬프([yyyy-MM-dd HH:mm:ss])가 올바른 형식인지 검증하세요.
+     * 힌트: matches 또는 Pattern/Matcher
+     * 패턴: 대괄호 안에 "yyyy-MM-dd HH:mm:ss" 형식
+     *
+     * [풀이] 로그 줄 전체가 "[yyyy-MM-dd HH:mm:ss]"로 시작하는지 matches로 검증
      * matches()는 전체 문자열 매칭이므로 앞부분 패턴 + ".*" 필요
      */
     boolean isValidTimestamp(String logLine) {
@@ -128,7 +156,11 @@ class Ex01_LogParserAnswer {
 
     // ── 문제 6 답안 ───────────────────────────────────────────────────────────
     /**
-     * Pattern으로 "(\w+)=(\S+)" 패턴을 반복 검색
+     * [문제] 로그 문자열에서 "key=value" 형태의 파라미터를 모두 추출해 "key: value" 형태의 목록으로 반환하세요.
+     * 예: "userId=42 elapsed=3200ms" → ["userId: 42", "elapsed: 3200ms"]
+     * 힌트: Pattern/Matcher, group 추출, String.format 또는 문자열 조합
+     *
+     * [풀이] Pattern으로 "(\w+)=(\S+)" 패턴을 반복 검색
      * group(1) = 키, group(2) = 값
      * String.format으로 "key: value" 형태로 조합
      */

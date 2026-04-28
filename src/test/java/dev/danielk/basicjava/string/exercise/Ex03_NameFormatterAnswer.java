@@ -10,13 +10,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 연습 03 답안: 이름 포매터
+ *
+ * 사용자 이름 데이터를 다양한 형태로 가공하는 메서드를 완성하세요.
+ *
+ * 사용해야 할 메서드:
+ *   strip/trim, toUpperCase/toLowerCase, String.format,
+ *   String.join, repeat, compareTo/equalsIgnoreCase,
+ *   substring, charAt, isEmpty/isBlank
  */
 @DisplayName("연습 03 답안: 이름 포매터")
 class Ex03_NameFormatterAnswer {
 
     // ── 문제 1 답안 ───────────────────────────────────────────────────────────
     /**
-     * strip으로 앞뒤 공백 제거 → split으로 "성"/"이름" 분리
+     * [문제] "성 이름" 형태의 영문 이름을 "이름 성" 순서로 바꾸세요.
+     * 앞뒤 공백이 있을 수 있습니다.
+     * 예: "  Kim Gildong  " → "Gildong Kim"
+     * 힌트: strip, split, String.format 또는 join
+     *
+     * [풀이] strip으로 앞뒤 공백 제거 → split으로 "성"/"이름" 분리
      * String.format("%s %s", 이름, 성) 으로 순서 변경
      */
     String swapName(String fullName) {
@@ -34,7 +46,10 @@ class Ex03_NameFormatterAnswer {
 
     // ── 문제 2 답안 ───────────────────────────────────────────────────────────
     /**
-     * 각 이름에 String.format으로 "안녕하세요, {이름}님!" 형태 적용
+     * [문제] 이름 목록을 받아 "안녕하세요, {이름}님!" 형태의 인사말 목록을 반환하세요.
+     * 힌트: String.format 또는 문자열 연결
+     *
+     * [풀이] 각 이름에 String.format으로 "안녕하세요, {이름}님!" 형태 적용
      */
     List<String> greetAll(List<String> names) {
         List<String> result = new ArrayList<>();
@@ -57,7 +72,10 @@ class Ex03_NameFormatterAnswer {
 
     // ── 문제 3 답안 ───────────────────────────────────────────────────────────
     /**
-     * ArrayList 복사 후 sort에 compareToIgnoreCase 전달
+     * [문제] 이름 목록을 사전순(대소문자 무시)으로 정렬한 결과를 반환하세요.
+     * 힌트: List 복사 후 sort, compareTo 또는 compareToIgnoreCase
+     *
+     * [풀이] ArrayList 복사 후 sort에 compareToIgnoreCase 전달
      * compareToIgnoreCase는 대소문자를 무시한 사전순 비교
      */
     List<String> sortNames(List<String> names) {
@@ -75,7 +93,11 @@ class Ex03_NameFormatterAnswer {
 
     // ── 문제 4 답안 ───────────────────────────────────────────────────────────
     /**
-     * split으로 단어 분리 → 각 단어의 charAt(0)을 toUpperCase로 변환
+     * [문제] 이름을 이니셜로 변환하세요.
+     * "Hong Gildong" → "H.G."
+     * 힌트: split, charAt(0), toUpperCase, StringBuilder, repeat 불필요 → 반복으로 처리
+     *
+     * [풀이] split으로 단어 분리 → 각 단어의 charAt(0)을 toUpperCase로 변환
      * StringBuilder로 "X." 형태로 누적
      */
     String toInitials(String fullName) {
@@ -97,7 +119,13 @@ class Ex03_NameFormatterAnswer {
 
     // ── 문제 5 답안 ───────────────────────────────────────────────────────────
     /**
-     * 이름이 1개면 그대로 반환
+     * [문제] 이름 목록을 쉼표로 구분된 하나의 문자열로 만들되, 마지막 이름 앞에는 " 그리고 "를 붙이세요.
+     * 예: ["Alice", "Bob", "Charlie"] → "Alice, Bob 그리고 Charlie"
+     * 예: ["Alice", "Bob"]            → "Alice 그리고 Bob"
+     * 예: ["Alice"]                   → "Alice"
+     * 힌트: size 분기, subList, String.join
+     *
+     * [풀이] 이름이 1개면 그대로 반환
      * 2개면 "{첫번째} 그리고 {두번째}"
      * 3개 이상이면 마지막 이름 제외한 목록을 join(",") 후 마지막 이름 이어붙이기
      * subList로 마지막 이름을 제외한 앞부분 추출
@@ -119,7 +147,12 @@ class Ex03_NameFormatterAnswer {
 
     // ── 문제 6 답안 ───────────────────────────────────────────────────────────
     /**
-     * length()로 maxLen 초과 여부 확인
+     * [문제] 이름을 최대 maxLen 글자로 줄이고 초과하면 "..."을 붙이세요.
+     * 예: ("홍길동입니다", 4) → "홍길동입..."  (4글자 + "...")
+     *     ("짧은", 5)        → "짧은"          (초과 안 함)
+     * 힌트: length, substring
+     *
+     * [풀이] length()로 maxLen 초과 여부 확인
      * 초과 시: substring(0, maxLen) + "..."
      * 미초과: 원본 반환
      */
