@@ -15,4 +15,7 @@
 - [x] 배열 문자열 변환: Arrays.toString, Arrays.deepToString
 
 ## 구현 파일
-- [`ArrayTest.java`](../../src/test/java/dev/danielk/basicjava/array/ArrayTest.java)
+- `src/test/java/dev/danielk/basicjava/array/`
+
+## 파일 링크
+- [ArrayTest.java](../../src/test/java/dev/danielk/basicjava/array/ArrayTest.java)

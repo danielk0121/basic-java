@@ -22,9 +22,12 @@
   - 커버 메서드: `retainAll`, `removeAll`, `Collections.reverse`, `sort(Comparator)`
 
 ## 구현 파일
-- [`Ex01_CartSystemTest.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex01_CartSystemTest.java) / [`Ex01_CartSystemAnswer.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex01_CartSystemAnswer.java)
-- [`Ex02_StudentGradeTest.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex02_StudentGradeTest.java) / [`Ex02_StudentGradeAnswer.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex02_StudentGradeAnswer.java)
-- [`Ex03_TeamRosterTest.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex03_TeamRosterTest.java) / [`Ex03_TeamRosterAnswer.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex03_TeamRosterAnswer.java)
+- `src/test/java/dev/danielk/basicjava/collection/exercise/`
+
+## 파일 링크
+- [Ex01_CartSystemTest.java](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex01_CartSystemTest.java) / [Ex01_CartSystemAnswer.java](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex01_CartSystemAnswer.java)
+- [Ex02_StudentGradeTest.java](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex02_StudentGradeTest.java) / [Ex02_StudentGradeAnswer.java](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex02_StudentGradeAnswer.java)
+- [Ex03_TeamRosterTest.java](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex03_TeamRosterTest.java) / [Ex03_TeamRosterAnswer.java](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex03_TeamRosterAnswer.java)
 
 ## 작업 방식
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)

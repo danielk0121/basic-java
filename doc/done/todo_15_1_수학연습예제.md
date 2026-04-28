@@ -22,8 +22,11 @@
   - 커버 메서드: `isPrime`, 자릿수 합, `Integer.toBinaryString`, `StringBuilder.reverse`
 
 ## 구현 파일
-- [`Ex01_CryptoHelperTest.java`](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperTest.java) / [`Ex01_CryptoHelperAnswer.java`](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperAnswer.java)
-- [`Ex02_NumberPuzzleTest.java`](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleTest.java) / [`Ex02_NumberPuzzleAnswer.java`](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleAnswer.java)
+- `src/test/java/dev/danielk/basicjava/math/exercise/`
+
+## 파일 링크
+- [Ex01_CryptoHelperTest.java](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperTest.java) / [Ex01_CryptoHelperAnswer.java](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperAnswer.java)
+- [Ex02_NumberPuzzleTest.java](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleTest.java) / [Ex02_NumberPuzzleAnswer.java](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleAnswer.java)
 
 ## 작업 방식
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)

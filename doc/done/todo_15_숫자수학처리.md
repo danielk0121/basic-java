@@ -10,4 +10,7 @@
 - [x] 순열, 조합 생성
 
 ## 구현 파일
-- [`MathTest.java`](../../src/test/java/dev/danielk/basicjava/math/MathTest.java)
+- `src/test/java/dev/danielk/basicjava/math/`
+
+## 파일 링크
+- [MathTest.java](../../src/test/java/dev/danielk/basicjava/math/MathTest.java)

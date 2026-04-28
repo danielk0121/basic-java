@@ -9,10 +9,13 @@
 - [x] Ex04 비밀번호 검증기 — 문제/답안 작성
 
 ## 구현 파일
-- [`Ex01_LogParserTest.java`](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex01_LogParserTest.java) / [`Ex01_LogParserAnswer.java`](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex01_LogParserAnswer.java)
-- [`Ex02_WordStatTest.java`](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex02_WordStatTest.java) / [`Ex02_WordStatAnswer.java`](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex02_WordStatAnswer.java)
-- [`Ex03_NameFormatterTest.java`](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex03_NameFormatterTest.java) / [`Ex03_NameFormatterAnswer.java`](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex03_NameFormatterAnswer.java)
-- [`Ex04_PasswordValidatorTest.java`](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex04_PasswordValidatorTest.java) / [`Ex04_PasswordValidatorAnswer.java`](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex04_PasswordValidatorAnswer.java)
+- `src/test/java/dev/danielk/basicjava/string/exercise/`
+
+## 파일 링크
+- [Ex01_LogParserTest.java](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex01_LogParserTest.java) / [Ex01_LogParserAnswer.java](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex01_LogParserAnswer.java)
+- [Ex02_WordStatTest.java](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex02_WordStatTest.java) / [Ex02_WordStatAnswer.java](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex02_WordStatAnswer.java)
+- [Ex03_NameFormatterTest.java](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex03_NameFormatterTest.java) / [Ex03_NameFormatterAnswer.java](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex03_NameFormatterAnswer.java)
+- [Ex04_PasswordValidatorTest.java](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex04_PasswordValidatorTest.java) / [Ex04_PasswordValidatorAnswer.java](../../src/test/java/dev/danielk/basicjava/string/exercise/Ex04_PasswordValidatorAnswer.java)
 
 ## 예제별 커버 메서드
 

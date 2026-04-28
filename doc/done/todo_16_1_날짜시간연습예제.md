@@ -22,9 +22,12 @@
   - 커버 메서드: `ZonedDateTime`, `ZoneId.of`, `withZoneSameInstant`, `Instant`, `format`
 
 ## 구현 파일
-- [`Ex01_EventSchedulerTest.java`](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex01_EventSchedulerTest.java) / [`Ex01_EventSchedulerAnswer.java`](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex01_EventSchedulerAnswer.java)
-- [`Ex02_WorkHoursCalculatorTest.java`](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex02_WorkHoursCalculatorTest.java) / [`Ex02_WorkHoursCalculatorAnswer.java`](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex02_WorkHoursCalculatorAnswer.java)
-- [`Ex03_MeetingTimeConverterTest.java`](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex03_MeetingTimeConverterTest.java) / [`Ex03_MeetingTimeConverterAnswer.java`](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex03_MeetingTimeConverterAnswer.java)
+- `src/test/java/dev/danielk/basicjava/datetime/exercise/`
+
+## 파일 링크
+- [Ex01_EventSchedulerTest.java](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex01_EventSchedulerTest.java) / [Ex01_EventSchedulerAnswer.java](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex01_EventSchedulerAnswer.java)
+- [Ex02_WorkHoursCalculatorTest.java](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex02_WorkHoursCalculatorTest.java) / [Ex02_WorkHoursCalculatorAnswer.java](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex02_WorkHoursCalculatorAnswer.java)
+- [Ex03_MeetingTimeConverterTest.java](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex03_MeetingTimeConverterTest.java) / [Ex03_MeetingTimeConverterAnswer.java](../../src/test/java/dev/danielk/basicjava/datetime/exercise/Ex03_MeetingTimeConverterAnswer.java)
 
 ## 작업 방식
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)

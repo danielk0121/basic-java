@@ -17,8 +17,11 @@
   - 커버 메서드: `new ObjectMapper()`, `om.writeValueAsString`, `om.readValue(TypeReference)`
 
 ## 구현 파일
-- [`Ex01_GsonBasicTest.java`](../../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicTest.java) / [`Ex01_GsonBasicAnswer.java`](../../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicAnswer.java)
-- [`Ex02_JacksonBasicTest.java`](../../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicTest.java) / [`Ex02_JacksonBasicAnswer.java`](../../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicAnswer.java)
+- `src/test/java/dev/danielk/basicjava/json/exercise/`
+
+## 파일 링크
+- [Ex01_GsonBasicTest.java](../../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicTest.java) / [Ex01_GsonBasicAnswer.java](../../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicAnswer.java)
+- [Ex02_JacksonBasicTest.java](../../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicTest.java) / [Ex02_JacksonBasicAnswer.java](../../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicAnswer.java)
 
 ## 작업 방식
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)

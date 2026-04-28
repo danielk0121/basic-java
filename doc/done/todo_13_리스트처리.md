@@ -12,4 +12,7 @@
 - [x] 리스트 빈도수 집계: Collections.frequency
 
 ## 구현 파일
-- [`ListTest.java`](../../src/test/java/dev/danielk/basicjava/collection/ListTest.java)
+- `src/test/java/dev/danielk/basicjava/collection/`
+
+## 파일 링크
+- [ListTest.java](../../src/test/java/dev/danielk/basicjava/collection/ListTest.java)
