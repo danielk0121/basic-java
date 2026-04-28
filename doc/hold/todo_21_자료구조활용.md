@@ -57,13 +57,19 @@
   - `put(e)` — 꽉 차면 블로킹
   - `take()` — 비어있으면 블로킹
   - `offer(e, timeout, unit)` / `poll(timeout, unit)` — 타임아웃 버전
-- `ConcurrentLinkedDeque<E>` — lock-free 비동기 덱
+- `ConcurrentLinkedDeque<E>` — lock-free 비동기 덱 (양방향, 논블로킹)
+- `LinkedBlockingDeque<E>` — 블로킹 덱 (양방향 생산자-소비자 패턴)
+  - `putFirst(e)` / `putLast(e)` — 앞/뒤 삽입, 꽉 차면 블로킹
+  - `takeFirst()` / `takeLast()` — 앞/뒤 제거, 비어있으면 블로킹
+  - 선택 크기 제한 가능 (`new LinkedBlockingDeque<>(capacity)`)
 - `ArrayBlockingQueue<E>` — 고정 크기 블로킹 큐 (bounded buffer)
 - `CopyOnWriteArrayList` — 읽기 다수·쓰기 소수 환경에서 스택 대용으로 사용 가능
 - 선택 기준
   - 단순 멀티스레드 큐 → `ConcurrentLinkedQueue`
   - 생산자-소비자 패턴 → `LinkedBlockingQueue`
   - 크기 제한 필요 → `ArrayBlockingQueue`
+  - 양방향 논블로킹 → `ConcurrentLinkedDeque`
+  - 양방향 블로킹 (앞뒤 모두 생산·소비) → `LinkedBlockingDeque`
 
 ## 구현 파일 (작성 예정)
 - `src/test/java/dev/danielk/basicjava/datastructure/`
