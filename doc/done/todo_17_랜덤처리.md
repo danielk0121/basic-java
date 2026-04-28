@@ -10,4 +10,4 @@
 - [x] 랜덤 요소 추출
 
 ## 구현 파일
-- `src/test/java/dev/danielk/basicjava/random/RandomTest.java`
+- [`RandomTest.java`](../../src/test/java/dev/danielk/basicjava/random/RandomTest.java)

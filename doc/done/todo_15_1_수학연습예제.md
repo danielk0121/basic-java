@@ -21,8 +21,9 @@
   - 시나리오: 주어진 수가 소수인지, 자릿수 합이 특정 조건 만족인지, 진법 변환 후 회문인지 판별
   - 커버 메서드: `isPrime`, 자릿수 합, `Integer.toBinaryString`, `StringBuilder.reverse`
 
-## 구현 파일 위치
-- `src/test/java/dev/danielk/basicjava/collection/exercise/`
+## 구현 파일
+- [`Ex01_CryptoHelperTest.java`](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperTest.java) / [`Ex01_CryptoHelperAnswer.java`](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex01_CryptoHelperAnswer.java)
+- [`Ex02_NumberPuzzleTest.java`](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleTest.java) / [`Ex02_NumberPuzzleAnswer.java`](../../src/test/java/dev/danielk/basicjava/math/exercise/Ex02_NumberPuzzleAnswer.java)
 
 ## 작업 방식
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)

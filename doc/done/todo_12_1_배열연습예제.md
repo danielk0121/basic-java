@@ -21,8 +21,10 @@
   - 시나리오: 1~5점 응답 배열에서 빈도수 집계, 배열 복사 후 내림차순 정렬, 배열 비교
   - 커버 메서드: `Arrays.copyOfRange`, `Arrays.equals`, `Arrays.fill`, `Comparator.reverseOrder`, `Arrays.asList → toArray`
 
-## 구현 파일 위치
-- `src/test/java/dev/danielk/basicjava/array/exercise/`
+## 구현 파일
+- [`Ex01_GradeProcessorTest.java`](../../src/test/java/dev/danielk/basicjava/array/exercise/Ex01_GradeProcessorTest.java) / [`Ex01_GradeProcessorAnswer.java`](../../src/test/java/dev/danielk/basicjava/array/exercise/Ex01_GradeProcessorAnswer.java)
+- [`Ex02_InventoryManagerTest.java`](../../src/test/java/dev/danielk/basicjava/array/exercise/Ex02_InventoryManagerTest.java) / [`Ex02_InventoryManagerAnswer.java`](../../src/test/java/dev/danielk/basicjava/array/exercise/Ex02_InventoryManagerAnswer.java)
+- [`Ex03_SurveyAnalyzerTest.java`](../../src/test/java/dev/danielk/basicjava/array/exercise/Ex03_SurveyAnalyzerTest.java) / [`Ex03_SurveyAnalyzerAnswer.java`](../../src/test/java/dev/danielk/basicjava/array/exercise/Ex03_SurveyAnalyzerAnswer.java)
 
 ## 작업 방식
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)

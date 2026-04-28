@@ -16,8 +16,9 @@
   - 시나리오: 문제 풀에서 중복 없이 N개 랜덤 추출, 보기 순서 셔플, 정답 인덱스 계산
   - 커버 메서드: `Collections.shuffle`, `subList`, `nextInt(bound)`, `nextDouble`
 
-## 구현 파일 위치
-- `src/test/java/dev/danielk/basicjava/collection/exercise/`
+## 구현 파일
+- [`Ex01_CardDeckTest.java`](../../src/test/java/dev/danielk/basicjava/random/exercise/Ex01_CardDeckTest.java) / [`Ex01_CardDeckAnswer.java`](../../src/test/java/dev/danielk/basicjava/random/exercise/Ex01_CardDeckAnswer.java)
+- [`Ex02_RandomQuizTest.java`](../../src/test/java/dev/danielk/basicjava/random/exercise/Ex02_RandomQuizTest.java) / [`Ex02_RandomQuizAnswer.java`](../../src/test/java/dev/danielk/basicjava/random/exercise/Ex02_RandomQuizAnswer.java)
 
 ## 작업 방식
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)

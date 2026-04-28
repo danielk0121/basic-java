@@ -21,8 +21,10 @@
   - 시나리오: 상품을 카테고리별로 분류, 카테고리 내 상품 추가, 키 기준 정렬 출력
   - 커버 메서드: `computeIfAbsent`, `merge`, `entrySet 정렬(키 기준)`
 
-## 구현 파일 위치
-- `src/test/java/dev/danielk/basicjava/collection/exercise/`
+## 구현 파일
+- [`Ex04_WordFrequencyTest.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex04_WordFrequencyTest.java) / [`Ex04_WordFrequencyAnswer.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex04_WordFrequencyAnswer.java)
+- [`Ex05_ScoreAggregatorTest.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex05_ScoreAggregatorTest.java) / [`Ex05_ScoreAggregatorAnswer.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex05_ScoreAggregatorAnswer.java)
+- [`Ex06_GroupClassifierTest.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex06_GroupClassifierTest.java) / [`Ex06_GroupClassifierAnswer.java`](../../src/test/java/dev/danielk/basicjava/collection/exercise/Ex06_GroupClassifierAnswer.java)
 
 ## 작업 방식
 - 파일명: `Ex0N_주제Test.java` (문제) / `Ex0N_주제Answer.java` (답안)

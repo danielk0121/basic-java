@@ -10,4 +10,4 @@
 - [x] 맵 병합: merge, compute
 
 ## 구현 파일
-- `src/test/java/dev/danielk/basicjava/collection/MapTest.java`
+- [`MapTest.java`](../../src/test/java/dev/danielk/basicjava/collection/MapTest.java)
