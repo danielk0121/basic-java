@@ -49,7 +49,7 @@
 - 역슬래시를 두 번 써야 함: 정규식 `\d` → 자바 문자열 `"\\d"`
 
 ## 구현 파일
-- `src/main/java/dev/danielk/basicjava/regex/SplitRegexExamples.java`
+- `src/test/java/dev/danielk/basicjava/regex/RegexSplitTest.java`
 
 ## 상태
 - [x] 코드 작성
