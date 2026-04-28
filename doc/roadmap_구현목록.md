@@ -77,6 +77,14 @@
 - 리스트/배열 셔플
 - 랜덤 요소 추출
 
+### 18. JSON 처리
+- Gson 직렬화: toJson()
+- Gson 역직렬화: fromJson(Class), fromJson(TypeToken)
+- Gson 리스트 처리: TypeToken<List<T>>
+- Jackson ObjectMapper 직렬화: writeValueAsString()
+- Jackson ObjectMapper 역직렬화: readValue(Class), readValue(TypeReference)
+- Jackson ObjectMapper 리스트 처리: TypeReference<List<T>>
+
 ---
 
 ## 알고리즘

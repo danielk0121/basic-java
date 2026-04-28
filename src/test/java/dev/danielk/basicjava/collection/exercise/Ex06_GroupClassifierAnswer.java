@@ -10,11 +10,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 연습 06 답안: 그룹별 데이터 분류기
+ *
+ * 상품을 카테고리별로 분류하고 키 기준 정렬 출력을 수행하세요.
+ *
+ * 사용해야 할 메서드:
+ *   computeIfAbsent, merge, entrySet 정렬(키 기준)
  */
 @DisplayName("연습 06 답안: 그룹별 데이터 분류기")
 class Ex06_GroupClassifierAnswer {
 
-    /** computeIfAbsent: 키가 없으면 람다로 새 리스트 생성, 있으면 기존 리스트 반환 후 add */
+    // ── 문제 1 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 상품 목록을 카테고리별로 분류하여 Map<카테고리, List<상품명>> 로 반환하세요.
+     * 입력: "전자기기:노트북", "식품:사과", "전자기기:마우스", ...
+     * 힌트: computeIfAbsent(category, k -> new ArrayList<>()).add(product)
+     *
+     * [풀이] computeIfAbsent: 키가 없으면 람다로 새 리스트 생성, 있으면 기존 리스트 반환 후 add
+     */
     Map<String, List<String>> groupByCategory(List<String> items) {
         Map<String, List<String>> result = new HashMap<>();
         for (String item : items) {
@@ -35,7 +47,13 @@ class Ex06_GroupClassifierAnswer {
         assertThat(result.get("식품")).containsExactlyInAnyOrder("사과", "바나나");
     }
 
-    /** merge: 키 없으면 1, 있으면 기존값 + 1 */
+    // ── 문제 2 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 카테고리별 상품 수를 집계하여 Map<카테고리, 상품수> 로 반환하세요.
+     * 힌트: merge(category, 1, Integer::sum)
+     *
+     * [풀이] merge: 키 없으면 1, 있으면 기존값 + 1
+     */
     Map<String, Integer> countByCategory(List<String> items) {
         Map<String, Integer> result = new HashMap<>();
         for (String item : items) {
@@ -55,7 +73,13 @@ class Ex06_GroupClassifierAnswer {
         assertThat(result.get("식품")).isEqualTo(2);
     }
 
-    /** LinkedHashMap은 삽입 순서를 보장 → 정렬 결과 유지 */
+    // ── 문제 3 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 카테고리 맵을 키(카테고리명) 기준 오름차순으로 정렬하여 반환하세요.
+     * 힌트: entrySet 스트림 → sorted(Map.Entry.comparingByKey()) → LinkedHashMap으로 수집
+     *
+     * [풀이] LinkedHashMap은 삽입 순서를 보장 → 정렬 결과 유지
+     */
     Map<String, Integer> sortByCategory(Map<String, Integer> categoryCount) {
         return categoryCount.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())

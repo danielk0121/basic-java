@@ -9,10 +9,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 연습 03 답안: 팀 로스터 관리
+ *
+ * 두 팀 명단을 비교하고 뒤집기, 커스텀 정렬을 수행하세요.
+ *
+ * 사용해야 할 메서드:
+ *   retainAll, removeAll, Collections.reverse, sort(Comparator)
  */
 @DisplayName("연습 03 답안: 팀 로스터 관리")
 class Ex03_TeamRosterAnswer {
 
+    // ── 문제 1 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 두 팀에 모두 속한 선수 명단(교집합)을 반환하세요.
+     * 힌트: new ArrayList<>(teamA) 후 retainAll(teamB)
+     *
+     * [풀이] retainAll: 인수 컬렉션에 없는 원소를 모두 제거 → 교집합만 남음
+     */
     List<String> commonPlayers(List<String> teamA, List<String> teamB) {
         List<String> result = new ArrayList<>(teamA);
         result.retainAll(teamB);
@@ -27,6 +39,13 @@ class Ex03_TeamRosterAnswer {
         assertThat(commonPlayers(teamA, teamB)).containsExactlyInAnyOrder("이영희", "최지우");
     }
 
+    // ── 문제 2 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] teamA에만 있고 teamB에는 없는 선수 명단을 반환하세요.
+     * 힌트: new ArrayList<>(teamA) 후 removeAll(teamB)
+     *
+     * [풀이] removeAll: 인수 컬렉션에 있는 원소를 모두 제거 → 차집합만 남음
+     */
     List<String> exclusivePlayers(List<String> teamA, List<String> teamB) {
         List<String> result = new ArrayList<>(teamA);
         result.removeAll(teamB);
@@ -41,7 +60,13 @@ class Ex03_TeamRosterAnswer {
         assertThat(exclusivePlayers(teamA, teamB)).containsExactlyInAnyOrder("김철수", "박민준");
     }
 
-    /** Collections.reverse는 인-플레이스 연산 → 원본 보호를 위해 복사본에 적용 */
+    // ── 문제 3 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 선수 명단의 순서를 뒤집어서 반환하세요. (원본 불변)
+     * 힌트: new ArrayList<>(roster) 후 Collections.reverse
+     *
+     * [풀이] Collections.reverse는 인-플레이스 연산 → 원본 보호를 위해 복사본에 적용
+     */
     List<String> reversedRoster(List<String> roster) {
         List<String> result = new ArrayList<>(roster);
         Collections.reverse(result);
@@ -53,10 +78,16 @@ class Ex03_TeamRosterAnswer {
     void test_reversedRoster() {
         List<String> roster = List.of("김철수", "이영희", "박민준");
         assertThat(reversedRoster(roster)).containsExactly("박민준", "이영희", "김철수");
-        assertThat(roster).containsExactly("김철수", "이영희", "박민준");
+        assertThat(roster).containsExactly("김철수", "이영희", "박민준"); // 원본 불변
     }
 
-    /** comparingInt(String::length)로 길이 기준, thenComparing으로 동점 처리 */
+    // ── 문제 4 답안 ───────────────────────────────────────────────────────────
+    /**
+     * [문제] 선수 이름을 이름 길이 오름차순으로 정렬하여 반환하세요. (길이 같으면 사전순)
+     * 힌트: sort(Comparator.comparingInt(String::length).thenComparing(naturalOrder()))
+     *
+     * [풀이] comparingInt(String::length)로 길이 기준, thenComparing으로 동점 처리
+     */
     List<String> sortByNameLength(List<String> roster) {
         List<String> result = new ArrayList<>(roster);
         result.sort(Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder()));
