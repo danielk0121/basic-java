@@ -133,15 +133,38 @@
 - [Ex01_GsonBasicTest.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicTest.java) / [Ex01_GsonBasicAnswer.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex01_GsonBasicAnswer.java): 연습 01 Gson 기본
 - [Ex02_JacksonBasicTest.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicTest.java) / [Ex02_JacksonBasicAnswer.java](../src/test/java/dev/danielk/basicjava/json/exercise/Ex02_JacksonBasicAnswer.java): 연습 02 Jackson 기본
 
+### 19. 정규식(Regex) 처리
+- split 패턴: 공백(`\s+`), 숫자 추출(`\D+`), 영문자 추출(`\d+`), 복합 구분기호(`[,;|/]`)
+- matches 패턴: 숫자만(`^\d+$`), 이메일, 한국 휴대폰 번호, 비밀번호 규칙
+- replaceAll 패턴: 연속 공백 정규화(`\s+`)
+
+**파일 링크**
+- [RegexSplitTest.java](../src/test/java/dev/danielk/basicjava/regex/RegexSplitTest.java): 정규식 처리 보일러플레이트
+- [Ex01_SplitPatternTest.java](../src/test/java/dev/danielk/basicjava/regex/exercise/Ex01_SplitPatternTest.java) / [Ex01_SplitPatternAnswer.java](../src/test/java/dev/danielk/basicjava/regex/exercise/Ex01_SplitPatternAnswer.java): 연습 01 split 패턴
+- [Ex02_MatchesPatternTest.java](../src/test/java/dev/danielk/basicjava/regex/exercise/Ex02_MatchesPatternTest.java) / [Ex02_MatchesPatternAnswer.java](../src/test/java/dev/danielk/basicjava/regex/exercise/Ex02_MatchesPatternAnswer.java): 연습 02 matches/replaceAll 패턴
+
 ---
 
 ## 알고리즘
 
 ### 21. 자료구조 활용 (JDK 라이브러리 사용, 직접 구현 안함)
-- 스택: Deque as Stack
-- 큐: LinkedList, ArrayDeque
-- 덱: ArrayDeque
-- 우선순위 큐(힙): PriorityQueue
+- 스택: ArrayDeque as Stack — push/pop/peek, 괄호 유효성 검사
+- 큐: ArrayDeque / LinkedList as Queue — offer/poll/peek, BFS
+- 덱: ArrayDeque — 양방향 조작, 팰린드롬, 슬라이딩 윈도우 최댓값
+- 우선순위 큐(힙): PriorityQueue — min/max-heap, 커스텀 정렬, K번째 최솟값
+- Thread-safe 큐: ConcurrentLinkedQueue (lock-free), LinkedBlockingQueue (블로킹), ArrayBlockingQueue (고정 크기)
+- Thread-safe 덱: ConcurrentLinkedDeque (lock-free), LinkedBlockingDeque (블로킹)
+
+**파일 링크**
+- [StackTest.java](../src/test/java/dev/danielk/basicjava/datastructure/StackTest.java): 스택
+- [QueueTest.java](../src/test/java/dev/danielk/basicjava/datastructure/QueueTest.java): 큐
+- [DequeTest.java](../src/test/java/dev/danielk/basicjava/datastructure/DequeTest.java): 덱
+- [PriorityQueueTest.java](../src/test/java/dev/danielk/basicjava/datastructure/PriorityQueueTest.java): 우선순위 큐
+- [ConcurrentLinkedQueueTest.java](../src/test/java/dev/danielk/basicjava/datastructure/ConcurrentLinkedQueueTest.java): lock-free 큐
+- [LinkedBlockingQueueTest.java](../src/test/java/dev/danielk/basicjava/datastructure/LinkedBlockingQueueTest.java): 블로킹 큐
+- [ArrayBlockingQueueTest.java](../src/test/java/dev/danielk/basicjava/datastructure/ArrayBlockingQueueTest.java): 고정 크기 블로킹 큐
+- [ConcurrentLinkedDequeTest.java](../src/test/java/dev/danielk/basicjava/datastructure/ConcurrentLinkedDequeTest.java): lock-free 덱
+- [LinkedBlockingDequeTest.java](../src/test/java/dev/danielk/basicjava/datastructure/LinkedBlockingDequeTest.java): 블로킹 덱
 
 ### 22. 재귀/완전탐색
 - 팩토리얼

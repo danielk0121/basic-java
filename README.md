@@ -62,5 +62,6 @@ src/test/java/dev/danielk/basicjava/
 │   └── exercise/          # JSON 연습 예제 (Gson 기본, Jackson 기본)
 ├── regex/                 # 정규식 처리 보일러플레이트 (split, matches, replaceAll)
 │   └── exercise/          # 정규식 연습 예제 (split 패턴, matches/replaceAll 패턴)
+├── datastructure/         # 자료구조 활용 (스택, 큐, 덱, 우선순위 큐, thread-safe 큐/덱)
 └── algorithm/             # 알고리즘 구현
 ```
