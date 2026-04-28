@@ -33,16 +33,24 @@ Gson과 Jackson ObjectMapper에 대한 연습문제 및 답안 작성
 [{"id":1,"username":"alice","email":"alice@example.com"},{"id":2,"username":"bob","email":"bob@example.com"}]
 ```
 
+## 파일 구조
+- `json/JsonTest.java` — 보일러플레이트 (직렬화/역직렬화 패턴 참고용)
+- `json/exercise/Ex01_GsonBasicTest.java` — 문제 (Gson 3개, @Disabled + TODO)
+- `json/exercise/Ex01_GsonBasicAnswer.java` — 답안 (Gson 3개)
+- `json/exercise/Ex02_JacksonBasicTest.java` — 문제 (Jackson 2개, @Disabled + TODO)
+- `json/exercise/Ex02_JacksonBasicAnswer.java` — 답안 (Jackson 2개)
+
 ## 작업 내용
-- [x] `src/test/java/dev/danielk/basicjava/json/JsonPracticeTest.java` 생성
-- [x] 문제 1~3: Gson 연습문제 작성
-- [x] 문제 4~5: Jackson ObjectMapper 연습문제 작성
-- [x] 각 문제에 `[문제]` / `[풀이]` 섹션 구분 적용
-- [x] 테스트 실행 확인
+- [x] `json/exercise/` 폴더 생성
+- [x] `Ex01_GsonBasicTest.java` / `Ex01_GsonBasicAnswer.java` 작성 (Gson 문제 1~3)
+- [x] `Ex02_JacksonBasicTest.java` / `Ex02_JacksonBasicAnswer.java` 작성 (Jackson 문제 1~2)
+- [x] 문제 파일: `@Disabled` + `throw new UnsupportedOperationException("구현 필요")`
+- [x] 답안 파일: `[문제]` / `[풀이]` 주석 분리
+- [x] Answer 테스트 전체 통과 확인
 
 ## 완료 기준
-- 5개 테스트 모두 통과
-- `[문제]` 주석 블록과 `[풀이]` 주석 블록이 명확히 분리됨
+- Answer 파일 테스트 5개 모두 통과
+- datetime/exercise 폴더 구조와 동일한 패턴 적용
 
 ## 완료일
 2026-04-29
