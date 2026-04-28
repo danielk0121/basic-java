@@ -3,6 +3,8 @@ package dev.danielk.basicjava.regex;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -51,9 +53,11 @@ class RegexSplitTest {
     @DisplayName("\\D+ : 비숫자 문자로 분리해 숫자만 추출")
     void extractNumbers() {
         String input = "abc123def456ghi789";
-        String[] result = input.split("\\D+");
+        // 비숫자로 시작하면 split 첫 토큰이 빈 문자열 → filter로 제거
+        String[] result = Arrays.stream(input.split("\\D+"))
+                .filter(s -> !s.isEmpty())
+                .toArray(String[]::new);
 
-        // 앞에 비숫자가 없으므로 빈 문자열 없이 바로 숫자 시작
         assertThat(result).containsExactly("123", "456", "789");
     }
 
