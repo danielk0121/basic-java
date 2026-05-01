@@ -50,7 +50,7 @@ class OkHttpConfigTest {
 
     @Test
     @DisplayName("커넥션 풀 설정 — maxIdleConnections, keepAliveDuration")
-    void 커넥션풀_설정() throws IOException {
+    void configureConnectionPool() throws IOException {
         ConnectionPool pool = new ConnectionPool(
                 3,                  // 최대 유휴 커넥션 수
                 30, TimeUnit.SECONDS // keep-alive 시간
@@ -73,7 +73,7 @@ class OkHttpConfigTest {
 
     @Test
     @DisplayName("keep-alive로 동일 호스트에 대한 소켓 재사용 — EventListener 관찰")
-    void 소켓_재사용_확인() throws IOException {
+    void verifySocketReuseWithEventListener() throws IOException {
         AtomicInteger acquiredCount = new AtomicInteger();
         AtomicInteger connectionStartCount = new AtomicInteger();
 
@@ -112,7 +112,7 @@ class OkHttpConfigTest {
 
     @Test
     @DisplayName("타임아웃 설정 — connectTimeout / readTimeout")
-    void 타임아웃_설정() {
+    void configureTimeouts() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(2, TimeUnit.SECONDS)
                 .readTimeout(2, TimeUnit.SECONDS)
@@ -126,7 +126,7 @@ class OkHttpConfigTest {
 
     @Test
     @DisplayName("Application Interceptor — 모든 요청에 헤더 자동 추가")
-    void 인터셉터_헤더추가() throws IOException, InterruptedException {
+    void addHeaderViaInterceptor() throws IOException, InterruptedException {
         Interceptor authInterceptor = chain -> {
             Request original = chain.request();
             Request withAuth = original.newBuilder()
@@ -153,7 +153,7 @@ class OkHttpConfigTest {
 
     @Test
     @DisplayName("retryOnConnectionFailure 설정 — 기본값 true")
-    void 재시도_옵션() {
+    void retryOnConnectionFailureOption() {
         OkHttpClient defaultClient = new OkHttpClient();
         assertTrue(defaultClient.retryOnConnectionFailure());
 
@@ -165,7 +165,7 @@ class OkHttpConfigTest {
 
     @Test
     @DisplayName("Dispatcher 동시성 제어 — maxRequests / maxRequestsPerHost")
-    void 디스패처_동시성() {
+    void configureDispatcherConcurrency() {
         Dispatcher dispatcher = new Dispatcher();
         dispatcher.setMaxRequests(64);
         dispatcher.setMaxRequestsPerHost(8);

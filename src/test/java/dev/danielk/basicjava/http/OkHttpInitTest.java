@@ -39,7 +39,7 @@ class OkHttpInitTest {
 
     @Test
     @DisplayName("기본 생성자로 OkHttpClient 인스턴스 생성")
-    void 기본생성자로_인스턴스_생성() throws IOException {
+    void createInstanceWithDefaultConstructor() throws IOException {
         // 학습 예제: 매번 새 인스턴스 생성
         OkHttpClient client = new OkHttpClient();
 
@@ -57,7 +57,7 @@ class OkHttpInitTest {
 
     @Test
     @DisplayName("Builder로 타임아웃 설정한 인스턴스 생성")
-    void Builder로_타임아웃_설정() throws IOException {
+    void createInstanceWithBuilderTimeout() throws IOException {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(3, TimeUnit.SECONDS)
                 .readTimeout(5, TimeUnit.SECONDS)
@@ -79,7 +79,7 @@ class OkHttpInitTest {
 
     @Test
     @DisplayName("응답은 try-with-resources로 닫아야 소켓 누수가 발생하지 않는다")
-    void 응답_close_누락방지() throws IOException {
+    void closeResponseWithTryWithResources() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setBody("close-me"));
 
@@ -96,7 +96,7 @@ class OkHttpInitTest {
 
     @Test
     @DisplayName("매번 새 인스턴스를 생성하면 풀이 매번 새로 만들어진다 (학습 확인용)")
-    void 매번_새_인스턴스() throws IOException {
+    void newInstanceEachTimeHasSeparatePool() throws IOException {
         server.enqueue(new MockResponse().setBody("first"));
         server.enqueue(new MockResponse().setBody("second"));
 

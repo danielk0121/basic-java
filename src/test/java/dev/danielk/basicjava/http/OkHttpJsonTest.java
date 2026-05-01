@@ -74,7 +74,7 @@ class OkHttpJsonTest {
 
     @Test
     @DisplayName("Object 응답 — 단일 객체 역직렬화 + @SerializedName 매핑")
-    void Object_단일객체_역직렬화() throws IOException {
+    void deserializeSingleObject() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
                 .setBody("{\"id\":1,\"name\":\"daniel\",\"user_email\":\"d@example.com\"}"));
@@ -92,7 +92,7 @@ class OkHttpJsonTest {
 
     @Test
     @DisplayName("Array 응답 — List<T>로 역직렬화 (TypeToken)")
-    void Array_List로_역직렬화() throws IOException {
+    void deserializeArrayToList() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setBody(
                 "[" +
@@ -115,7 +115,7 @@ class OkHttpJsonTest {
 
     @Test
     @DisplayName("Array 응답 — T[] 배열로 역직렬화")
-    void Array_배열로_역직렬화() throws IOException {
+    void deserializeArrayToTypedArray() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setBody(
                 "[{\"id\":10,\"name\":\"x\"},{\"id\":20,\"name\":\"y\"}]"));
@@ -132,7 +132,7 @@ class OkHttpJsonTest {
 
     @Test
     @DisplayName("중첩 객체 역직렬화 — Order { user, items }")
-    void 중첩객체_역직렬화() throws IOException {
+    void deserializeNestedObject() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setBody(
                 "{\"id\":100," +
@@ -154,7 +154,7 @@ class OkHttpJsonTest {
 
     @Test
     @DisplayName("페이지 래퍼 응답 — Page<User> 제네릭 역직렬화")
-    void 페이지래퍼_역직렬화() throws IOException {
+    void deserializePageWrapper() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setBody(
                 "{\"data\":[" +
@@ -177,7 +177,7 @@ class OkHttpJsonTest {
 
     @Test
     @DisplayName("직렬화 — 도메인 객체를 JSON 문자열로 변환")
-    void 직렬화_toJson() {
+    void serializeToJson() {
         User user = new User(7L, "daniel", "d@example.com");
         String json = gson.toJson(user);
 
@@ -189,7 +189,7 @@ class OkHttpJsonTest {
 
     @Test
     @DisplayName("직렬화 — null 필드 포함 옵션 (serializeNulls)")
-    void 직렬화_serializeNulls() {
+    void serializeNullsOption() {
         Gson gsonWithNulls = new GsonBuilder().serializeNulls().create();
 
         User user = new User(null, "daniel", null);
@@ -201,7 +201,7 @@ class OkHttpJsonTest {
 
     @Test
     @DisplayName("누락 필드 / 추가 필드 — 누락은 null, 추가는 무시")
-    void 필드_누락과_추가() {
+    void missingAndExtraFields() {
         // name 누락, extraField 추가
         String json = "{\"id\":1,\"extraField\":\"ignored\"}";
 

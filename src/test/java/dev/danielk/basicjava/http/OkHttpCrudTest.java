@@ -67,7 +67,7 @@ class OkHttpCrudTest {
 
     @Test
     @DisplayName("GET 단건 — 200 응답을 도메인 객체로 역직렬화")
-    void GET_단건_역직렬화() throws IOException {
+    void getSingleAndDeserialize() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
                 .setResponseCode(200)
@@ -90,7 +90,7 @@ class OkHttpCrudTest {
 
     @Test
     @DisplayName("POST 생성 — 201 Created + Location 헤더")
-    void POST_생성_Location헤더() throws IOException, InterruptedException {
+    void postCreateWithLocationHeader() throws IOException, InterruptedException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
                 .setResponseCode(201)
@@ -121,7 +121,7 @@ class OkHttpCrudTest {
 
     @Test
     @DisplayName("PUT 수정 — 200 응답")
-    void PUT_수정() throws IOException, InterruptedException {
+    void putUpdate() throws IOException, InterruptedException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
                 .setResponseCode(200)
@@ -149,7 +149,7 @@ class OkHttpCrudTest {
 
     @Test
     @DisplayName("DELETE 삭제 — 204 No Content (빈 응답 본문)")
-    void DELETE_204() throws IOException, InterruptedException {
+    void deleteNoContent() throws IOException, InterruptedException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setResponseCode(204));
 
@@ -171,7 +171,7 @@ class OkHttpCrudTest {
 
     @Test
     @DisplayName("4xx 에러 응답 — 에러 본문을 파싱해서 메시지 추출")
-    void 에러응답_파싱() throws IOException {
+    void parseErrorResponse() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
                 .setResponseCode(400)

@@ -42,7 +42,7 @@ class OkHttpGetPostTest {
 
     @Test
     @DisplayName("GET 요청 — 단순 호출")
-    void GET_단순호출() throws IOException, InterruptedException {
+    void simpleGet() throws IOException, InterruptedException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setBody("hello world"));
 
@@ -63,7 +63,7 @@ class OkHttpGetPostTest {
 
     @Test
     @DisplayName("GET 요청 — 쿼리 파라미터 + 헤더")
-    void GET_쿼리파라미터_헤더() throws IOException, InterruptedException {
+    void getWithQueryParamsAndHeaders() throws IOException, InterruptedException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setBody("ok"));
 
@@ -91,7 +91,7 @@ class OkHttpGetPostTest {
 
     @Test
     @DisplayName("POST 요청 — Form 전송")
-    void POST_Form전송() throws IOException, InterruptedException {
+    void postFormBody() throws IOException, InterruptedException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse().setResponseCode(200).setBody("created"));
 
@@ -117,7 +117,7 @@ class OkHttpGetPostTest {
 
     @Test
     @DisplayName("POST 요청 — JSON 전송")
-    void POST_JSON전송() throws IOException, InterruptedException {
+    void postJsonBody() throws IOException, InterruptedException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
                 .setResponseCode(201)
@@ -145,7 +145,7 @@ class OkHttpGetPostTest {
 
     @Test
     @DisplayName("404 응답 처리 — isSuccessful=false")
-    void 응답_404_처리() throws IOException {
+    void handle404Response() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
                 .setResponseCode(404)
