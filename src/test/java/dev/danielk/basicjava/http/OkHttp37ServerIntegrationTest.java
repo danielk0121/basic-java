@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.TestPropertySource;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -27,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * 다단계 JSON 응답(User + wishProducts + product)을 종단간으로 검증한다.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(properties = "app.sample-data.enabled=false")
 @DisplayName("OkHttp 클라이언트 - Spring 서버 통합 (다단계 JSON)")
 class OkHttp37ServerIntegrationTest {
 

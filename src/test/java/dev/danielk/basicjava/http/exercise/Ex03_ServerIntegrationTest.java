@@ -15,6 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.TestPropertySource;
 
 import java.io.IOException;
 
@@ -27,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 다단계 JSON(User + wishProducts + product)을 서버와 주고받습니다.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(properties = "app.sample-data.enabled=false")
 @DisplayName("연습 03: Spring 서버 통합 호출 (다단계 JSON)")
 class Ex03_ServerIntegrationTest {
 
