@@ -21,11 +21,15 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * todo 34: 도메인 CRUD REST JSON API client side 응답 처리 학습 테스트
  *
- * 도메인: User { id, name, email }
+ * MockWebServer를 사용하지만 응답 형식은 main {@link UserController}가 반환하는 형식과 동일하게 맞춘다.
+ * 도메인은 main의 {@link User}, {@link ApiError} record를 그대로 재사용한다.
+ *
+ * 시뮬레이션하는 컨트롤러 엔드포인트:
  * - GET    /users/{id}   → 200 + body
  * - POST   /users        → 201 + Location 헤더
  * - PUT    /users/{id}   → 200
  * - DELETE /users/{id}   → 204 No Content
+ * - 404 응답 시 ApiError 본문 (status, message)
  */
 @DisplayName("OkHttp REST CRUD 응답 처리")
 class OkHttp34CrudTest {
@@ -34,24 +38,6 @@ class OkHttp34CrudTest {
 
     private MockWebServer server;
     private Gson gson;
-
-    static class User {
-        Long id;
-        String name;
-        String email;
-
-        User() {}
-        User(Long id, String name, String email) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-        }
-    }
-
-    static class ApiError {
-        int status;
-        String message;
-    }
 
     @BeforeEach
     void setUp() throws IOException {
@@ -66,7 +52,7 @@ class OkHttp34CrudTest {
     }
 
     @Test
-    @DisplayName("GET 단건 — 200 응답을 도메인 객체로 역직렬화")
+    @DisplayName("GET 단건 — 200 응답을 User로 역직렬화")
     void getSingleAndDeserialize() throws IOException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
@@ -82,9 +68,9 @@ class OkHttp34CrudTest {
         try (Response response = client.newCall(request).execute()) {
             assertEquals(200, response.code());
             User user = gson.fromJson(response.body().charStream(), User.class);
-            assertEquals(1L, user.id);
-            assertEquals("daniel", user.name);
-            assertEquals("d@example.com", user.email);
+            assertEquals(1L, user.id());
+            assertEquals("daniel", user.name());
+            assertEquals("d@example.com", user.email());
         }
     }
 
@@ -110,12 +96,11 @@ class OkHttp34CrudTest {
             assertEquals(201, response.code());
             assertEquals("/users/42", response.header("Location"));
             User created = gson.fromJson(response.body().charStream(), User.class);
-            assertEquals(42L, created.id);
+            assertEquals(42L, created.id());
         }
 
         RecordedRequest recorded = server.takeRequest();
         assertEquals("POST", recorded.getMethod());
-        // 요청 본문에 id가 null 포함되었는지는 Gson 기본동작상 id 필드는 제외됨
         assertTrue(recorded.getBody().readUtf8().contains("\"name\":\"new\""));
     }
 
@@ -139,7 +124,7 @@ class OkHttp34CrudTest {
         try (Response response = client.newCall(request).execute()) {
             assertEquals(200, response.code());
             User result = gson.fromJson(response.body().charStream(), User.class);
-            assertEquals("updated", result.name);
+            assertEquals("updated", result.name());
         }
 
         RecordedRequest recorded = server.takeRequest();
@@ -161,7 +146,6 @@ class OkHttp34CrudTest {
         try (Response response = client.newCall(request).execute()) {
             assertEquals(204, response.code());
             assertTrue(response.isSuccessful());
-            // 204는 본문이 비어있음
             assertEquals("", response.body().string());
         }
 
@@ -170,26 +154,27 @@ class OkHttp34CrudTest {
     }
 
     @Test
-    @DisplayName("4xx 에러 응답 — 에러 본문을 파싱해서 메시지 추출")
+    @DisplayName("4xx 에러 응답 — UserController가 반환하는 ApiError 형식 (status, message) 파싱")
     void parseErrorResponse() throws IOException {
         OkHttpClient client = new OkHttpClient();
+        // UserController @ExceptionHandler가 반환하는 형식: { "status": 404, "message": "user not found: 999" }
         server.enqueue(new MockResponse()
-                .setResponseCode(400)
+                .setResponseCode(404)
                 .setHeader("Content-Type", "application/json")
-                .setBody("{\"status\":400,\"message\":\"invalid email\"}"));
+                .setBody("{\"status\":404,\"message\":\"user not found: 999\"}"));
 
         Request request = new Request.Builder()
-                .url(server.url("/users"))
-                .post(RequestBody.create("{}", JSON))
+                .url(server.url("/users/999"))
+                .get()
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             assertFalse(response.isSuccessful());
-            assertEquals(400, response.code());
+            assertEquals(404, response.code());
 
             ApiError error = gson.fromJson(response.body().charStream(), ApiError.class);
-            assertEquals(400, error.status);
-            assertEquals("invalid email", error.message);
+            assertEquals(404, error.status());
+            assertEquals("user not found: 999", error.message());
         }
     }
 }

@@ -2,6 +2,7 @@ package dev.danielk.basicjava.http.exercise;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import dev.danielk.basicjava.http.User;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,14 +23,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 연습 02 답안: JSON 직렬화/역직렬화 (MockWebServer)
+ *
+ * 도메인은 main {@link User} record를 재사용 (UserController 응답 형식과 동일).
  */
 @DisplayName("연습 02 답안: JSON 직렬화/역직렬화")
 class Ex02_JsonExchangeAnswer {
 
     static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-    record User(Long id, String name, String email) {
-    }
 
     private MockWebServer server;
     private final Gson gson = new Gson();
