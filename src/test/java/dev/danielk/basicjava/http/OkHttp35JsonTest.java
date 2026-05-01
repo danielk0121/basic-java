@@ -78,7 +78,7 @@ class OkHttp35JsonTest {
                   "name": "daniel",
                   "email": "d@example.com",
                   "joinedAt": "2026-05-02T10:00:00",
-                  "wishlist": [
+                  "wishProducts": [
                     {"product": {"id": 1, "name": "키보드", "price": 30000}},
                     {"product": {"id": 3, "name": "모니터", "price": 300000}}
                   ]
@@ -91,9 +91,9 @@ class OkHttp35JsonTest {
             UserResponse user = gson.fromJson(response.body().charStream(), UserResponse.class);
             assertEquals(1L, user.id());
             assertEquals("daniel", user.name());
-            assertEquals(2, user.wishlist().size());
-            assertEquals("모니터", user.wishlist().get(1).product().name());
-            assertEquals(300000, user.wishlist().get(1).product().price());
+            assertEquals(2, user.wishProducts().size());
+            assertEquals("모니터", user.wishProducts().get(1).product().name());
+            assertEquals(300000, user.wishProducts().get(1).product().price());
         }
     }
 
@@ -105,11 +105,11 @@ class OkHttp35JsonTest {
                 [
                   {
                     "id":1,"name":"a","email":"a@x.com","joinedAt":"2026-05-01T09:00:00",
-                    "wishlist":[]
+                    "wishProducts":[]
                   },
                   {
                     "id":2,"name":"b","email":"b@x.com","joinedAt":"2026-05-01T09:00:00",
-                    "wishlist":[
+                    "wishProducts":[
                       {"product":{"id":2,"name":"마우스","price":15000}}
                     ]
                   }
@@ -122,9 +122,9 @@ class OkHttp35JsonTest {
             Type listType = new TypeToken<List<UserResponse>>() {}.getType();
             List<UserResponse> users = gson.fromJson(response.body().charStream(), listType);
             assertEquals(2, users.size());
-            assertTrue(users.get(0).wishlist().isEmpty());
-            assertEquals(1, users.get(1).wishlist().size());
-            assertEquals("마우스", users.get(1).wishlist().get(0).product().name());
+            assertTrue(users.get(0).wishProducts().isEmpty());
+            assertEquals(1, users.get(1).wishProducts().size());
+            assertEquals("마우스", users.get(1).wishProducts().get(0).product().name());
         }
     }
 
@@ -135,8 +135,8 @@ class OkHttp35JsonTest {
         server.enqueue(new MockResponse().setBody("""
                 {
                   "data": [
-                    {"id":1,"name":"a","email":"a@x.com","joinedAt":"2026-05-01T09:00:00","wishlist":[]},
-                    {"id":2,"name":"b","email":"b@x.com","joinedAt":"2026-05-01T09:00:00","wishlist":[]}
+                    {"id":1,"name":"a","email":"a@x.com","joinedAt":"2026-05-01T09:00:00","wishProducts":[]},
+                    {"id":2,"name":"b","email":"b@x.com","joinedAt":"2026-05-01T09:00:00","wishProducts":[]}
                   ],
                   "page": 0,
                   "total": 2
@@ -177,8 +177,8 @@ class OkHttp35JsonTest {
 
         assertTrue(json.contains("\"name\":\"daniel\""));
         assertTrue(json.contains("\"email\":\"d@example.com\""));
-        // 클라이언트는 wishlist / joinedAt / id를 보내지 않음
-        assertFalse(json.contains("\"wishlist\""));
+        // 클라이언트는 wishProducts / joinedAt / id를 보내지 않음
+        assertFalse(json.contains("\"wishProducts\""));
         assertFalse(json.contains("\"joinedAt\""));
         assertFalse(json.contains("\"id\""));
     }
@@ -196,13 +196,13 @@ class OkHttp35JsonTest {
     @Test
     @DisplayName("누락 필드 / 추가 필드 — 누락은 null, 추가는 무시")
     void missingAndExtraFields() {
-        // wishlist 누락, extraField 추가
+        // wishProducts 누락, extraField 추가
         String json = "{\"id\":1,\"name\":\"daniel\",\"extraField\":\"ignored\"}";
         UserResponse user = gson.fromJson(json, UserResponse.class);
         assertEquals(1L, user.id());
         assertEquals("daniel", user.name());
         assertNull(user.email());
         assertNull(user.joinedAt());
-        assertNull(user.wishlist());
+        assertNull(user.wishProducts());
     }
 }

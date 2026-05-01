@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 연습 03: Spring 서버 통합 호출 (다단계 JSON)
  *
  * todo 36에서 만든 실제 Spring REST 서버를 OkHttp로 호출하세요.
- * 다단계 JSON(User + wishlist + product)을 서버와 주고받습니다.
+ * 다단계 JSON(User + wishProducts + product)을 서버와 주고받습니다.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("연습 03: Spring 서버 통합 호출 (다단계 JSON)")
@@ -66,7 +66,7 @@ class Ex03_ServerIntegrationTest {
     // ── 문제 2 ────────────────────────────────────────────────────────────────
     /**
      * 주어진 ID로 User를 조회하여 반환하세요. 없으면 null 반환.
-     * 서버는 신규 가입자에게 샘플 wishlist (키보드, 모니터)를 부여합니다.
+     * 서버는 신규 가입자에게 샘플 wishProducts (키보드, 모니터)를 부여합니다.
      * 힌트: 200이면 UserResponse 역직렬화, 404면 null
      */
     UserResponse findById(Long id) throws IOException {
@@ -83,9 +83,9 @@ class Ex03_ServerIntegrationTest {
         UserResponse found = findById(id);
         assertThat(found).isNotNull();
         assertThat(found.name()).isEqualTo("find-me");
-        // 샘플 wishlist 검증
-        assertThat(found.wishlist()).hasSize(2);
-        assertThat(found.wishlist().get(0).product().name()).isEqualTo("키보드");
+        // 샘플 wishProducts 검증
+        assertThat(found.wishProducts()).hasSize(2);
+        assertThat(found.wishProducts().get(0).product().name()).isEqualTo("키보드");
 
         UserResponse missing = findById(99999L);
         assertThat(missing).isNull();

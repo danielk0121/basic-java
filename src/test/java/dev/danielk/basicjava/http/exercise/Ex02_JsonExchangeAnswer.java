@@ -63,7 +63,7 @@ class Ex02_JsonExchangeAnswer {
                   "name": "daniel",
                   "email": "d@x.com",
                   "joinedAt": "2026-05-02T10:00:00",
-                  "wishlist": [
+                  "wishProducts": [
                     {"product": {"id": 1, "name": "키보드", "price": 30000}}
                   ]
                 }
@@ -71,8 +71,8 @@ class Ex02_JsonExchangeAnswer {
 
         UserResponse user = fetchUser(server.url("/users/7").toString());
         assertThat(user.id()).isEqualTo(7L);
-        assertThat(user.wishlist()).hasSize(1);
-        assertThat(user.wishlist().get(0).product().name()).isEqualTo("키보드");
+        assertThat(user.wishProducts()).hasSize(1);
+        assertThat(user.wishProducts().get(0).product().name()).isEqualTo("키보드");
     }
 
     // ── 문제 2 답안 ───────────────────────────────────────────────────────────
@@ -90,15 +90,15 @@ class Ex02_JsonExchangeAnswer {
     void test_fetchUserList() throws IOException {
         server.enqueue(new MockResponse().setBody("""
                 [
-                  {"id":1,"name":"a","email":"a@x.com","joinedAt":"2026-05-01T09:00:00","wishlist":[]},
+                  {"id":1,"name":"a","email":"a@x.com","joinedAt":"2026-05-01T09:00:00","wishProducts":[]},
                   {"id":2,"name":"b","email":"b@x.com","joinedAt":"2026-05-01T09:00:00",
-                    "wishlist":[{"product":{"id":2,"name":"마우스","price":15000}}]}
+                    "wishProducts":[{"product":{"id":2,"name":"마우스","price":15000}}]}
                 ]
                 """));
 
         List<UserResponse> users = fetchUserList(server.url("/users").toString());
         assertThat(users).hasSize(2);
-        assertThat(users.get(1).wishlist().get(0).product().name()).isEqualTo("마우스");
+        assertThat(users.get(1).wishProducts().get(0).product().name()).isEqualTo("마우스");
     }
 
     // ── 문제 3 답안 ───────────────────────────────────────────────────────────
@@ -123,7 +123,7 @@ class Ex02_JsonExchangeAnswer {
                           "name": "new",
                           "email": "n@x.com",
                           "joinedAt": "2026-05-02T10:00:00",
-                          "wishlist": [
+                          "wishProducts": [
                             {"product":{"id":1,"name":"키보드","price":30000}}
                           ]
                         }
@@ -132,13 +132,13 @@ class Ex02_JsonExchangeAnswer {
         UserRequest req = new UserRequest("new", "n@x.com");
         UserResponse created = createUser(server.url("/users").toString(), req);
         assertThat(created.id()).isEqualTo(42L);
-        assertThat(created.wishlist().get(0).product().name()).isEqualTo("키보드");
+        assertThat(created.wishProducts().get(0).product().name()).isEqualTo("키보드");
 
         var recorded = server.takeRequest();
         assertThat(recorded.getHeader("Content-Type")).startsWith("application/json");
         String sent = recorded.getBody().readUtf8();
         assertThat(sent).contains("\"name\":\"new\"");
-        assertThat(sent).doesNotContain("\"wishlist\"");
+        assertThat(sent).doesNotContain("\"wishProducts\"");
         assertThat(sent).doesNotContain("\"joinedAt\"");
     }
 }

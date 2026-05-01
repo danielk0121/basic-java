@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * 연습 02: 다단계 JSON 직렬화/역직렬화 (MockWebServer)
  *
- * UserController가 다루는 다단계 응답(User + wishlist + product)을 처리하세요.
+ * UserController가 다루는 다단계 응답(User + wishProducts + product)을 처리하세요.
  * DTO는 main의 {@link UserRequest}, {@link UserResponse}를 재사용합니다.
  */
 @DisplayName("연습 02: 다단계 JSON 직렬화/역직렬화")
@@ -52,7 +52,7 @@ class Ex02_JsonExchangeTest {
     // ── 문제 1 ────────────────────────────────────────────────────────────────
     /**
      * 주어진 URL로 GET 요청을 보내고 다단계 JSON 응답을 UserResponse로 역직렬화하세요.
-     * 응답에는 wishlist 배열이 있고, 각 요소는 product 중첩 객체를 가집니다.
+     * 응답에는 wishProducts 배열이 있고, 각 요소는 product 중첩 객체를 가집니다.
      * 힌트: gson.fromJson(response.body().charStream(), UserResponse.class)
      */
     UserResponse fetchUser(String url) throws IOException {
@@ -70,7 +70,7 @@ class Ex02_JsonExchangeTest {
                   "name": "daniel",
                   "email": "d@x.com",
                   "joinedAt": "2026-05-02T10:00:00",
-                  "wishlist": [
+                  "wishProducts": [
                     {"product": {"id": 1, "name": "키보드", "price": 30000}}
                   ]
                 }
@@ -78,14 +78,14 @@ class Ex02_JsonExchangeTest {
 
         UserResponse user = fetchUser(server.url("/users/7").toString());
         assertThat(user.id()).isEqualTo(7L);
-        assertThat(user.wishlist()).hasSize(1);
-        assertThat(user.wishlist().get(0).product().name()).isEqualTo("키보드");
+        assertThat(user.wishProducts()).hasSize(1);
+        assertThat(user.wishProducts().get(0).product().name()).isEqualTo("키보드");
     }
 
     // ── 문제 2 ────────────────────────────────────────────────────────────────
     /**
      * 주어진 URL로 GET 요청을 보내고 JSON 배열 응답을 List<UserResponse>로 역직렬화하세요.
-     * 각 User에는 wishlist 배열이 포함됩니다.
+     * 각 User에는 wishProducts 배열이 포함됩니다.
      * 힌트: new TypeToken<List<UserResponse>>() {}.getType()
      */
     List<UserResponse> fetchUserList(String url) throws IOException {
@@ -99,21 +99,21 @@ class Ex02_JsonExchangeTest {
     void test_fetchUserList() throws IOException {
         server.enqueue(new MockResponse().setBody("""
                 [
-                  {"id":1,"name":"a","email":"a@x.com","joinedAt":"2026-05-01T09:00:00","wishlist":[]},
+                  {"id":1,"name":"a","email":"a@x.com","joinedAt":"2026-05-01T09:00:00","wishProducts":[]},
                   {"id":2,"name":"b","email":"b@x.com","joinedAt":"2026-05-01T09:00:00",
-                    "wishlist":[{"product":{"id":2,"name":"마우스","price":15000}}]}
+                    "wishProducts":[{"product":{"id":2,"name":"마우스","price":15000}}]}
                 ]
                 """));
 
         List<UserResponse> users = fetchUserList(server.url("/users").toString());
         assertThat(users).hasSize(2);
-        assertThat(users.get(1).wishlist().get(0).product().name()).isEqualTo("마우스");
+        assertThat(users.get(1).wishProducts().get(0).product().name()).isEqualTo("마우스");
     }
 
     // ── 문제 3 ────────────────────────────────────────────────────────────────
     /**
      * UserRequest(name/email)를 JSON으로 직렬화하여 POST 전송하고, 응답 JSON을 UserResponse로 역직렬화하세요.
-     * 클라이언트는 wishlist/joinedAt을 보내지 않고, 서버가 채운 응답을 받아옵니다.
+     * 클라이언트는 wishProducts/joinedAt을 보내지 않고, 서버가 채운 응답을 받아옵니다.
      * 힌트: gson.toJson(request) 후 RequestBody.create(json, JSON)
      */
     UserResponse createUser(String url, UserRequest request) throws IOException {
@@ -134,7 +134,7 @@ class Ex02_JsonExchangeTest {
                           "name": "new",
                           "email": "n@x.com",
                           "joinedAt": "2026-05-02T10:00:00",
-                          "wishlist": [
+                          "wishProducts": [
                             {"product":{"id":1,"name":"키보드","price":30000}}
                           ]
                         }
@@ -143,14 +143,14 @@ class Ex02_JsonExchangeTest {
         UserRequest req = new UserRequest("new", "n@x.com");
         UserResponse created = createUser(server.url("/users").toString(), req);
         assertThat(created.id()).isEqualTo(42L);
-        assertThat(created.wishlist().get(0).product().name()).isEqualTo("키보드");
+        assertThat(created.wishProducts().get(0).product().name()).isEqualTo("키보드");
 
         var recorded = server.takeRequest();
         assertThat(recorded.getHeader("Content-Type")).startsWith("application/json");
         String sent = recorded.getBody().readUtf8();
-        // 클라이언트가 보낸 본문에는 wishlist/joinedAt이 없어야 함
+        // 클라이언트가 보낸 본문에는 wishProducts/joinedAt이 없어야 함
         assertThat(sent).contains("\"name\":\"new\"");
-        assertThat(sent).doesNotContain("\"wishlist\"");
+        assertThat(sent).doesNotContain("\"wishProducts\"");
         assertThat(sent).doesNotContain("\"joinedAt\"");
     }
 }

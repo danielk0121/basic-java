@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * todo 37: OkHttp 클라이언트로 todo 36 Spring 서버 호출 통합 테스트
  *
- * 다단계 JSON 응답(User + wishlist + product)을 종단간으로 검증한다.
+ * 다단계 JSON 응답(User + wishProducts + product)을 종단간으로 검증한다.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("OkHttp 클라이언트 - Spring 서버 통합 (다단계 JSON)")
@@ -45,11 +45,11 @@ class OkHttp37ServerIntegrationTest {
     }
 
     @Test
-    @DisplayName("CRUD 시나리오 종합 — 생성 시 샘플 wishlist 부여, 수정은 name/email만")
+    @DisplayName("CRUD 시나리오 종합 — 생성 시 샘플 wishProducts 부여, 수정은 name/email만")
     void fullCrudFlow() throws IOException {
         OkHttpClient client = new OkHttpClient();
 
-        // 1. POST 생성 — 서버가 joinedAt / 샘플 wishlist를 채워서 응답
+        // 1. POST 생성 — 서버가 joinedAt / 샘플 wishProducts를 채워서 응답
         UserRequest createReqBody = new UserRequest("daniel", "daniel@example.com");
         Request createReq = new Request.Builder()
                 .url(baseUrl() + "/users")
@@ -65,11 +65,11 @@ class OkHttp37ServerIntegrationTest {
             assertNotNull(created.id());
             assertEquals("daniel", created.name());
             assertNotNull(created.joinedAt());
-            // 샘플 wishlist: 키보드, 모니터
-            assertEquals(2, created.wishlist().size());
-            assertEquals("키보드", created.wishlist().get(0).product().name());
-            assertEquals(30000, created.wishlist().get(0).product().price());
-            assertEquals("모니터", created.wishlist().get(1).product().name());
+            // 샘플 wishProducts: 키보드, 모니터
+            assertEquals(2, created.wishProducts().size());
+            assertEquals("키보드", created.wishProducts().get(0).product().name());
+            assertEquals(30000, created.wishProducts().get(0).product().price());
+            assertEquals("모니터", created.wishProducts().get(1).product().name());
             createdId = created.id();
         }
 
@@ -79,10 +79,10 @@ class OkHttp37ServerIntegrationTest {
             assertEquals(200, response.code());
             UserResponse found = gson.fromJson(response.body().charStream(), UserResponse.class);
             assertEquals(createdId, found.id());
-            assertEquals(2, found.wishlist().size());
+            assertEquals(2, found.wishProducts().size());
         }
 
-        // 3. PUT 수정 — name/email만 변경, wishlist는 유지되어야 함
+        // 3. PUT 수정 — name/email만 변경, wishProducts는 유지되어야 함
         UserRequest updateReq = new UserRequest("updated", "u@example.com");
         Request putReq = new Request.Builder()
                 .url(baseUrl() + "/users/" + createdId)
@@ -93,9 +93,9 @@ class OkHttp37ServerIntegrationTest {
             UserResponse updated = gson.fromJson(response.body().charStream(), UserResponse.class);
             assertEquals("updated", updated.name());
             assertEquals("u@example.com", updated.email());
-            // wishlist는 기존값 유지
-            assertEquals(2, updated.wishlist().size());
-            assertEquals("키보드", updated.wishlist().get(0).product().name());
+            // wishProducts는 기존값 유지
+            assertEquals(2, updated.wishProducts().size());
+            assertEquals("키보드", updated.wishProducts().get(0).product().name());
         }
 
         // 4. DELETE → 204
@@ -135,8 +135,8 @@ class OkHttp37ServerIntegrationTest {
             Type listType = new TypeToken<List<UserResponse>>() {}.getType();
             List<UserResponse> users = gson.fromJson(response.body().charStream(), listType);
             assertTrue(users.size() >= 2);
-            // 모든 사용자에게 샘플 wishlist가 부여되었는지 확인
-            assertTrue(users.stream().allMatch(u -> u.wishlist().size() == 2));
+            // 모든 사용자에게 샘플 wishProducts가 부여되었는지 확인
+            assertTrue(users.stream().allMatch(u -> u.wishProducts().size() == 2));
         }
     }
 

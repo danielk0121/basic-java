@@ -85,8 +85,8 @@ class Ex03_ServerIntegrationAnswer {
         UserResponse found = findById(id);
         assertThat(found).isNotNull();
         assertThat(found.name()).isEqualTo("find-me");
-        assertThat(found.wishlist()).hasSize(2);
-        assertThat(found.wishlist().get(0).product().name()).isEqualTo("키보드");
+        assertThat(found.wishProducts()).hasSize(2);
+        assertThat(found.wishProducts().get(0).product().name()).isEqualTo("키보드");
 
         UserResponse missing = findById(99999L);
         assertThat(missing).isNull();

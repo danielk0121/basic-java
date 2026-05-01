@@ -24,10 +24,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * todo 34: 다단계 JSON 응답 CRUD 학습 테스트
  *
  * MockWebServer가 UserController가 반환할 만한 다단계 응답을 흉내낸다.
- * 응답 형식: { id, name, email, joinedAt, wishlist: [ { product: { id, name, price } } ] }
+ * 응답 형식: { id, name, email, joinedAt, wishProducts: [ { product: { id, name, price } } ] }
  *
  * 클라이언트는 DTO(UserRequest / UserResponse)를 통해 직렬화/역직렬화한다.
- * UserRequest는 name/email만 가진 단순 구조 (CUD 정책상 wishlist는 변경 불가).
+ * UserRequest는 name/email만 가진 단순 구조 (CUD 정책상 wishProducts는 변경 불가).
  */
 @DisplayName("OkHttp REST CRUD 응답 처리 (다단계 JSON)")
 class OkHttp34CrudTest {
@@ -62,7 +62,7 @@ class OkHttp34CrudTest {
                           "name": "daniel",
                           "email": "d@example.com",
                           "joinedAt": "2026-05-02T10:00:00",
-                          "wishlist": [
+                          "wishProducts": [
                             {"product": {"id": 1, "name": "키보드", "price": 30000}},
                             {"product": {"id": 3, "name": "모니터", "price": 300000}}
                           ]
@@ -77,10 +77,10 @@ class OkHttp34CrudTest {
             assertEquals(1L, user.id());
             assertEquals("daniel", user.name());
             assertNotNull(user.joinedAt());
-            assertEquals(2, user.wishlist().size());
-            assertEquals("키보드", user.wishlist().get(0).product().name());
-            assertEquals(30000, user.wishlist().get(0).product().price());
-            assertEquals("모니터", user.wishlist().get(1).product().name());
+            assertEquals(2, user.wishProducts().size());
+            assertEquals("키보드", user.wishProducts().get(0).product().name());
+            assertEquals(30000, user.wishProducts().get(0).product().price());
+            assertEquals("모니터", user.wishProducts().get(1).product().name());
         }
     }
 
@@ -98,7 +98,7 @@ class OkHttp34CrudTest {
                           "name": "new",
                           "email": "n@example.com",
                           "joinedAt": "2026-05-02T10:00:00",
-                          "wishlist": [
+                          "wishProducts": [
                             {"product": {"id": 1, "name": "키보드", "price": 30000}}
                           ]
                         }
@@ -113,8 +113,8 @@ class OkHttp34CrudTest {
             assertEquals("/users/42", response.header("Location"));
             UserResponse created = gson.fromJson(response.body().charStream(), UserResponse.class);
             assertEquals(42L, created.id());
-            assertEquals(1, created.wishlist().size());
-            assertEquals("키보드", created.wishlist().get(0).product().name());
+            assertEquals(1, created.wishProducts().size());
+            assertEquals("키보드", created.wishProducts().get(0).product().name());
         }
 
         RecordedRequest recorded = server.takeRequest();
@@ -123,12 +123,12 @@ class OkHttp34CrudTest {
         // 클라이언트 요청은 name/email만 포함
         assertTrue(sent.contains("\"name\":\"new\""));
         assertTrue(sent.contains("\"email\":\"n@example.com\""));
-        assertFalse(sent.contains("\"wishlist\""));
+        assertFalse(sent.contains("\"wishProducts\""));
         assertFalse(sent.contains("\"joinedAt\""));
     }
 
     @Test
-    @DisplayName("PUT 수정 — name/email만 변경, wishlist 유지")
+    @DisplayName("PUT 수정 — name/email만 변경, wishProducts 유지")
     void putUpdate() throws IOException, InterruptedException {
         OkHttpClient client = new OkHttpClient();
         server.enqueue(new MockResponse()
@@ -140,7 +140,7 @@ class OkHttp34CrudTest {
                           "name": "updated",
                           "email": "u@example.com",
                           "joinedAt": "2026-05-02T10:00:00",
-                          "wishlist": [
+                          "wishProducts": [
                             {"product": {"id": 2, "name": "마우스", "price": 15000}}
                           ]
                         }
@@ -154,8 +154,8 @@ class OkHttp34CrudTest {
             assertEquals(200, response.code());
             UserResponse result = gson.fromJson(response.body().charStream(), UserResponse.class);
             assertEquals("updated", result.name());
-            // wishlist는 서버가 유지하므로 응답에 그대로 포함
-            assertEquals(1, result.wishlist().size());
+            // wishProducts는 서버가 유지하므로 응답에 그대로 포함
+            assertEquals(1, result.wishProducts().size());
         }
 
         RecordedRequest recorded = server.takeRequest();

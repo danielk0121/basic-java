@@ -1,4 +1,4 @@
-package dev.danielk.basicjava.http;
+package dev.danielk.basicjava.http.domain;
 
 /**
  * 도메인 record — 상품.

@@ -1,5 +1,8 @@
 package dev.danielk.basicjava.http;
 
+import dev.danielk.basicjava.http.domain.Product;
+import dev.danielk.basicjava.http.domain.User;
+import dev.danielk.basicjava.http.domain.WishProduct;
 import dev.danielk.basicjava.http.dto.UserRequest;
 import dev.danielk.basicjava.http.dto.UserResponse;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +29,10 @@ import java.util.concurrent.atomic.AtomicLong;
  * 학습용 User REST 컨트롤러.
  *
  * 응답 JSON은 root + 필드 + 배열을 가진 다단계 구조:
- * { id, name, email, joinedAt, wishlist: [ { product: { id, name, price } } ] }
+ * { id, name, email, joinedAt, wishProducts: [ { product: { id, name, price } } ] }
  *
- * CUD 정책: name / email만 변경. joinedAt / wishlist는 서버가 관리한다.
- * 신규 사용자에게는 동일한 샘플 wishlist를 부여한다 (하드코딩).
+ * CUD 정책: name / email만 변경. joinedAt / wishProducts는 서버가 관리한다.
+ * 신규 사용자에게는 동일한 샘플 wishProducts를 부여한다 (하드코딩).
  */
 @RestController
 @RequestMapping("/users")
@@ -46,9 +49,9 @@ public class UserController {
     );
 
     // 신규 가입 시 부여할 샘플 찜 목록 (하드코딩)
-    private static final List<Wishlist> SAMPLE_WISHLIST = List.of(
-            new Wishlist(SAMPLE_PRODUCTS.get(0)),
-            new Wishlist(SAMPLE_PRODUCTS.get(2))
+    private static final List<WishProduct> SAMPLE_WISH_PRODUCTS = List.of(
+            new WishProduct(SAMPLE_PRODUCTS.get(0)),
+            new WishProduct(SAMPLE_PRODUCTS.get(2))
     );
 
     @GetMapping
@@ -69,7 +72,7 @@ public class UserController {
                 request.name(),
                 request.email(),
                 LocalDateTime.now(),
-                SAMPLE_WISHLIST
+                SAMPLE_WISH_PRODUCTS
         );
         store.put(newId, created);
         return ResponseEntity
@@ -80,7 +83,7 @@ public class UserController {
     @PutMapping("/{id}")
     public UserResponse update(@PathVariable Long id, @RequestBody UserRequest request) {
         User existing = requireUser(id);
-        // CUD는 단일 정보(name/email)만 변경. joinedAt / wishlist는 그대로 유지.
+        // CUD는 단일 정보(name/email)만 변경. joinedAt / wishProducts는 그대로 유지.
         User updated = existing.withProfile(request.name(), request.email());
         store.put(id, updated);
         return UserResponse.from(updated);
