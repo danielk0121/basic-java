@@ -1,6 +1,7 @@
 package dev.danielk.basicjava.http;
 
 import dev.danielk.basicjava.http.domain.User;
+import dev.danielk.basicjava.http.domain.WishProduct;
 import dev.danielk.basicjava.http.dto.UserRequest;
 import dev.danielk.basicjava.http.dto.UserResponse;
 import org.springframework.http.ResponseEntity;
@@ -29,40 +30,42 @@ import java.util.concurrent.atomic.AtomicLong;
  * 응답 JSON은 root + 필드 + 배열을 가진 다단계 구조:
  * { id, name, email, joinedAt, wishProducts: [ { product: { id, name, price } } ] }
  *
+ * User 도메인은 wishProducts를 갖지 않는다.
+ * 사용자별 찜 목록은 별도 저장소(wishStore)에서 관리하고, 응답 시 UserResponse가 결합한다.
+ *
  * CUD 정책: name / email만 변경. joinedAt / wishProducts는 서버가 관리한다.
- * 신규 사용자에게는 동일한 샘플 wishProducts를 부여한다 (하드코딩).
+ * 신규 사용자에게는 동일한 샘플 wishProducts를 부여한다.
  */
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private final Map<Long, User> store = new ConcurrentHashMap<>();
+    private final Map<Long, List<WishProduct>> wishStore = new ConcurrentHashMap<>();
     private final AtomicLong userIdGen = new AtomicLong();
 
     @GetMapping
     public List<UserResponse> list() {
-        return store.values().stream().map(UserResponse::from).toList();
+        return store.values().stream()
+                .map(u -> UserResponse.from(u, wishlistOf(u.id())))
+                .toList();
     }
 
     @GetMapping("/{id}")
     public UserResponse get(@PathVariable Long id) {
-        return UserResponse.from(requireUser(id));
+        User user = requireUser(id);
+        return UserResponse.from(user, wishlistOf(id));
     }
 
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UserRequest request) {
         long newId = userIdGen.incrementAndGet();
-        User created = new User(
-                newId,
-                request.name(),
-                request.email(),
-                LocalDateTime.now(),
-                SampleData.wishProducts()
-        );
+        User created = new User(newId, request.name(), request.email(), LocalDateTime.now());
         store.put(newId, created);
+        wishStore.put(newId, SampleData.wishProducts());
         return ResponseEntity
                 .created(URI.create("/users/" + newId))
-                .body(UserResponse.from(created));
+                .body(UserResponse.from(created, wishlistOf(newId)));
     }
 
     @PutMapping("/{id}")
@@ -71,7 +74,7 @@ public class UserController {
         // CUD는 단일 정보(name/email)만 변경. joinedAt / wishProducts는 그대로 유지.
         User updated = existing.withProfile(request.name(), request.email());
         store.put(id, updated);
-        return UserResponse.from(updated);
+        return UserResponse.from(updated, wishlistOf(id));
     }
 
     @DeleteMapping("/{id}")
@@ -79,6 +82,7 @@ public class UserController {
         if (store.remove(id) == null) {
             throw new UserNotFoundException(id);
         }
+        wishStore.remove(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -89,7 +93,7 @@ public class UserController {
         int from = Math.min(page * size, all.size());
         int to = Math.min(from + size, all.size());
         List<UserResponse> slice = all.subList(from, to).stream()
-                .map(UserResponse::from)
+                .map(u -> UserResponse.from(u, wishlistOf(u.id())))
                 .toList();
         return new Page<>(slice, page, all.size());
     }
@@ -105,6 +109,10 @@ public class UserController {
             throw new UserNotFoundException(id);
         }
         return user;
+    }
+
+    private List<WishProduct> wishlistOf(Long userId) {
+        return wishStore.getOrDefault(userId, List.of());
     }
 
     public record Page<T>(List<T> data, int page, int total) {
