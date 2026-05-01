@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * todo 33: OkHttp GET / POST 요청 학습 테스트 (MockWebServer 더미 서버 사용)
  */
 @DisplayName("OkHttp GET / POST 요청")
-class OkHttpGetPostTest {
+class OkHttp33GetPostTest {
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 

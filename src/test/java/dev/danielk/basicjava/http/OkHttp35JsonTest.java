@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * todo 35: JSON array / object 응답 직렬화-역직렬화 학습 테스트 (Gson)
  */
 @DisplayName("OkHttp JSON array/object 응답 처리")
-class OkHttpJsonTest {
+class OkHttp35JsonTest {
 
     private MockWebServer server;
     private Gson gson;

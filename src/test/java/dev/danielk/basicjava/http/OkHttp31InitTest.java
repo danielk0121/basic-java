@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * 운영 환경에서는 단일 OkHttpClient 인스턴스 공유가 권장됨.
  */
 @DisplayName("OkHttp 클라이언트 초기화")
-class OkHttpInitTest {
+class OkHttp31InitTest {
 
     private MockWebServer server;
 

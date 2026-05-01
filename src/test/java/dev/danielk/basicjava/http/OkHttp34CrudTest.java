@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * - DELETE /users/{id}   → 204 No Content
  */
 @DisplayName("OkHttp REST CRUD 응답 처리")
-class OkHttpCrudTest {
+class OkHttp34CrudTest {
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 

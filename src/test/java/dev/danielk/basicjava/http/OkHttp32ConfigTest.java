@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * - 디스패처
  */
 @DisplayName("OkHttp 라이브러리 설정")
-class OkHttpConfigTest {
+class OkHttp32ConfigTest {
 
     private MockWebServer server;
 
