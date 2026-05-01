@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 컨트롤러는 이 클래스만 의존하고 저장 자료구조에는 직접 접근하지 않는다.
  */
 @Component
-public class UserRepository {
+public class SampleUserRepository {
 
     private final Map<Long, User> userStore = new ConcurrentHashMap<>();
     private final Map<Long, List<WishProduct>> wishStore = new ConcurrentHashMap<>();
