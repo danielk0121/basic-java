@@ -4,8 +4,10 @@ import dev.danielk.basicjava.http.domain.User;
 import dev.danielk.basicjava.http.dto.UserRequest;
 import dev.danielk.basicjava.http.dto.UserResponse;
 import dev.danielk.basicjava.http.sampledata.SampleDataFactory;
-import dev.danielk.basicjava.http.sampledata.SampleDataRepository;
+import dev.danielk.basicjava.http.sampledata.UserQuery;
+import dev.danielk.basicjava.http.sampledata.UserRepository;
 import dev.danielk.basicjava.http.sampledata.UserWithWishProducts;
+import dev.danielk.basicjava.http.sampledata.WishProductRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,8 +30,8 @@ import java.util.List;
  * 응답 JSON은 root + 필드 + 배열을 가진 다단계 구조:
  * { id, name, email, joinedAt, wishProducts: [ { product: { id, name, price } } ] }
  *
- * 저장 책임은 {@link SampleDataRepository}가, 샘플 데이터 생성은 {@link SampleDataFactory}가 담당한다.
- * 컨트롤러는 요청-응답 변환 + 비즈니스 흐름만 담당한다.
+ * CUD는 단일 도메인 단위 repository를 직접 사용한다.
+ * READ는 복합 도메인 응답을 만드는 UserQuery를 사용한다.
  *
  * CUD 정책: name / email만 변경. joinedAt / wishProducts는 서버가 관리한다.
  * 신규 사용자에게는 동일한 샘플 wishProducts를 부여한다.
@@ -38,58 +40,69 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final SampleDataRepository repository;
+    private final UserRepository userRepository;
+    private final WishProductRepository wishProductRepository;
+    private final UserQuery userQuery;
 
-    public UserController(SampleDataRepository repository) {
-        this.repository = repository;
+    public UserController(UserRepository userRepository,
+                          WishProductRepository wishProductRepository,
+                          UserQuery userQuery) {
+        this.userRepository = userRepository;
+        this.wishProductRepository = wishProductRepository;
+        this.userQuery = userQuery;
     }
 
     // GET /users (전체 목록)은 현업에서 사실상 삭제되어야 하는 형태이므로 제공하지 않는다.
-    // 페이지네이션이 필요하면 GET /users/page 사용.
 
     @GetMapping("/{id}")
     public UserResponse get(@PathVariable Long id) {
-        UserWithWishProducts joined = repository.findById(id)
+        UserWithWishProducts joined = userQuery.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
         return UserResponse.from(joined.user(), joined.wishProducts());
     }
 
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UserRequest request) {
-        long newId = repository.nextUserId();
+        long newId = userRepository.nextId();
         User created = new User(newId, request.name(), request.email(), LocalDateTime.now());
-        List<dev.danielk.basicjava.http.domain.WishProduct> wish = SampleDataFactory.wishProducts();
-        repository.save(created, wish);
+        userRepository.save(created);
+        wishProductRepository.saveAll(newId, SampleDataFactory.wishProducts());
+
+        UserWithWishProducts joined = userQuery.findById(newId)
+                .orElseThrow(() -> new IllegalStateException("created user not found: " + newId));
         return ResponseEntity
                 .created(URI.create("/users/" + newId))
-                .body(UserResponse.from(created, wish));
+                .body(UserResponse.from(joined.user(), joined.wishProducts()));
     }
 
     @PutMapping("/{id}")
     public UserResponse update(@PathVariable Long id, @RequestBody UserRequest request) {
-        UserWithWishProducts existing = repository.findById(id)
+        User existing = userRepository.findRawById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
-        // CUD는 단일 정보(name/email)만 변경. joinedAt / wishProducts는 그대로 유지.
-        User updated = existing.user().withProfile(request.name(), request.email());
-        repository.update(updated);
-        return UserResponse.from(updated, existing.wishProducts());
+        // CUD는 단일 정보(name/email)만 변경.
+        userRepository.update(existing.withProfile(request.name(), request.email()));
+
+        UserWithWishProducts joined = userQuery.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        return UserResponse.from(joined.user(), joined.wishProducts());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (!repository.delete(id)) {
+        if (!userRepository.delete(id)) {
             throw new UserNotFoundException(id);
         }
+        wishProductRepository.deleteByUserId(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/page")
     public Page<UserResponse> page(@RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "10") int size) {
-        List<UserResponse> slice = repository.findPage(page, size).stream()
+        List<UserResponse> slice = userQuery.findPage(page, size).stream()
                 .map(j -> UserResponse.from(j.user(), j.wishProducts()))
                 .toList();
-        return new Page<>(slice, page, repository.count());
+        return new Page<>(slice, page, userQuery.count());
     }
 
     @ExceptionHandler(UserNotFoundException.class)

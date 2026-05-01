@@ -4,22 +4,24 @@ import dev.danielk.basicjava.http.domain.User;
 import jakarta.annotation.PostConstruct;
 
 /**
- * 애플리케이션 시작 시 SampleDataFactory의 데이터를 SampleDataRepository에 시드한다.
- *
+ * 애플리케이션 시작 시 SampleDataFactory의 데이터를 두 repository에 시드한다.
  * 빈 등록과 활성화 조건은 SampleDataConfiguration이 결정한다.
  */
 public class SampleDataCreator {
 
-    private final SampleDataRepository repository;
+    private final UserRepository userRepository;
+    private final WishProductRepository wishProductRepository;
 
-    public SampleDataCreator(SampleDataRepository repository) {
-        this.repository = repository;
+    public SampleDataCreator(UserRepository userRepository, WishProductRepository wishProductRepository) {
+        this.userRepository = userRepository;
+        this.wishProductRepository = wishProductRepository;
     }
 
     @PostConstruct
     public void seed() {
         for (User user : SampleDataFactory.users()) {
-            repository.save(user, SampleDataFactory.wishProducts());
+            userRepository.save(user);
+            wishProductRepository.saveAll(user.id(), SampleDataFactory.wishProducts());
         }
     }
 }
