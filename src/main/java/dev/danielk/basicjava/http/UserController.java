@@ -5,6 +5,7 @@ import dev.danielk.basicjava.http.dto.UserRequest;
 import dev.danielk.basicjava.http.dto.UserResponse;
 import dev.danielk.basicjava.http.sampledata.SampleDataFactory;
 import dev.danielk.basicjava.http.sampledata.SampleDataRepository;
+import dev.danielk.basicjava.http.sampledata.UserWithWishProducts;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -48,27 +49,30 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserResponse get(@PathVariable Long id) {
-        User user = requireUser(id);
-        return UserResponse.from(user, repository.findWishProducts(id));
+        UserWithWishProducts joined = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        return UserResponse.from(joined.user(), joined.wishProducts());
     }
 
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UserRequest request) {
         long newId = repository.nextUserId();
         User created = new User(newId, request.name(), request.email(), LocalDateTime.now());
-        repository.save(created, SampleDataFactory.wishProducts());
+        List<dev.danielk.basicjava.http.domain.WishProduct> wish = SampleDataFactory.wishProducts();
+        repository.save(created, wish);
         return ResponseEntity
                 .created(URI.create("/users/" + newId))
-                .body(UserResponse.from(created, repository.findWishProducts(newId)));
+                .body(UserResponse.from(created, wish));
     }
 
     @PutMapping("/{id}")
     public UserResponse update(@PathVariable Long id, @RequestBody UserRequest request) {
-        User existing = requireUser(id);
+        UserWithWishProducts existing = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
         // CUD는 단일 정보(name/email)만 변경. joinedAt / wishProducts는 그대로 유지.
-        User updated = existing.withProfile(request.name(), request.email());
+        User updated = existing.user().withProfile(request.name(), request.email());
         repository.update(updated);
-        return UserResponse.from(updated, repository.findWishProducts(id));
+        return UserResponse.from(updated, existing.wishProducts());
     }
 
     @DeleteMapping("/{id}")
@@ -83,7 +87,7 @@ public class UserController {
     public Page<UserResponse> page(@RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "10") int size) {
         List<UserResponse> slice = repository.findPage(page, size).stream()
-                .map(u -> UserResponse.from(u, repository.findWishProducts(u.id())))
+                .map(j -> UserResponse.from(j.user(), j.wishProducts()))
                 .toList();
         return new Page<>(slice, page, repository.count());
     }
@@ -91,10 +95,6 @@ public class UserController {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ApiError> handleNotFound(UserNotFoundException e) {
         return ResponseEntity.status(404).body(new ApiError(404, e.getMessage()));
-    }
-
-    private User requireUser(Long id) {
-        return repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     public record Page<T>(List<T> data, int page, int total) {

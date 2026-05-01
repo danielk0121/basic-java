@@ -15,6 +15,9 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * 빈 등록은 SampleDataConfiguration이 담당한다.
  * userIdGen 시작값은 생성자 인자로 주입받는다.
+ *
+ * 조회는 user + wishProducts 조인 결과(UserWithWishProducts)로 반환한다.
+ * 운영 DB로 치면 SELECT user.*, wp.* FROM user JOIN wish_product ... 에 해당.
  */
 public class SampleDataRepository {
 
@@ -39,29 +42,33 @@ public class SampleDataRepository {
         userStore.put(user.id(), user);
     }
 
-    public Optional<User> findById(Long id) {
-        return Optional.ofNullable(userStore.get(id));
+    /**
+     * 단건 조회 — user + wishProducts 조인 결과.
+     */
+    public Optional<UserWithWishProducts> findById(Long id) {
+        User user = userStore.get(id);
+        if (user == null) {
+            return Optional.empty();
+        }
+        return Optional.of(joined(user));
     }
 
     /**
-     * 페이지 단위로 사용자를 조회한다. id 오름차순.
-     * 운영 DB에서는 SELECT ... ORDER BY id LIMIT ? OFFSET ? 에 해당.
+     * 페이지 단위 조회 — user + wishProducts 조인 결과. id 오름차순.
+     * 운영 DB에서는 SELECT ... ORDER BY id LIMIT ? OFFSET ? + JOIN 으로 처리.
      */
-    public List<User> findPage(int page, int size) {
+    public List<UserWithWishProducts> findPage(int page, int size) {
         return userStore.values().stream()
                 .sorted((a, b) -> Long.compare(a.id(), b.id()))
                 .skip((long) page * size)
                 .limit(size)
+                .map(this::joined)
                 .toList();
     }
 
     /** 전체 user 개수 (페이지 응답의 total). */
     public int count() {
         return userStore.size();
-    }
-
-    public List<WishProduct> findWishProducts(Long userId) {
-        return wishStore.getOrDefault(userId, List.of());
     }
 
     public boolean delete(Long id) {
@@ -72,5 +79,9 @@ public class SampleDataRepository {
 
     public boolean exists(Long id) {
         return userStore.containsKey(id);
+    }
+
+    private UserWithWishProducts joined(User user) {
+        return new UserWithWishProducts(user, wishStore.getOrDefault(user.id(), List.of()));
     }
 }
