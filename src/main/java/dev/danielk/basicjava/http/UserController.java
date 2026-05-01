@@ -25,7 +25,7 @@ import java.util.List;
  * 응답 JSON은 root + 필드 + 배열을 가진 다단계 구조:
  * { id, name, email, joinedAt, wishProducts: [ { product: { id, name, price } } ] }
  *
- * 저장 책임은 {@link SampleUserRepository}가, 샘플 데이터 생성은 {@link SampleDataFactory}가 담당한다.
+ * 저장 책임은 {@link SampleDataRepository}가, 샘플 데이터 생성은 {@link SampleDataFactory}가 담당한다.
  * 컨트롤러는 요청-응답 변환 + 비즈니스 흐름만 담당한다.
  *
  * CUD 정책: name / email만 변경. joinedAt / wishProducts는 서버가 관리한다.
@@ -35,9 +35,9 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final SampleUserRepository repository;
+    private final SampleDataRepository repository;
 
-    public UserController(SampleUserRepository repository) {
+    public UserController(SampleDataRepository repository) {
         this.repository = repository;
     }
 
