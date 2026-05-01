@@ -23,12 +23,9 @@ public class SampleDataCreator {
 
     @PostConstruct
     public void seed() {
-        long maxId = 0;
-        for (User user : SampleDataFactory.users()) {
-            repository.save(user, SampleDataFactory.wishProducts());
-            maxId = Math.max(maxId, user.id());
+        for (User prototype : SampleDataFactory.users()) {
+            User assigned = prototype.withId(repository.nextUserId());
+            repository.save(assigned, SampleDataFactory.wishProducts());
         }
-        // 시드된 id와 충돌하지 않도록 id 시퀀스를 끌어올린다.
-        repository.advanceUserIdAtLeast(maxId);
     }
 }

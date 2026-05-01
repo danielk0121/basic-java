@@ -56,12 +56,4 @@ public class SampleDataRepository {
     public boolean exists(Long id) {
         return userStore.containsKey(id);
     }
-
-    /**
-     * 다음 발급될 id가 currentMax 이후가 되도록 시퀀스를 끌어올린다.
-     * 시드된 데이터의 최대 id를 보장할 때 사용한다.
-     */
-    public void advanceUserIdAtLeast(long currentMax) {
-        userIdGen.updateAndGet(prev -> Math.max(prev, currentMax));
-    }
 }
