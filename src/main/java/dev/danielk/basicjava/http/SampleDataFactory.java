@@ -1,8 +1,10 @@
 package dev.danielk.basicjava.http;
 
 import dev.danielk.basicjava.http.domain.Product;
+import dev.danielk.basicjava.http.domain.User;
 import dev.danielk.basicjava.http.domain.WishProduct;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,11 +26,23 @@ public final class SampleDataFactory {
             new WishProduct(SAMPLE_PRODUCTS.get(2))
     );
 
+    private static final LocalDateTime SAMPLE_JOINED_AT = LocalDateTime.of(2026, 1, 1, 9, 0, 0);
+
+    private static final List<User> SAMPLE_USERS = List.of(
+            new User(1L, "alice", "alice@example.com", SAMPLE_JOINED_AT),
+            new User(2L, "bob", "bob@example.com", SAMPLE_JOINED_AT),
+            new User(3L, "daniel", "daniel@example.com", SAMPLE_JOINED_AT)
+    );
+
     public static List<Product> products() {
         return SAMPLE_PRODUCTS;
     }
 
     public static List<WishProduct> wishProducts() {
         return SAMPLE_WISH_PRODUCTS;
+    }
+
+    public static List<User> users() {
+        return SAMPLE_USERS;
     }
 }
