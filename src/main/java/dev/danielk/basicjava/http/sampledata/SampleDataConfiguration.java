@@ -1,5 +1,8 @@
 package dev.danielk.basicjava.http.sampledata;
 
+import dev.danielk.basicjava.http.query.UserQuery;
+import dev.danielk.basicjava.http.repository.UserRepository;
+import dev.danielk.basicjava.http.repository.WishProductRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

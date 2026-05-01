@@ -1,6 +1,8 @@
 package dev.danielk.basicjava.http.sampledata;
 
 import dev.danielk.basicjava.http.domain.User;
+import dev.danielk.basicjava.http.repository.UserRepository;
+import dev.danielk.basicjava.http.repository.WishProductRepository;
 import jakarta.annotation.PostConstruct;
 
 /**

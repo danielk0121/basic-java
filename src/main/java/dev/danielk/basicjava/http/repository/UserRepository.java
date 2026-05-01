@@ -1,4 +1,4 @@
-package dev.danielk.basicjava.http.sampledata;
+package dev.danielk.basicjava.http.repository;
 
 import dev.danielk.basicjava.http.domain.User;
 
@@ -45,7 +45,7 @@ public class UserRepository {
     }
 
     /** 페이지 단위 조회 — id 오름차순. */
-    java.util.List<User> findPageRaw(int page, int size) {
+    public java.util.List<User> findPageRaw(int page, int size) {
         return store.values().stream()
                 .sorted((a, b) -> Long.compare(a.id(), b.id()))
                 .skip((long) page * size)
@@ -53,7 +53,7 @@ public class UserRepository {
                 .toList();
     }
 
-    int count() {
+    public int count() {
         return store.size();
     }
 }

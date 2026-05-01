@@ -1,4 +1,7 @@
-package dev.danielk.basicjava.http.sampledata;
+package dev.danielk.basicjava.http.query;
+
+import dev.danielk.basicjava.http.repository.UserRepository;
+import dev.danielk.basicjava.http.repository.WishProductRepository;
 
 import java.util.List;
 import java.util.Optional;
