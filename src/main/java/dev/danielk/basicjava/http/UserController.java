@@ -1,8 +1,6 @@
 package dev.danielk.basicjava.http;
 
-import dev.danielk.basicjava.http.domain.Product;
 import dev.danielk.basicjava.http.domain.User;
-import dev.danielk.basicjava.http.domain.WishProduct;
 import dev.danielk.basicjava.http.dto.UserRequest;
 import dev.danielk.basicjava.http.dto.UserResponse;
 import org.springframework.http.ResponseEntity;
@@ -41,19 +39,6 @@ public class UserController {
     private final Map<Long, User> store = new ConcurrentHashMap<>();
     private final AtomicLong userIdGen = new AtomicLong();
 
-    // 샘플 상품 마스터 (하드코딩)
-    private static final List<Product> SAMPLE_PRODUCTS = List.of(
-            new Product(1L, "키보드", 30000),
-            new Product(2L, "마우스", 15000),
-            new Product(3L, "모니터", 300000)
-    );
-
-    // 신규 가입 시 부여할 샘플 찜 목록 (하드코딩)
-    private static final List<WishProduct> SAMPLE_WISH_PRODUCTS = List.of(
-            new WishProduct(SAMPLE_PRODUCTS.get(0)),
-            new WishProduct(SAMPLE_PRODUCTS.get(2))
-    );
-
     @GetMapping
     public List<UserResponse> list() {
         return store.values().stream().map(UserResponse::from).toList();
@@ -72,7 +57,7 @@ public class UserController {
                 request.name(),
                 request.email(),
                 LocalDateTime.now(),
-                SAMPLE_WISH_PRODUCTS
+                SampleData.wishProducts()
         );
         store.put(newId, created);
         return ResponseEntity
