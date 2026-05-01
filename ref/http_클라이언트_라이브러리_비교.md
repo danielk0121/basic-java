@@ -165,6 +165,101 @@
 
 ---
 
+## 운영 관점 분석: 커넥션풀 / Retry / 소켓 재사용
+
+### 1. 커넥션풀 지원
+
+- **RestTemplate**
+  - 자체 풀 없음 — 기본 `SimpleClientHttpRequestFactory`는 `HttpURLConnection` 사용 (풀링 미흡)
+  - 프로덕션에서는 `HttpComponentsClientHttpRequestFactory` + Apache HttpClient `PoolingHttpClientConnectionManager` 조합 필수
+  - 풀 설정을 직접 구성해야 함 (maxTotal, maxPerRoute 등)
+
+- **RestClient**
+  - 내부적으로 RestTemplate과 동일한 `ClientHttpRequestFactory` 추상화 사용
+  - Apache HttpClient 5 / JDK HttpClient / Jetty / Reactor Netty 중 선택 가능
+  - 선택한 팩토리의 풀링 정책을 따름 — Apache HttpClient 5 사용 시 풀링 강력
+
+- **WebClient**
+  - Reactor Netty 기본 — `ConnectionProvider`로 풀 관리 (기본 활성화)
+  - `ConnectionProvider.builder().maxConnections().pendingAcquireTimeout()...` 세밀 조정
+  - HTTP/2 멀티플렉싱 지원 시 단일 커넥션 재사용 효율 매우 높음
+
+- **JDK HttpClient**
+  - 내장 커넥션 풀 보유 — 단일 `HttpClient` 인스턴스 재사용 시 자동 풀링
+  - **풀 크기 직접 설정 API 없음** — JVM 시스템 프로퍼티(`jdk.httpclient.connectionPoolSize` 등)로만 제한적 조정
+  - HTTP/2 기본 지원으로 멀티플렉싱 자동 활용
+
+- **OkHttp**
+  - `ConnectionPool` 클래스 명시적 제공 — 기본 5 idle / 5분 keepAlive
+  - `OkHttpClient` 단일 인스턴스 공유가 권장 패턴
+  - HTTP/2 멀티플렉싱 + 커넥션 코얼레싱(같은 IP면 다른 호스트도 재사용) 지원
+
+### 2. Retry 지원
+
+- **RestTemplate**
+  - 내장 retry 없음 — Spring Retry(`@Retryable`) 또는 Resilience4j 별도 적용
+  - 인터셉터(`ClientHttpRequestInterceptor`)로 직접 구현 가능
+
+- **RestClient**
+  - 내장 retry 없음 — Resilience4j / Spring Retry와 조합
+  - `RestClient.Builder.requestInterceptor()`에 retry 로직 삽입 가능
+
+- **WebClient**
+  - Reactor 연산자 `retry()`, `retryWhen(Retry.backoff(...))` 내장
+  - 지수 백오프, 지터, 조건부 재시도 등 풍부한 옵션 — 5개 중 가장 강력
+  - 비동기 특성상 retry가 스레드 점유 없이 동작
+
+- **JDK HttpClient**
+  - 멱등(idempotent) 메서드(GET 등)에 한해 자동 재시도 (커넥션 단계 한정)
+  - 응답 기반 재시도(5xx 등)는 지원 안 함 — 사용자 구현 필요
+  - `jdk.httpclient.redirects.retrylimit` 시스템 프로퍼티로 제어
+
+- **OkHttp**
+  - `retryOnConnectionFailure(true)` 기본 활성화 — 커넥션 실패 자동 재시도
+  - Interceptor 체인으로 응답 기반 retry 구현 용이
+  - Route 실패 시 다른 IP로 자동 fallback (DNS 다중 응답 시)
+
+### 3. 소켓 재사용 / 모니터링
+
+- **RestTemplate** (Apache HttpClient 사용 가정)
+  - keep-alive 기반 재사용 — `PoolingHttpClientConnectionManager.getTotalStats()` / `getStats(route)`
+  - 활성/유휴/대기 커넥션 수 조회 가능
+  - JMX 노출 가능 (수동 등록)
+
+- **RestClient**
+  - 동일 — 사용 중인 `ClientHttpRequestFactory` 백엔드의 모니터링 API 그대로 활용
+  - Apache HttpClient 5 백엔드 시 `PoolingHttpClientConnectionManager` 통계 사용
+
+- **WebClient (Reactor Netty)**
+  - Micrometer 자동 통합 — `reactor.netty.connection.provider.*` 메트릭 노출
+  - `total.connections`, `active.connections`, `idle.connections`, `pending.connections` 등
+  - Spring Boot Actuator + Prometheus와 즉시 연동 — 모니터링 측면 최강
+
+- **JDK HttpClient**
+  - 공식 모니터링 API 부재 — 풀 상태 조회 불가
+  - 디버그 로깅(`jdk.httpclient.HttpClient.log=requests,headers`)으로 간접 확인만 가능
+  - 프로덕션 관측 관점에서 가장 약점
+
+- **OkHttp**
+  - `ConnectionPool.connectionCount()`, `idleConnectionCount()` 직접 제공
+  - `EventListener` 인터페이스 — 커넥션 시작/종료/재사용/획득 등 세밀한 이벤트 콜백
+  - Micrometer `okhttp3` 바인더로 메트릭 연동 가능
+
+### 종합 평가
+
+- 풀 제어 세밀도: OkHttp ≈ Apache HttpClient(RestTemplate/RestClient 백엔드) > WebClient > JDK HttpClient
+- Retry 풍부도: WebClient > OkHttp > 기타(외부 라이브러리 의존)
+- 모니터링/관측성: WebClient(Reactor Netty + Micrometer) > OkHttp(EventListener) > Apache HttpClient > JDK HttpClient
+- 소켓 재사용 효율: WebClient(HTTP/2 멀티플렉싱) ≈ JDK HttpClient ≈ OkHttp > Apache HttpClient(HTTP/1.1 keep-alive)
+
+### 학습 프로젝트 권장 조합
+
+- RestClient + Apache HttpClient 5 — 풀/모니터링 학습용 (PoolingHttpClientConnectionManager 통계 확인)
+- WebClient + Reactor Netty + Actuator — 메트릭/리액티브 retry 학습용
+- OkHttp + EventListener — 커넥션 라이프사이클 이벤트 학습용
+
+---
+
 ## 참고 자료
 
 - [Which Java HTTP client should I use in 2024?](https://www.wiremock.io/post/java-http-client-comparison)

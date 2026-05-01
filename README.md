@@ -9,7 +9,7 @@
 
 ## 로드맵
 
-[구현 목록 보기](doc/roadmap_구현목록.md)
+[구현 목록 보기](ref/roadmap_구현목록.md)
 
 ## 기술 스택
 
@@ -24,11 +24,11 @@
 
 ## 설계 결정
 
-- [폴더 구조 고찰: doc 분리 vs src/test 통합](doc/ref_폴더구조_고찰.md)
+- [폴더 구조 고찰: doc 분리 vs src/test 통합](ref/ref_폴더구조_고찰.md)
 
 ## 참고 문서
 
-- [ref_큐_덱_차이점.md](doc/ref_큐_덱_차이점.md)
+- [ref_큐_덱_차이점.md](ref/ref_큐_덱_차이점.md)
 
 ## 연습 예제 구조
 
