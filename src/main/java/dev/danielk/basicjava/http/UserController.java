@@ -41,12 +41,8 @@ public class UserController {
         this.repository = repository;
     }
 
-    @GetMapping
-    public List<UserResponse> list() {
-        return repository.findAll().stream()
-                .map(u -> UserResponse.from(u, repository.findWishProducts(u.id())))
-                .toList();
-    }
+    // GET /users (전체 목록)은 현업에서 사실상 삭제되어야 하는 형태이므로 제공하지 않는다.
+    // 페이지네이션이 필요하면 GET /users/page 사용.
 
     @GetMapping("/{id}")
     public UserResponse get(@PathVariable Long id) {

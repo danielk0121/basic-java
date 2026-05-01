@@ -59,36 +59,10 @@ UserResponse
 
 ---
 
-## GET /users — 전체 목록
+## GET /users — 제공하지 않음
 
-```json
-[
-  {
-    "id": 1,
-    "name": "alice",
-    "email": "a@x.com",
-    "joinedAt": "2026-05-02T10:00:00",
-    "wishProducts": [
-      {"product": {"id": 1, "name": "키보드", "price": 30000}},
-      {"product": {"id": 3, "name": "모니터", "price": 300000}}
-    ]
-  },
-  {
-    "id": 2,
-    "name": "bob",
-    "email": "b@x.com",
-    "joinedAt": "2026-05-02T10:05:00",
-    "wishProducts": [
-      {"product": {"id": 1, "name": "키보드", "price": 30000}},
-      {"product": {"id": 3, "name": "모니터", "price": 300000}}
-    ]
-  }
-]
-```
-
-설명
-- 최상위가 배열인 응답
-- 클라이언트는 `TypeToken<List<UserResponse>>`로 역직렬화
+전체 목록 조회는 데이터 양이 무한정 늘어날 수 있어 현업에서 사실상 사용되지 않는 형태이므로 컨트롤러가 제공하지 않는다.
+대신 페이지네이션 엔드포인트(`GET /users/page`)를 사용한다.
 
 ---
 

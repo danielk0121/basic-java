@@ -114,33 +114,6 @@ class OkHttp37ServerIntegrationTest {
     }
 
     @Test
-    @DisplayName("GET 전체 목록 — List<UserResponse>로 역직렬화")
-    void getList() throws IOException {
-        OkHttpClient client = new OkHttpClient();
-
-        for (String name : List.of("a", "b")) {
-            UserRequest req = new UserRequest(name, name + "@x.com");
-            Request createReq = new Request.Builder()
-                    .url(baseUrl() + "/users")
-                    .post(RequestBody.create(gson.toJson(req), JSON))
-                    .build();
-            try (Response response = client.newCall(createReq).execute()) {
-                assertEquals(201, response.code());
-            }
-        }
-
-        Request listReq = new Request.Builder().url(baseUrl() + "/users").get().build();
-        try (Response response = client.newCall(listReq).execute()) {
-            assertEquals(200, response.code());
-            Type listType = new TypeToken<List<UserResponse>>() {}.getType();
-            List<UserResponse> users = gson.fromJson(response.body().charStream(), listType);
-            assertTrue(users.size() >= 2);
-            // 모든 사용자에게 샘플 wishProducts가 부여되었는지 확인
-            assertTrue(users.stream().allMatch(u -> u.wishProducts().size() == 2));
-        }
-    }
-
-    @Test
     @DisplayName("GET 페이지 응답 — Page<UserResponse> 래퍼 역직렬화")
     void getPage() throws IOException {
         OkHttpClient client = new OkHttpClient();
