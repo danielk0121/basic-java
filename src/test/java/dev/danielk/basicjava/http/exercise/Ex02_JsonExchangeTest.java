@@ -2,7 +2,9 @@ package dev.danielk.basicjava.http.exercise;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import dev.danielk.basicjava.http.User;
+import dev.danielk.basicjava.http.GsonFactory;
+import dev.danielk.basicjava.http.dto.UserRequest;
+import dev.danielk.basicjava.http.dto.UserResponse;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,22 +25,18 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 연습 02: JSON 직렬화/역직렬화 (MockWebServer)
+ * 연습 02: 다단계 JSON 직렬화/역직렬화 (MockWebServer)
  *
- * Gson과 OkHttp을 사용하여 객체 ↔ JSON 변환을 익히세요.
- * 도메인은 main {@link User} record를 재사용 (UserController 응답 형식과 동일).
- *
- * 사용해야 할 메서드:
- *   Gson.toJson/fromJson, TypeToken<List<T>>, MediaType.parse,
- *   RequestBody.create(json, mediaType)
+ * UserController가 다루는 다단계 응답(User + wishlist + product)을 처리하세요.
+ * DTO는 main의 {@link UserRequest}, {@link UserResponse}를 재사용합니다.
  */
-@DisplayName("연습 02: JSON 직렬화/역직렬화")
+@DisplayName("연습 02: 다단계 JSON 직렬화/역직렬화")
 class Ex02_JsonExchangeTest {
 
     static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private MockWebServer server;
-    private final Gson gson = new Gson();
+    private final Gson gson = GsonFactory.create();
 
     @BeforeEach
     void setUp() throws IOException {
@@ -53,82 +51,106 @@ class Ex02_JsonExchangeTest {
 
     // ── 문제 1 ────────────────────────────────────────────────────────────────
     /**
-     * 주어진 URL로 GET 요청을 보내고 JSON 응답을 User 객체로 역직렬화하세요.
-     * 힌트: gson.fromJson(response.body().charStream(), User.class)
+     * 주어진 URL로 GET 요청을 보내고 다단계 JSON 응답을 UserResponse로 역직렬화하세요.
+     * 응답에는 wishlist 배열이 있고, 각 요소는 product 중첩 객체를 가집니다.
+     * 힌트: gson.fromJson(response.body().charStream(), UserResponse.class)
      */
-    User fetchUser(String url) throws IOException {
+    UserResponse fetchUser(String url) throws IOException {
         // TODO: 구현하세요
         throw new UnsupportedOperationException("구현 필요");
     }
 
     @Disabled("구현 필요")
     @Test
-    @DisplayName("문제 1: JSON 응답을 객체로 역직렬화")
+    @DisplayName("문제 1: 다단계 JSON 응답을 UserResponse로 역직렬화")
     void test_fetchUser() throws IOException {
-        server.enqueue(new MockResponse()
-                .setHeader("Content-Type", "application/json")
-                .setBody("{\"id\":7,\"name\":\"daniel\",\"email\":\"d@x.com\"}"));
+        server.enqueue(new MockResponse().setBody("""
+                {
+                  "id": 7,
+                  "name": "daniel",
+                  "email": "d@x.com",
+                  "joinedAt": "2026-05-02T10:00:00",
+                  "wishlist": [
+                    {"product": {"id": 1, "name": "키보드", "price": 30000}}
+                  ]
+                }
+                """));
 
-        User user = fetchUser(server.url("/users/7").toString());
+        UserResponse user = fetchUser(server.url("/users/7").toString());
         assertThat(user.id()).isEqualTo(7L);
-        assertThat(user.name()).isEqualTo("daniel");
-        assertThat(user.email()).isEqualTo("d@x.com");
+        assertThat(user.wishlist()).hasSize(1);
+        assertThat(user.wishlist().get(0).product().name()).isEqualTo("키보드");
     }
 
     // ── 문제 2 ────────────────────────────────────────────────────────────────
     /**
-     * 주어진 URL로 GET 요청을 보내고 JSON 배열 응답을 List<User>로 역직렬화하세요.
-     * 힌트: new TypeToken<List<User>>() {}.getType()
+     * 주어진 URL로 GET 요청을 보내고 JSON 배열 응답을 List<UserResponse>로 역직렬화하세요.
+     * 각 User에는 wishlist 배열이 포함됩니다.
+     * 힌트: new TypeToken<List<UserResponse>>() {}.getType()
      */
-    List<User> fetchUserList(String url) throws IOException {
+    List<UserResponse> fetchUserList(String url) throws IOException {
         // TODO: 구현하세요
         throw new UnsupportedOperationException("구현 필요");
     }
 
     @Disabled("구현 필요")
     @Test
-    @DisplayName("문제 2: JSON 배열을 List<T>로 역직렬화")
+    @DisplayName("문제 2: 다단계 JSON 배열을 List<T>로 역직렬화")
     void test_fetchUserList() throws IOException {
-        server.enqueue(new MockResponse().setBody(
-                "[" +
-                "{\"id\":1,\"name\":\"a\",\"email\":\"a@x.com\"}," +
-                "{\"id\":2,\"name\":\"b\",\"email\":\"b@x.com\"}" +
-                "]"));
+        server.enqueue(new MockResponse().setBody("""
+                [
+                  {"id":1,"name":"a","email":"a@x.com","joinedAt":"2026-05-01T09:00:00","wishlist":[]},
+                  {"id":2,"name":"b","email":"b@x.com","joinedAt":"2026-05-01T09:00:00",
+                    "wishlist":[{"product":{"id":2,"name":"마우스","price":15000}}]}
+                ]
+                """));
 
-        List<User> users = fetchUserList(server.url("/users").toString());
+        List<UserResponse> users = fetchUserList(server.url("/users").toString());
         assertThat(users).hasSize(2);
-        assertThat(users.get(0).name()).isEqualTo("a");
-        assertThat(users.get(1).email()).isEqualTo("b@x.com");
+        assertThat(users.get(1).wishlist().get(0).product().name()).isEqualTo("마우스");
     }
 
     // ── 문제 3 ────────────────────────────────────────────────────────────────
     /**
-     * User 객체를 JSON으로 직렬화하여 POST 전송하고, 응답 JSON을 User로 역직렬화하여 반환하세요.
-     * 힌트: gson.toJson(user) 후 RequestBody.create(json, JSON)으로 본문 생성
+     * UserRequest(name/email)를 JSON으로 직렬화하여 POST 전송하고, 응답 JSON을 UserResponse로 역직렬화하세요.
+     * 클라이언트는 wishlist/joinedAt을 보내지 않고, 서버가 채운 응답을 받아옵니다.
+     * 힌트: gson.toJson(request) 후 RequestBody.create(json, JSON)
      */
-    User createUser(String url, User newUser) throws IOException {
+    UserResponse createUser(String url, UserRequest request) throws IOException {
         // TODO: 구현하세요
         throw new UnsupportedOperationException("구현 필요");
     }
 
     @Disabled("구현 필요")
     @Test
-    @DisplayName("문제 3: 객체 직렬화하여 POST + 응답 역직렬화")
+    @DisplayName("문제 3: UserRequest 직렬화하여 POST + UserResponse 역직렬화")
     void test_createUser() throws IOException, InterruptedException {
         server.enqueue(new MockResponse()
                 .setResponseCode(201)
                 .setHeader("Content-Type", "application/json")
-                .setBody("{\"id\":42,\"name\":\"new\",\"email\":\"n@x.com\"}"));
+                .setBody("""
+                        {
+                          "id": 42,
+                          "name": "new",
+                          "email": "n@x.com",
+                          "joinedAt": "2026-05-02T10:00:00",
+                          "wishlist": [
+                            {"product":{"id":1,"name":"키보드","price":30000}}
+                          ]
+                        }
+                        """));
 
-        User created = createUser(
-                server.url("/users").toString(),
-                new User(null, "new", "n@x.com")
-        );
+        UserRequest req = new UserRequest("new", "n@x.com");
+        UserResponse created = createUser(server.url("/users").toString(), req);
         assertThat(created.id()).isEqualTo(42L);
-        assertThat(created.name()).isEqualTo("new");
+        assertThat(created.wishlist().get(0).product().name()).isEqualTo("키보드");
 
         var recorded = server.takeRequest();
         assertThat(recorded.getHeader("Content-Type")).startsWith("application/json");
-        assertThat(recorded.getBody().readUtf8()).contains("\"name\":\"new\"");
+        String sent = recorded.getBody().readUtf8();
+        // 클라이언트가 보낸 본문에는 wishlist/joinedAt이 없어야 함
+        assertThat(sent).contains("\"name\":\"new\"");
+        assertThat(sent).doesNotContain("\"wishlist\"");
+        assertThat(sent).doesNotContain("\"joinedAt\"");
     }
 }

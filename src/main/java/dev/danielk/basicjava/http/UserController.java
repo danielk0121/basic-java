@@ -1,5 +1,7 @@
 package dev.danielk.basicjava.http;
 
+import dev.danielk.basicjava.http.dto.UserRequest;
+import dev.danielk.basicjava.http.dto.UserResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,47 +24,66 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 학습용 User REST 컨트롤러.
- * Service / Repository 레이어 없이 컨트롤러에서 인메모리 저장소를 직접 다룬다.
+ *
+ * 응답 JSON은 root + 필드 + 배열을 가진 다단계 구조:
+ * { id, name, email, joinedAt, wishlist: [ { product: { id, name, price } } ] }
+ *
+ * CUD 정책: name / email만 변경. joinedAt / wishlist는 서버가 관리한다.
+ * 신규 사용자에게는 동일한 샘플 wishlist를 부여한다 (하드코딩).
  */
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private final Map<Long, User> store = new ConcurrentHashMap<>();
-    private final AtomicLong idGen = new AtomicLong();
+    private final AtomicLong userIdGen = new AtomicLong();
+
+    // 샘플 상품 마스터 (하드코딩)
+    private static final List<Product> SAMPLE_PRODUCTS = List.of(
+            new Product(1L, "키보드", 30000),
+            new Product(2L, "마우스", 15000),
+            new Product(3L, "모니터", 300000)
+    );
+
+    // 신규 가입 시 부여할 샘플 찜 목록 (하드코딩)
+    private static final List<Wishlist> SAMPLE_WISHLIST = List.of(
+            new Wishlist(SAMPLE_PRODUCTS.get(0)),
+            new Wishlist(SAMPLE_PRODUCTS.get(2))
+    );
 
     @GetMapping
-    public List<User> list() {
-        return new ArrayList<>(store.values());
+    public List<UserResponse> list() {
+        return store.values().stream().map(UserResponse::from).toList();
     }
 
     @GetMapping("/{id}")
-    public User get(@PathVariable Long id) {
-        User user = store.get(id);
-        if (user == null) {
-            throw new UserNotFoundException(id);
-        }
-        return user;
+    public UserResponse get(@PathVariable Long id) {
+        return UserResponse.from(requireUser(id));
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody User request) {
-        long newId = idGen.incrementAndGet();
-        User created = new User(newId, request.name(), request.email());
+    public ResponseEntity<UserResponse> create(@RequestBody UserRequest request) {
+        long newId = userIdGen.incrementAndGet();
+        User created = new User(
+                newId,
+                request.name(),
+                request.email(),
+                LocalDateTime.now(),
+                SAMPLE_WISHLIST
+        );
         store.put(newId, created);
         return ResponseEntity
                 .created(URI.create("/users/" + newId))
-                .body(created);
+                .body(UserResponse.from(created));
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable Long id, @RequestBody User request) {
-        if (!store.containsKey(id)) {
-            throw new UserNotFoundException(id);
-        }
-        User updated = new User(id, request.name(), request.email());
+    public UserResponse update(@PathVariable Long id, @RequestBody UserRequest request) {
+        User existing = requireUser(id);
+        // CUD는 단일 정보(name/email)만 변경. joinedAt / wishlist는 그대로 유지.
+        User updated = existing.withProfile(request.name(), request.email());
         store.put(id, updated);
-        return updated;
+        return UserResponse.from(updated);
     }
 
     @DeleteMapping("/{id}")
@@ -73,18 +95,28 @@ public class UserController {
     }
 
     @GetMapping("/page")
-    public Page<User> page(@RequestParam(defaultValue = "0") int page,
-                           @RequestParam(defaultValue = "10") int size) {
+    public Page<UserResponse> page(@RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "10") int size) {
         List<User> all = new ArrayList<>(store.values());
         int from = Math.min(page * size, all.size());
         int to = Math.min(from + size, all.size());
-        List<User> slice = all.subList(from, to);
+        List<UserResponse> slice = all.subList(from, to).stream()
+                .map(UserResponse::from)
+                .toList();
         return new Page<>(slice, page, all.size());
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ApiError> handleNotFound(UserNotFoundException e) {
         return ResponseEntity.status(404).body(new ApiError(404, e.getMessage()));
+    }
+
+    private User requireUser(Long id) {
+        User user = store.get(id);
+        if (user == null) {
+            throw new UserNotFoundException(id);
+        }
+        return user;
     }
 
     public record Page<T>(List<T> data, int page, int total) {
