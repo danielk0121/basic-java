@@ -9,10 +9,7 @@ import java.util.List;
 
 /**
  * 학습용 컨트롤러에서 사용할 샘플 데이터.
- * DB 테이블에 들어있을 만한 값들을 하드코딩으로 보관한다.
- *
- * User의 id는 시드 시점에 SampleDataRepository.nextUserId()로 부여되므로
- * 여기서는 id를 정하지 않는다 (null).
+ * DB 테이블에 들어있을 만한 값들(id 포함)을 하드코딩으로 보관한다.
  */
 public final class SampleDataFactory {
 
@@ -32,9 +29,9 @@ public final class SampleDataFactory {
     private static final LocalDateTime SAMPLE_JOINED_AT = LocalDateTime.of(2026, 1, 1, 9, 0, 0);
 
     private static final List<User> SAMPLE_USERS = List.of(
-            new User(null, "alice", "alice@example.com", SAMPLE_JOINED_AT),
-            new User(null, "bob", "bob@example.com", SAMPLE_JOINED_AT),
-            new User(null, "daniel", "daniel@example.com", SAMPLE_JOINED_AT)
+            new User(1L, "alice", "alice@example.com", SAMPLE_JOINED_AT),
+            new User(2L, "bob", "bob@example.com", SAMPLE_JOINED_AT),
+            new User(3L, "daniel", "daniel@example.com", SAMPLE_JOINED_AT)
     );
 
     public static List<Product> products() {

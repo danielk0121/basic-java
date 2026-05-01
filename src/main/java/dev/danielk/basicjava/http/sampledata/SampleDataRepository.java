@@ -2,7 +2,6 @@ package dev.danielk.basicjava.http.sampledata;
 
 import dev.danielk.basicjava.http.domain.User;
 import dev.danielk.basicjava.http.domain.WishProduct;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +13,19 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * 인메모리 저장소 — 학습 목적의 단순한 Map 기반 구현.
  * 컨트롤러는 이 클래스만 의존하고 저장 자료구조에는 직접 접근하지 않는다.
+ *
+ * 빈 등록은 SampleDataConfiguration이 담당한다.
+ * userIdGen 시작값은 생성자 인자로 주입받는다.
  */
-@Component
 public class SampleDataRepository {
 
     private final Map<Long, User> userStore = new ConcurrentHashMap<>();
     private final Map<Long, List<WishProduct>> wishStore = new ConcurrentHashMap<>();
-    private final AtomicLong userIdGen = new AtomicLong();
+    private final AtomicLong userIdGen;
+
+    public SampleDataRepository(long userIdStart) {
+        this.userIdGen = new AtomicLong(userIdStart);
+    }
 
     public long nextUserId() {
         return userIdGen.incrementAndGet();
