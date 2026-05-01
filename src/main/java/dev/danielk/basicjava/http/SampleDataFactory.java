@@ -9,9 +9,9 @@ import java.util.List;
  * 학습용 컨트롤러에서 사용할 샘플 데이터.
  * 컨트롤러 본체(요청 처리 로직)와 분리하여 데이터 생성 책임을 격리한다.
  */
-public final class SampleData {
+public final class SampleDataFactory {
 
-    private SampleData() {}
+    private SampleDataFactory() {}
 
     private static final List<Product> SAMPLE_PRODUCTS = List.of(
             new Product(1L, "키보드", 30000),
