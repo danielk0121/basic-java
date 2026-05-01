@@ -6,6 +6,7 @@
 
 - Java SDK를 활용한 보일러플레이트 코드 구현
 - 단순한 알고리즘 구현
+- HTTP 클라이언트(OkHttp) / Spring REST 서버 학습 테스트
 
 ## 로드맵
 
@@ -16,15 +17,18 @@
 - Java 17
 - Spring Boot 3.5.0
 - Gradle
+- OkHttp 4.12.0 + MockWebServer
+- Gson 2.12.1
 
 ## 코드 작성 규칙
 
-- `src/test` — 보일러플레이트, 알고리즘 코드 작성. JUnit으로 입력/출력 검증
-- `src/main` — HTTP 컨트롤러, 클라이언트 등 실행 가능한 서버 코드만 작성
+- `src/test` — 보일러플레이트, 알고리즘, HTTP 학습 테스트 코드. JUnit으로 입력/출력 검증
+- `src/main` — HTTP 서버(REST 컨트롤러) 등 실행 가능한 서버 코드만 작성
 
 ## 설계 결정
 
 - [폴더 구조 고찰: doc 분리 vs src/test 통합](ref/ref_폴더구조_고찰.md)
+- [HTTP 클라이언트 라이브러리 비교](ref/http_클라이언트_라이브러리_비교.md)
 
 ## 참고 문서
 
@@ -42,8 +46,14 @@
 ```
 src/main/java/dev/danielk/basicjava/
 └── http/
-    ├── server/            # HTTP 서버 처리 (컨트롤러)
-    └── client/            # HTTP 클라이언트 처리
+    ├── UserController.java       # REST 컨트롤러
+    ├── ApiError.java             # 에러 응답 DTO
+    ├── UserNotFoundException.java
+    ├── domain/                   # 도메인 record (User, Product, WishProduct)
+    ├── dto/                      # 요청/응답 DTO (UserRequest, UserResponse, ...)
+    ├── repository/               # 단일 도메인 CUD (UserRepository, WishProductRepository)
+    ├── query/                    # 복합 도메인 read (UserQuery, UserWithWishProducts)
+    └── sampledata/               # 시드 데이터 (Factory, Creator, Configuration)
 
 src/test/java/dev/danielk/basicjava/
 ├── string/                # 문자열 처리 보일러플레이트
@@ -63,5 +73,22 @@ src/test/java/dev/danielk/basicjava/
 ├── regex/                 # 정규식 처리 보일러플레이트 (split, matches, replaceAll)
 │   └── exercise/          # 정규식 연습 예제 (split 패턴, matches/replaceAll 패턴)
 ├── datastructure/         # 자료구조 활용 (스택, 큐, 덱, 우선순위 큐, thread-safe 큐/덱)
-└── algorithm/             # 알고리즘 구현
+├── algorithm/             # 알고리즘 구현
+└── http/                  # OkHttp 클라이언트 학습 + Spring 서버 통합 테스트
+    ├── OkHttp31InitTest.java     # 클라이언트 초기화
+    ├── OkHttp32ConfigTest.java   # 커넥션풀, 인터셉터, 타임아웃
+    ├── OkHttp33GetPostTest.java  # GET/POST + MockWebServer
+    ├── OkHttp34CrudTest.java     # CRUD 응답 처리
+    ├── OkHttp35JsonTest.java     # 다단계 JSON 직렬화/역직렬화
+    ├── OkHttp37ServerIntegrationTest.java  # 실제 Spring 서버 통합
+    ├── api_response_examples.md  # UserController 응답 예시
+    └── exercise/                 # OkHttp 연습 예제 (기초/JSON 교환/서버 통합)
 ```
+
+## 서버 구조 요점 (http 패키지)
+
+- **CUD는 단일 도메인**: `UserRepository`, `WishProductRepository`로 분리
+- **READ는 복합 도메인**: `UserQuery`가 두 repository를 조합하여 `UserWithWishProducts` 반환
+- **응답 DTO가 결합 책임**: `UserResponse`가 `User` + `List<WishProduct>`를 합쳐 다단계 JSON 생성
+- **샘플 데이터**: `SampleDataFactory` (정의), `SampleDataCreator` (시드), `SampleDataConfiguration` (빈 구성)
+  - `app.sample-data.enabled=false` 로 시드 비활성화 가능 (테스트에서 사용)

@@ -174,14 +174,54 @@
 
 ---
 
-## HTTP 처리 (별도 진행)
+## HTTP 처리
 
-### 31. HTTP 처리
+### 31. HTTP 처리 (OkHttp 단일 라이브러리)
 
-> 먼저 RestTemplate, WebClient, OkHttp 등 HTTP 클라이언트 라이브러리 비교 문서를 작성한 뒤 코드 구현 진행
+학습 목표
+1. HTTP 클라이언트 라이브러리(OkHttp) 1개를 적당히 잘 사용하도록 연습
+2. REST API 서버 코드(`UserController`)에 맞춰 클라이언트 테스트 코드 작성
 
-- RestTemplate GET/POST 요청
-- HttpClient GET/POST 요청 (Java 11+)
-- JSON 직렬화/역직렬화: ObjectMapper
-- 쿼리 파라미터 및 헤더 설정
-- REST 컨트롤러 기본 구조: GET/POST/PUT/DELETE
+#### 1단계: OkHttp 클라이언트 학습 (MockWebServer 사용)
+
+- OkHttp 클라이언트 초기화, 타임아웃, try-with-resources
+- 커넥션 풀, EventListener로 소켓 재사용 관찰, 인터셉터, Dispatcher
+- GET/POST 요청 (Form/JSON), 쿼리 파라미터, 헤더, 4xx/5xx 응답 처리
+- 다단계 JSON array/object 응답 직렬화/역직렬화 (Gson + TypeToken)
+
+**파일 링크**
+- [OkHttp31InitTest.java](../src/test/java/dev/danielk/basicjava/http/OkHttp31InitTest.java): 클라이언트 초기화
+- [OkHttp32ConfigTest.java](../src/test/java/dev/danielk/basicjava/http/OkHttp32ConfigTest.java): 라이브러리 설정 (커넥션풀/인터셉터)
+- [OkHttp33GetPostTest.java](../src/test/java/dev/danielk/basicjava/http/OkHttp33GetPostTest.java): GET/POST 요청
+- [OkHttp34CrudTest.java](../src/test/java/dev/danielk/basicjava/http/OkHttp34CrudTest.java): REST CRUD 응답 처리
+- [OkHttp35JsonTest.java](../src/test/java/dev/danielk/basicjava/http/OkHttp35JsonTest.java): 다단계 JSON 직렬화/역직렬화
+
+#### 2단계: HTTP 서버 + 통합 테스트
+
+서버 구조 (`src/main/java/dev/danielk/basicjava/http/`)
+- 도메인: `User`, `Product`, `WishProduct`
+- DTO: `UserRequest`, `UserResponse`, `WishProductResponse`, `ProductResponse`
+- Repository (CUD): `UserRepository`, `WishProductRepository`
+- Query (READ): `UserQuery`, `UserWithWishProducts`
+- 샘플 데이터: `SampleDataFactory`, `SampleDataCreator`, `SampleDataConfiguration`
+
+엔드포인트
+- `GET /users/{id}`, `GET /users/page` — 다단계 JSON 응답 (User + wishProducts + product)
+- `POST /users`, `PUT /users/{id}` — name/email만 변경
+- `DELETE /users/{id}`
+
+**파일 링크**
+- [UserController.java](../src/main/java/dev/danielk/basicjava/http/UserController.java)
+- [api_response_examples.md](../src/test/java/dev/danielk/basicjava/http/api_response_examples.md)
+- [OkHttp37ServerIntegrationTest.java](../src/test/java/dev/danielk/basicjava/http/OkHttp37ServerIntegrationTest.java): `@SpringBootTest(RANDOM_PORT)` 통합 테스트
+
+#### 연습 예제 (`http/exercise/`)
+
+- Ex01: OkHttp 기초 GET/POST/Form/헤더
+- Ex02: 다단계 JSON 직렬화/역직렬화 (MockWebServer)
+- Ex03: 실제 Spring 서버 통합 (`@SpringBootTest`)
+
+**파일 링크**
+- [Ex01_OkHttpBasicTest.java](../src/test/java/dev/danielk/basicjava/http/exercise/Ex01_OkHttpBasicTest.java) / [Ex01_OkHttpBasicAnswer.java](../src/test/java/dev/danielk/basicjava/http/exercise/Ex01_OkHttpBasicAnswer.java)
+- [Ex02_JsonExchangeTest.java](../src/test/java/dev/danielk/basicjava/http/exercise/Ex02_JsonExchangeTest.java) / [Ex02_JsonExchangeAnswer.java](../src/test/java/dev/danielk/basicjava/http/exercise/Ex02_JsonExchangeAnswer.java)
+- [Ex03_ServerIntegrationTest.java](../src/test/java/dev/danielk/basicjava/http/exercise/Ex03_ServerIntegrationTest.java) / [Ex03_ServerIntegrationAnswer.java](../src/test/java/dev/danielk/basicjava/http/exercise/Ex03_ServerIntegrationAnswer.java)
