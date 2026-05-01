@@ -33,6 +33,7 @@
 ## 참고 문서
 
 - [ref_큐_덱_차이점.md](ref/ref_큐_덱_차이점.md)
+- [review_자바쓰레기.md](ref/review_자바쓰레기.md)
 
 ## 연습 예제 구조
 
