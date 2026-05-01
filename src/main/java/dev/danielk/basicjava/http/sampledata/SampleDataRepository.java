@@ -3,7 +3,6 @@ package dev.danielk.basicjava.http.sampledata;
 import dev.danielk.basicjava.http.domain.User;
 import dev.danielk.basicjava.http.domain.WishProduct;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -44,8 +43,21 @@ public class SampleDataRepository {
         return Optional.ofNullable(userStore.get(id));
     }
 
-    public List<User> findAll() {
-        return new ArrayList<>(userStore.values());
+    /**
+     * 페이지 단위로 사용자를 조회한다. id 오름차순.
+     * 운영 DB에서는 SELECT ... ORDER BY id LIMIT ? OFFSET ? 에 해당.
+     */
+    public List<User> findPage(int page, int size) {
+        return userStore.values().stream()
+                .sorted((a, b) -> Long.compare(a.id(), b.id()))
+                .skip((long) page * size)
+                .limit(size)
+                .toList();
+    }
+
+    /** 전체 user 개수 (페이지 응답의 total). */
+    public int count() {
+        return userStore.size();
     }
 
     public List<WishProduct> findWishProducts(Long userId) {

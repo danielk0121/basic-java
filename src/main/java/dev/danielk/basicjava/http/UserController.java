@@ -82,13 +82,10 @@ public class UserController {
     @GetMapping("/page")
     public Page<UserResponse> page(@RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "10") int size) {
-        List<User> all = repository.findAll();
-        int from = Math.min(page * size, all.size());
-        int to = Math.min(from + size, all.size());
-        List<UserResponse> slice = all.subList(from, to).stream()
+        List<UserResponse> slice = repository.findPage(page, size).stream()
                 .map(u -> UserResponse.from(u, repository.findWishProducts(u.id())))
                 .toList();
-        return new Page<>(slice, page, all.size());
+        return new Page<>(slice, page, repository.count());
     }
 
     @ExceptionHandler(UserNotFoundException.class)
