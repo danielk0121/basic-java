@@ -21,5 +21,5 @@
 - 구조 방침: REST API 학습이 주 목적이므로 Service/Repository 레이어 없이 Controller에서 인메모리 저장소로 직접 처리한다.
 - 1단계의 OkHttp 학습 내용을 종합해 실제 서버를 호출한다 (MockWebServer가 아닌 실제 Spring 서버).
 
-- [ ] [todo 36: HTTP 서버 — REST 컨트롤러](todo_36_HTTP서버컨트롤러.md) (`src/main`에 컨트롤러 단일 레이어)
-- [ ] [todo 37: OkHttp 클라이언트로 todo 36 서버 호출](todo_37_OkHttp서버통합.md)
+- [x] [todo 36: HTTP 서버 — REST 컨트롤러](todo_36_HTTP서버컨트롤러.md) (`src/main`에 컨트롤러 단일 레이어)
+- [x] [todo 37: OkHttp 클라이언트로 todo 36 서버 호출](todo_37_OkHttp서버통합.md)
