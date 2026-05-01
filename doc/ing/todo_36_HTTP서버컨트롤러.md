@@ -4,7 +4,7 @@
 
 ## 목적
 
-- todo 37~39의 클라이언트 학습 테스트가 호출할 실제 REST 서버를 구성한다.
+- todo 37의 OkHttp 통합 테스트가 호출할 실제 REST 서버를 구성한다.
 - REST API 학습이 주 목적이므로 **레이어드 구조(Service/Repository)를 사용하지 않고**, Controller에서 인메모리 저장소로 직접 처리한다.
 
 ## 구조
@@ -32,10 +32,8 @@
 
 ## 테스트
 
-- `src/test/java/.../http/UserController36Test.java` — `TestRestTemplate` 또는 RestClient로 직접 서버 검증
-- 각 엔드포인트의 정상/실패 케이스 검증
+- 서버 자체 검증은 todo 37의 OkHttp 통합 테스트로 대체한다 (별도 컨트롤러 단위 테스트 불필요).
 
 ## 코드 위치
 
 - main: `src/main/java/dev/danielk/basicjava/http/`
-- test: `src/test/java/dev/danielk/basicjava/http/UserController36Test.java`
