@@ -3,6 +3,8 @@ package dev.danielk.basicjava.http;
 import dev.danielk.basicjava.http.domain.User;
 import dev.danielk.basicjava.http.dto.UserRequest;
 import dev.danielk.basicjava.http.dto.UserResponse;
+import dev.danielk.basicjava.http.sampledata.SampleDataFactory;
+import dev.danielk.basicjava.http.sampledata.SampleDataRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;

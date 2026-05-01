@@ -1,4 +1,4 @@
-package dev.danielk.basicjava.http;
+package dev.danielk.basicjava.http.sampledata;
 
 import dev.danielk.basicjava.http.domain.User;
 import dev.danielk.basicjava.http.domain.WishProduct;
